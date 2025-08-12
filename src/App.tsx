@@ -5,7 +5,7 @@ import './App.scss'
 import { usePreconnectStaticAssets } from './hooks/preconnect';
 import { usePreloadStaticAssets } from './hooks/preload';
 
-const Model = lazy(() => import('./components/Model'));
+const Model = lazy(() => import('./components/Model2'));
 function App() {
   usePreconnectStaticAssets();
   usePreloadStaticAssets();

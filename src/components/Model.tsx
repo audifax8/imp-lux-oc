@@ -17,16 +17,16 @@ export interface IConfigureAPI {
 }
 
 function getProductImg(apiKey: string, coreService: IConfigureAPI): string {
-    const isMobile = false;
-    const conciseRecipe = coreService.getRecipe('legacyConcise');
-    const uriRecipe = encodeURI(conciseRecipe);
-    const { id, defaultViewName, environment, workflow, customerId } = coreService.getProduct();
-    const format = 'png';
-    const quality = '50';
-    const sacale = isMobile ? '0.2' : '0.5';
-    const baseURL = `https://prod.fluidconfigure.com/imagecomposer/generate/?view=${defaultViewName}&apiKey=${apiKey}&workflow=${workflow}&environment=${environment}&customerId=${customerId}&productId=${id}&purpose=serverDisplay&format=${format}&trim=false&padding=0&scale=${sacale}&binary=true&quality=${quality}&backgroundColor=%23f6f6f6ff&recipe=${uriRecipe}`;
-    return baseURL;
-  }
+  const isMobile = false;
+  const conciseRecipe = coreService.getRecipe('legacyConcise');
+  const uriRecipe = encodeURI(conciseRecipe);
+  const { id, defaultViewName, environment, workflow, customerId } = coreService.getProduct();
+  const format = 'png';
+  const quality = '50';
+  const sacale = isMobile ? '0.2' : '0.5';
+  const baseURL = `https://prod.fluidconfigure.com/imagecomposer/generate/?view=${defaultViewName}&apiKey=${apiKey}&workflow=${workflow}&environment=${environment}&customerId=${customerId}&productId=${id}&purpose=serverDisplay&format=${format}&trim=false&padding=0&scale=${sacale}&binary=true&quality=${quality}&backgroundColor=%23f6f6f6ff&recipe=${uriRecipe}`;
+  return baseURL;
+}
 
 const myPromise = new Promise((resolve, reject) => {
   const pref = 'https://cdn-prod.fluidconfigure.com/static/configs/3.13.0/prod/prod/1581/preferences.json';
