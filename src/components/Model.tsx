@@ -1,4 +1,4 @@
-import { use } from 'react';
+import { use, useEffect, useState } from 'react';
 
 export interface IProduct {
   name: string;
@@ -67,11 +67,21 @@ const myPromise = new Promise((resolve, reject) => {
 });
 
 export default function Model() {
+  const [isImageLoaded, setIsImageLoaded] = useState('https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/sk.webp');
   const img = use(myPromise) as string;
-  return (
+
+  useEffect(
+    () => {
+      fetch(img)
+        .then(() => setIsImageLoaded(img))
+        .catch((e) => console.log(e));
+    }
+  , [isImageLoaded]);
+
+  return (isImageLoaded && 
     <section className="yr-model">
       <picture className={('yr-skeleton yr-model__placeholder yr-image')}>
-        <img src={img} alt="Model" />
+        <img src={isImageLoaded} alt="Model" />
       </picture>
     </section>
   );
