@@ -76,7 +76,7 @@ export default function Model() {
         .then(() => setIsImageLoaded(img))
         .catch((e) => console.log(e));
     }
-  , [isImageLoaded]);
+  , [img]);
 
   return (isImageLoaded && 
     <section className="yr-model">
