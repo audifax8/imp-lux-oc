@@ -36,8 +36,10 @@ export function mapURLs(): IResource[] {
       fetchPriority: FetchPriority.HIGH,
       crossOrigin: 'anonymous'
     },
+    //https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/sk.webp
+    //url: `${CDN_FLUID_BASE_URL}/static/assets/prod/${workflow}/customers/c1628/configureHtml/etc/assets/img/sk_product.png`,
     {
-      url: `${CDN_FLUID_BASE_URL}/static/assets/prod/${workflow}/customers/c1628/configureHtml/etc/assets/img/sk_product.png`,
+      url: `${CDN_FLUID_BASE_URL}/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/sk.webp`,
       as: 'image',
       fetchPriority: FetchPriority.HIGH
     }
