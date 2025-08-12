@@ -5,6 +5,7 @@ import commonjs from 'vite-plugin-commonjs';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
 export default defineConfig({
+  base: 'imp-lux-oc',
   plugins: [
     react(),
     commonjs(),
