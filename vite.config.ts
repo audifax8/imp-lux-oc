@@ -13,16 +13,7 @@ export default defineConfig({
   ],
   build: {
     chunkSizeWarningLimit: 1000,
-    cssCodeSplit: true,
-    rollupOptions: {
-      output: {
-        format: 'es',
-        manualChunks: {
-          vendor: ['@cfg.plat/configure-core']
-        },
-        inlineDynamicImports: false
-      }
-    }
+    cssCodeSplit: true
   },
   define: {
     'process.browser': true,

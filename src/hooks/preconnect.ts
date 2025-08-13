@@ -4,7 +4,7 @@ import { preconnect } from 'react-dom';
 const CDN_FLUID_BASE_URL = 'https://cdn-prod.fluidconfigure.com';
 
 export function getURLsToPreconnect(): string[] {
-  const urls = [CDN_FLUID_BASE_URL, 'https://prod.fluidconfigure.com'];
+  const urls = [CDN_FLUID_BASE_URL, 'https://prod.fluidconfigure.com', 'https://cid-impl.fluidconfigure.com'];
   return urls;
 }
 
