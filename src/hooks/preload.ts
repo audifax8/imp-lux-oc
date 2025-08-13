@@ -42,11 +42,6 @@ export function mapURLs(): IResource[] {
       url: `${CDN_FLUID_BASE_URL}/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/sk.webp`,
       as: 'image',
       fetchPriority: FetchPriority.HIGH
-    },
-    {
-      url: 'https://cid-impl.fluidconfigure.com/platform/configure-core/configure-core.umd.js',
-      as: 'script',
-      fetchPriority: FetchPriority.HIGH
     }
   ];
   return urls;
