@@ -1,4 +1,5 @@
-import { use } from 'react';
+import { use, useEffect } from 'react';
+import clsx from 'clsx';
 import { IConfigureAPI } from '../../declarations/interfaces';
 import { setAPIReady } from '../../libs/yr-react/store/ConfigureStore';
 import { setShowSkeleton, setTokenAndImage } from '../../store/UIStore';
@@ -6,6 +7,8 @@ import { setShowSkeleton, setTokenAndImage } from '../../store/UIStore';
 import { apis } from '../../libs/apis';
 import { CDN_FLUID_BASE_URL } from '../../declarations/constants';
 import { startAPIs } from '../../store/APIsStore';
+import { useRTRAPIReady } from '../../state/rtr';
+import { useParams, useToken } from '../../state/ui';
 
 const myPromise = new Promise((resolve, reject) => {
   const { workflow, customer, product, locale, yrEnv } = apis.getParams();
@@ -61,10 +64,23 @@ const myPromise = new Promise((resolve, reject) => {
 
 export default function Model() {
   const configureImg = use(myPromise) as string;
+  const [rtrAPIReady] = useRTRAPIReady();
+  const [params] = useParams();
+  const [token] = useToken();
+
+  useEffect(() => {
+    if (params.rtrDisabled) {
+      return;
+    }
+    if (rtrAPIReady && token) {
+      apis.rtrAPI?.init(token);
+    }
+  }, [params.rtrDisabled, rtrAPIReady, token]);
 
   return (configureImg && 
     <section className="yr-model">
-      <picture className={('yr-model__placeholder yr-image')}>
+      <div id="viewer" className={clsx('yr-model__rtr', { 'yr-model__hidden': !rtrAPIReady })}></div>
+      <picture className={clsx('yr-model__placeholder', 'yr-image', { 'yr-model__hidden': rtrAPIReady })}>
         <img src={configureImg} alt="Model" />
       </picture>
     </section>

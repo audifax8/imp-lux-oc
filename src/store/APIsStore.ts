@@ -27,6 +27,7 @@ export function startAPIs(configure: IConfigureAPI) {
 export function startRTR() {
   const rtrAPI = new RtrAPI(window.rtrViewerMV as IRTRBaseAPI);
   apis.initRTRAPI(rtrAPI);
+  useAPIsStore.setState({ rtrApiReady: true }, false, 'Destroyed APIs');
 }
 
 /** Store Hook */

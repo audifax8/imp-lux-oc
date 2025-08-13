@@ -3,7 +3,6 @@ self.onmessage = (event: MessageEvent) => {
   const { params, assetsToDownload, assetDescription } = data;
   const { yrEnv } = params;
   try {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
     assetsToDownload.forEach((assetUrl: string) => {
       if (yrEnv) {
         console.log(`[WEB WORKER] asset description: ${assetDescription ?? assetDescription}`);

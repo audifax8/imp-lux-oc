@@ -41,6 +41,10 @@ export function setTokenAndImage(token: string, configureImg: string) {
   useUIStore.setState({ configureImg, token }, false, 'Set Token & Img');
 }
 
+export function setToken(token: string) {
+  useUIStore.setState({ token }, false, 'Set Token');
+}
+
 export const useUIStore = create(
   subscribeWithSelector(devtools<IUIState>(() => ({ ...INITIAL_STATE }), { name: 'UI Store' }))
 );

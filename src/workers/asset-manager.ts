@@ -2,6 +2,7 @@
 //import { IConfigureInitParams, IRTRAssetsAPI } from '@/declarations/interfaces';
 
 import { IConfigureInitParams, IRTRAssetsAPI } from "../declarations/interfaces";
+import { setToken } from "../store/UIStore";
 //import { useConfigureStore } from "../libs/yr-react/store/ConfigureStore";
 
 export class AssetsWorker {
@@ -47,7 +48,7 @@ export class AssetsWorker {
         console.log(data);
       }
       if (upc && data?.[upc]) {
-        //useConfigureStore.setState({ token: data?.[upc]?.token }, false, 'SET UPC2Token');
+        setToken(data?.[upc]?.token);
       }
     };
     worker.postMessage({ assetsToDownload, params: this.params, assetDescription });
