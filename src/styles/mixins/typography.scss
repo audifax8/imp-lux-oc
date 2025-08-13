@@ -1,0 +1,51 @@
+@use '../base/variables' as *;
+
+@mixin text-editorial($size) {
+  font-family: $font-family-primary;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 160%;
+  color: var(--text-color-primary);
+  font-size: $size;
+}
+
+@mixin text-editorial-xs {
+  @include text-editorial(12px);
+}
+
+@mixin text-editorial-sm {
+  @include text-editorial(14px);
+}
+
+@mixin text-editorial-md {
+  @include text-editorial(16px);
+}
+
+@mixin text-editorial-lg {
+  @include text-editorial(20px);
+}
+
+@mixin text-editorial-xl {
+  @include text-editorial(24px);
+}
+
+@mixin text-main($size) {
+  font-family: $font-family-secondary;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 160%;
+  color: var(--text-color-secondary);
+  font-size: $size;
+}
+
+@mixin text-main-xs {
+  @include text-main(12px);
+}
+
+@mixin text-main-sm {
+  @include text-main(14px);
+}
+
+@mixin text-main-md {
+  @include text-main(16px);
+}

@@ -1,0 +1,16 @@
+%focus-style {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
+
+a[href],
+button,
+input,
+select,
+textarea,
+[tabindex] {
+  &:focus,
+  &:focus-visible {
+    @extend %focus-style;
+  }
+}

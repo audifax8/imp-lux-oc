@@ -1,0 +1,76 @@
+@use '../base/variables.scss' as *;
+@use '../mixins' as *;
+
+%icon-only-style {
+  background: inherit;
+  color: inherit;
+  width: fit-content;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+}
+
+.yr-button {
+  @include text-editorial-xs;
+
+  display: flex;
+  height: 32px;
+  width: fit-content;
+  padding: 0 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  border: unset;
+  cursor: pointer;
+
+  &.yr-skeleton {
+    @include skeleton-button;
+
+    span {
+      visibility: hidden;
+    }
+  }
+
+  &-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-rounded {
+    background-color: $color-dark;
+    color: $color-light !important;
+    border-radius: 48px;
+
+    &.yr-skeleton {
+      color: transparent !important;
+      border-radius: 48px;
+    }
+
+    &.yr-button-icon-only {
+      @extend %icon-only-style;
+
+      aspect-ratio: 1 / 1;
+      padding: 5px;
+    }
+  }
+
+  &-square {
+    @include text-editorial-sm;
+
+    background-color: $color-dark;
+    color: $color-light !important;
+    border-radius: 0;
+    padding: 9px 24px;
+
+    &.yr-skeleton {
+      color: transparent !important;
+      border-radius: 0;
+    }
+
+    &.yr-button-icon-only {
+      @extend %icon-only-style;
+    }
+  }
+}

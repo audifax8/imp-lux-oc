@@ -1,9 +1,10 @@
 import { lazy, Suspense } from 'react';
 import { ModelSkeleton } from './components/Skeleton';
 
-import './App.scss'
 import { usePreconnectStaticAssets } from './hooks/preconnect';
 import { usePreloadStaticAssets } from './hooks/preload';
+
+import './styles/index.scss'
 
 const Model = lazy(() => import('./components/Model'));
 function App() {

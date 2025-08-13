@@ -1,0 +1,40 @@
+@use '../base/variables' as *;
+@use '../mixins' as *;
+
+.yr-add-to-cart {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0 16px;
+
+  &-price {
+    @include text-editorial-md;
+
+    color: $color-rb-red;
+    align-self: center;
+
+    &.yr-skeleton {
+      @include skeleton-text-md;
+    }
+  }
+
+  &-button {
+    background: $color-rb-red;
+    margin-left: auto;
+    align-self: center;
+  }
+
+  @include respond(lg) {
+    padding: 0;
+
+    &-price {
+      @include text-editorial-xl;
+
+      color: $color-rb-red;
+
+      &.yr-skeleton {
+        @include skeleton-text-xl;
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+@use '../base/variables.scss' as *;
+@use '../mixins/breakpoints.scss' as *;
+
+.yr-customizer {
+  border-radius: 24px 24px 0 0;
+  border: var(--customizer-border);
+  background: var(--customizer-background);
+  backdrop-filter: blur(12.5px);
+  overflow-y: scroll;
+
+  @include respond(lg) {
+    border-radius: 24px;
+    max-height: 573px;
+    overflow-y: hidden;
+  }
+}

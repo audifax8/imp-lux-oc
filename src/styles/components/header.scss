@@ -1,0 +1,68 @@
+@use '../mixins' as *;
+
+.yr-header {
+  text-transform: uppercase;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: center;
+  padding: 0 16px;
+
+  &-go-back-button {
+    background: transparent;
+  }
+
+  &-title {
+    @include text-editorial-lg;
+
+    &.yr-skeleton {
+      @include skeleton-text-lg;
+    }
+  }
+
+  .yr-logo {
+    align-self: center;
+  }
+
+  .yr-switch {
+    align-self: center;
+    margin-left: auto;
+  }
+
+  &-cta-container {
+    align-self: center;
+    margin-left: auto;
+    display: flex;
+    gap: 8px;
+    grid-column: 2 / 3;
+  }
+
+  @include respond(lg) {
+    grid-template-columns: repeat(5, 1fr);
+    padding: 0;
+    gap: 10px;
+
+    &-title {
+      @include text-editorial-xl;
+
+      grid-row: 1 / 2;
+      grid-column: 4 / 5;
+
+      &.yr-skeleton {
+        @include skeleton-text-xl;
+      }
+    }
+
+    .yr-switch {
+      grid-row: 1 / 2;
+      grid-column: 5 / 6;
+    }
+
+    &-cta-container {
+      grid-row: 2 / 3;
+      grid-column: 4 / 5;
+      margin-left: 0;
+      margin-right: auto;
+    }
+  }
+}
