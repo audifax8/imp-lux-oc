@@ -1,0 +1,60 @@
+import { create, StoreApi } from 'zustand';
+import { createStoreStateHook } from './zustand-helpers';
+import { devtools, subscribeWithSelector } from 'zustand/middleware';
+import { IConfigureAPI } from '../../../declarations/interfaces';
+//import createCore from '@cfg.plat/configure-core';
+//import { generatePath } from '@/libs/core/utils';
+
+//import { Settings } from '../../core/settings';
+//import { apis } from '@/libs/apis';
+
+export interface IConfigureState {
+  apiReady: boolean;
+  token: string;
+  configureImg: string;
+}
+
+const INITIAL_STATE: IConfigureState = {
+  apiReady: false,
+  token: undefined!,
+  configureImg: undefined!
+};
+
+/** Store Hook */
+export const useConfigureStore = create(
+  subscribeWithSelector(devtools<IConfigureState>(() => ({ ...INITIAL_STATE }), { name: 'Configure' }))
+);
+
+/** Store Selectors */
+export const useConfigureState = createStoreStateHook(useConfigureStore);
+export type ConfigureStore = StoreApi<IConfigureState>;
+export type ConfigureCallback = (error: Error, configure: IConfigureAPI) => void;
+
+export function setAPIReady(apiReady: boolean, configureImg: string, token?: string) {
+  useConfigureStore.setState({ apiReady, configureImg, token }, false, 'Set API ready');
+}
+
+export const startConfigureStore = () => {
+  useConfigureStore.setState(INITIAL_STATE, false, 'INIT Configure store');
+};
+
+/*export async function startConfigure(params: IConfigureInitParams, cb: ConfigureCallback) {
+  const { workflow, customer, locale, product } = params;
+  const preferencesUrl = generatePath(Settings.url.preferences, { workflow, customer, locale, product });
+  const [preferencesResponse] = await Promise.all([fetch(preferencesUrl)]);
+  if (!preferencesResponse.ok) {
+    useConfigureStore.setState({ apiReady: false }, false, 'Initialized Configure API');
+    return;
+  }
+  const preferences = await preferencesResponse.json();
+  createCore(
+    { preferences, productOverrides: {}, ...params, jsonBaseUrl: Settings.url.jsonBaseUrl },
+    (error: Error, configure: IConfigureAPI) => cb(error, configure)
+  );
+}*/
+
+// TODO ADD MORE INIT LOGIC
+export function destroyConfigure() {
+  //apis?.destroyAPIs();
+  useConfigureStore.setState(INITIAL_STATE, false, 'Destroyed Configure Store');
+}

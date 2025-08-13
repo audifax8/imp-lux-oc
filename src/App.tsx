@@ -1,26 +1,12 @@
-import { lazy, Suspense } from 'react';
-import { ModelSkeleton } from './components/Skeleton';
+import { startConfigureStore } from './libs/yr-react/store/ConfigureStore';
+import { Wrapper } from './components/wrapper';
 
-import { usePreconnectStaticAssets } from './hooks/preconnect';
-import { usePreloadStaticAssets } from './hooks/preload';
-
-import './styles/index.scss'
-
-const Model = lazy(() => import('./components/Model'));
 function App() {
-  usePreconnectStaticAssets();
-  usePreloadStaticAssets();
+  startConfigureStore();
+  console.log('1');
+
   return (
-    <>
-      <main
-        className={'yr-app-layout'}>
-          <div className="yr-main-content">
-            <Suspense fallback={<ModelSkeleton />}>
-              <Model />
-            </Suspense>
-          </div>
-      </main>
-    </>
+    <Wrapper />
   )
 }
 

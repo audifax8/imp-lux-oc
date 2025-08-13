@@ -1,4 +1,5 @@
 import { use } from 'react';
+import { IConfigureAPI } from '../../declarations/interfaces';
 
 declare global {
   interface Window {
@@ -12,22 +13,6 @@ declare global {
     YR: any;
     _fluid: unknown;
   }
-}
-
-export interface IProduct {
-  name: string;
-  id: number;
-  vendorId: string;
-  defaultViewName: string;
-  environment: string;
-  customerId: number;
-  workflow: string;
-}
-export interface IConfigureAPI {
-  product: { id: number };
-  getProduct(): IProduct;
-  getRecipe(format: string, option1?: string, option2?: string): string;
-  destroy(): void;
 }
 
 function getProductImg(apiKey: string, coreService: IConfigureAPI): string {

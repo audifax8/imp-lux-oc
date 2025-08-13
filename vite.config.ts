@@ -9,10 +9,10 @@ export default defineConfig({
   plugins: [
     react(),
     commonjs(),
-    nodePolyfills(),
+    nodePolyfills()
   ],
   build: {
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 500,
     cssCodeSplit: true,
     rollupOptions: {
       output: {

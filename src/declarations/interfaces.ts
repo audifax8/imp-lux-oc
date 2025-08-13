@@ -1,0 +1,183 @@
+import { FetchPriority } from './enums';
+
+export interface IConfigureState {
+  /** Configure API instance */
+  configure: IConfigureAPI;
+  product: IProduct;
+  token: string;
+}
+export interface IConfigureAPI {
+  product: { id: number };
+  getProduct(): IProduct;
+  getProductName(): string;
+  getAttributeByAlias(alias: string): IConfigurableAttribute;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  getRecipe(format: string, option1?: string, option2?: string): any;
+  getAttribute(options: unknown): IConfigurableAttribute;
+  getSelectedAV(alias: string): IAttributeValue;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  getFcParams(): any;
+  destroy(): void;
+}
+export interface IConfigureInitParams {
+  /**  Customer ID. */
+  customer: number;
+  /** Product ID. */
+  product: number;
+  /**  The environment to use for configurations and services. The default is "prod". */
+  environment?: string;
+  /** The workflow from which to load configurations. The default is "prod". */
+  workflow: string;
+  /** The locale to use for this instance. The defaults is "en_us". You must have localization defined for this locale. */
+  locale?: string;
+  currency?: string;
+  number?: string;
+  /** Load the configurator with this recipe ID. If omitted, a blank recipe will be used with default values for each attribute. */
+  recipe?: number;
+  recipeId?: string;
+  yrEnv?: boolean;
+  vendorId?: string;
+  rtrDisabled?: boolean;
+  token?: string;
+  upc?: string;
+  showBackgroundImage?: boolean;
+  showThemeSwitch?: boolean;
+  darkMode?: boolean;
+}
+
+export interface IConfigurableAttribute {
+  id: number;
+  alias: string;
+  vendorId: string;
+  name: string;
+  values: IAttributeValue[];
+  metadata: KeyValueString[];
+  allFacets: ICAFacet[];
+}
+export interface IProduct {
+  name: string;
+  id: number;
+  vendorId: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  facets: any;
+  defaultViewName: string;
+  environment: string;
+  customerId: number;
+  workflow: string;
+}
+
+export interface IAttributeValue {
+  active: boolean;
+  selected: boolean;
+  selectable: boolean;
+  id: number;
+  url?: string;
+  vendorId: string;
+  alias: string;
+  name: string;
+  metadata: KeyValueString[];
+  facets: IAVFacet;
+}
+
+export interface ICAFacet {
+  name: string;
+  id: number;
+  facetValues: IFacetValue[];
+}
+
+export type IAVFacet = Record<string, number[]>;
+
+export interface IFacetValue {
+  id: number;
+  name: string;
+  selectable: boolean;
+}
+
+export interface IRTRAssetsAPI {
+  prefetchListStartup?: string[];
+  prefetchListConfigurableAttributes?: Record<string, string[]>;
+  prefetchListHierarchy?: Record<string, string[]>;
+}
+
+export interface IResource {
+  url: string;
+  as: string;
+  crossOrigin?: string;
+  fetchPriority?: FetchPriority;
+}
+
+export interface IRTR_API {
+  getVersion(): string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  init(token: string, cb?: any): void;
+  isIdAvailable(token: string): Promise<boolean>;
+  setId(token: string): void;
+  selectComponent(token: number): void;
+  mapCameraNameRTRToComponent(caName: string): number | undefined;
+  mapCaNameToRTRCameraName(caAlias: string): string;
+  isInitialized(): Promise<boolean>;
+}
+
+interface ITokenPayload {
+  type: string;
+  value: string;
+}
+
+interface ISelectComponentPayload {
+  componentId: number;
+}
+
+interface IEnvPayload {
+  envs: {
+    ms: string;
+    catalog: string;
+    asset: string;
+  };
+  qa: boolean;
+}
+
+export interface IInitRTRPayload {
+  data: {
+    settings: {
+      env: string;
+      orbitPoint: boolean;
+      highlightComponent: boolean;
+      overviewVisibility: boolean;
+      displayComponentPointer: boolean;
+      automaticFramingComponent: boolean;
+      buttonsVisibility: {
+        tutorial: string;
+        explosion: string;
+        accessibility: string;
+        animationAtLanding: string;
+      };
+    };
+    id: ITokenPayload;
+    locale: string; // or any other available locale
+    selector: string;
+  };
+  metadata: IEnvPayload;
+  callbacks: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onComponentSelected: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onActions: any;
+  };
+}
+export interface IRTRBaseAPI {
+  getVersion(): string;
+  init(payload: IInitRTRPayload): void;
+  isIdAvailable(dataToChekPayload: ITokenPayload, envPayload: IEnvPayload): Promise<boolean>;
+  setId(setIdPayload: ITokenPayload): void;
+  isInitialized(): Promise<boolean>;
+  selectComponent(payload: ISelectComponentPayload): void;
+}
+
+export type KeyValueString = Record<string, string>;
+
+export type KeyValueNumber = Record<string, number>;
+export interface IBaseLuxAPI {
+  getProductVendorId(product: IProduct): string;
+  getVendorIDSize(params: IConfigureInitParams): string;
+  getAssetsURL(params: IConfigureInitParams): string;
+}
