@@ -34,7 +34,7 @@ const DEFAULT_RXC_VERSION = '1.1.3';
 const RXC_BASE_URL = 'https://rxc.luxottica.com';
 export const RXC_URL = `${RXC_BASE_URL}/rxc3/fe/test/v/${DEFAULT_RXC_VERSION}/dist/rxc.js`;
 
-const CDN_FLUID_BASE_URL = 'https://cdn-prod.fluidconfigure.com';
+export const CDN_FLUID_BASE_URL = 'https://cdn-prod.fluidconfigure.com';
 
 export const RTR_ASSETS_URL = 'https://cp.luxottica.com/public/v1/prefetch/_vendorId_?qa=_rtrQa_';
 export const SKELETON_IMG_URL = `${CDN_FLUID_BASE_URL}/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/sk.webp`;
@@ -91,7 +91,7 @@ export function mapURLs(params: IConfigureInitParams): IResource[] {
   if (!rtrDisabled) {
     urls.push({ url: RTR_URL, as: 'script', fetchPriority: FetchPriority.HIGH, crossOrigin: 'anonymous' });
   }
-  if (customer === RBN_CUSTOMER_ID) {
+  /*if (customer === RBN_CUSTOMER_ID) {
     urls.push({
       url: 'fonts/Lato/Lato-Regular.woff2',
       as: 'font',
@@ -110,7 +110,7 @@ export function mapURLs(params: IConfigureInitParams): IResource[] {
       fetchPriority: FetchPriority.LOW,
       crossOrigin: 'anonymous'
     });
-  }
+  }*/
   return urls;
 }
 

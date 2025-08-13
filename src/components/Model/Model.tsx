@@ -1,23 +1,15 @@
-import { use, useEffect, useState } from 'react';
+import { use } from 'react';
 import { IConfigureAPI } from '../../declarations/interfaces';
 import { setAPIReady } from '../../libs/yr-react/store/ConfigureStore';
+import { setShowSkeleton, setTokenAndImage, useUIState } from '../../store/UIStore';
 
-
-function getProductImg(apiKey: string, coreService: IConfigureAPI): string {
-  const isMobile = false;
-  const conciseRecipe = coreService.getRecipe('legacyConcise');
-  const uriRecipe = encodeURI(conciseRecipe);
-  const { id, defaultViewName, environment, workflow, customerId } = coreService.getProduct();
-  const format = 'png';
-  const quality = '50';
-  const sacale = isMobile ? '0.2' : '0.5';
-  const baseURL = `https://prod.fluidconfigure.com/imagecomposer/generate/?view=${defaultViewName}&apiKey=${apiKey}&workflow=${workflow}&environment=${environment}&customerId=${customerId}&productId=${id}&purpose=serverDisplay&format=${format}&trim=false&padding=0&scale=${sacale}&binary=true&quality=${quality}&backgroundColor=%23f6f6f6ff&recipe=${uriRecipe}`;
-  return baseURL;
-}
+import { apis } from '../../libs/apis';
+import { CDN_FLUID_BASE_URL } from '../../declarations/constants';
 
 const myPromise = new Promise((resolve, reject) => {
-  const pref = 'https://cdn-prod.fluidconfigure.com/static/configs/3.13.0/prod/prod/1581/preferences.json';
-  const graph = 'https://cdn-prod.fluidconfigure.com/static/configs/3.13.0/prod/prod/1581/product/22972/graph-settings-en_US.json';
+  const { workflow, customer, product, locale } = apis.getParams();
+  const graph = `${CDN_FLUID_BASE_URL}/static/configs/3.13.0/prod/${workflow}/${customer}/product/${product}/graph-settings-${locale}.json`
+  const pref = `${CDN_FLUID_BASE_URL}/static/configs/3.13.0/prod/${workflow}/${customer}/preferences.json`;
   
   Promise.all([
     fetch(pref), 
@@ -37,16 +29,20 @@ const myPromise = new Promise((resolve, reject) => {
         productGraph,
         preferences,
         shouldSkipCache: false,
-        product: 22972,
-        customer: 1581,
-        workflow: 'prod'
+        product,
+        customer,
+        workflow
       },
       (error: Error, configureCore: IConfigureAPI) => {
         if (error) {
           return reject(error);
         }
-        const configureImg = getProductImg('LUX-Ray-Ban-8taOhSR5AFyjt9tfxU', configureCore);
-        setAPIReady(true, configureImg, '');
+        apis.initLuxApi(configureCore);
+        const configureImg = apis.luxAPI.getProductImg('LUX-Ray-Ban-8taOhSR5AFyjt9tfxU');
+        const token = apis.luxAPI.getToken();
+        setAPIReady(true);
+        setTokenAndImage(token, configureImg);
+        setShowSkeleton(false);
         return resolve(configureImg);
       }
     );
@@ -55,21 +51,13 @@ const myPromise = new Promise((resolve, reject) => {
 });
 
 export default function Model() {
-  const [isImageLoaded, setIsImageLoaded] = useState('https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/sk.webp');
-  const img = use(myPromise) as string;
+  use(myPromise) as string;
+  const [configureImg] = useUIState('configureImg');
 
-  useEffect(
-    () => {
-      fetch(img)
-        .then(() => setIsImageLoaded(img))
-        .catch((e) => console.log(e));
-    }
-  , [img]);
-
-  return (isImageLoaded && 
+  return (configureImg && 
     <section className="yr-model">
-      <picture className={('yr-skeleton yr-model__placeholder yr-image')}>
-        <img src={isImageLoaded} alt="Model" />
+      <picture className={('yr-model__placeholder yr-image')}>
+        <img src={configureImg} alt="Model" />
       </picture>
     </section>
   );

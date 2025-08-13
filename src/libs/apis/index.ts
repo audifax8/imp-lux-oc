@@ -16,6 +16,10 @@ class APIs {
     this.params = params;
   }
 
+  getParams(): IConfigureInitParams {
+    return this.params;
+  }
+
   initLuxApi(configure: IConfigureAPI): void {
     const { customer } = this.params;
     this.luxAPI = customer === OAK_CUSTOMER_ID ? new OakCustomAPI() : new RbnCustomAPI();

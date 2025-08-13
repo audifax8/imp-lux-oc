@@ -1,9 +1,10 @@
 import { startConfigureStore } from './libs/yr-react/store/ConfigureStore';
 import { Wrapper } from './components/wrapper';
+import { startUIStore } from './store/UIStore';
 
 function App() {
   startConfigureStore();
-  console.log('1');
+  startUIStore();
 
   return (
     <Wrapper />

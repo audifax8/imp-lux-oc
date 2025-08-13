@@ -10,14 +10,10 @@ import { IConfigureAPI } from '../../../declarations/interfaces';
 
 export interface IConfigureState {
   apiReady: boolean;
-  token: string;
-  configureImg: string;
 }
 
 const INITIAL_STATE: IConfigureState = {
-  apiReady: false,
-  token: undefined!,
-  configureImg: undefined!
+  apiReady: false
 };
 
 /** Store Hook */
@@ -30,8 +26,8 @@ export const useConfigureState = createStoreStateHook(useConfigureStore);
 export type ConfigureStore = StoreApi<IConfigureState>;
 export type ConfigureCallback = (error: Error, configure: IConfigureAPI) => void;
 
-export function setAPIReady(apiReady: boolean, configureImg: string, token?: string) {
-  useConfigureStore.setState({ apiReady, configureImg, token }, false, 'Set API ready');
+export function setAPIReady(apiReady: boolean) {
+  useConfigureStore.setState({ apiReady }, false, 'Set API ready');
 }
 
 export const startConfigureStore = () => {
