@@ -6,6 +6,7 @@ import { usePreloadStaticAssets } from '../hooks/preload';
 import { AppLayout } from './AppLayout';
 
 import '../styles/index.scss';
+import { useDownloadRTRScript } from '../hooks/rtrScript';
 
 /**
  * Implementation content.
@@ -15,7 +16,7 @@ import '../styles/index.scss';
 export function Wrapper() {
   usePreconnectStaticAssets();
   usePreloadStaticAssets();
-  //useDownloadRTRScript();
+  useDownloadRTRScript();
   return (
     <main className={clsx('yr-implementation-root')}>
       <section>

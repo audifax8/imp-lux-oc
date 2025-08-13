@@ -1,0 +1,44 @@
+import { create, StoreApi } from 'zustand';
+import { devtools, subscribeWithSelector } from 'zustand/middleware';
+import { apis } from '../libs/apis';
+import { RtrAPI } from '../libs/apis/rtr-api';
+import { createStoreStateHook } from '../libs/yr-react/store/zustand-helpers';
+import { IConfigureAPI, IRTRBaseAPI } from '../declarations/interfaces';
+
+export interface IAPIsState {
+  rtrRendered?: boolean;
+  rtrApiReady: boolean;
+  rtrError: string;
+  rtrDisabled: boolean;
+}
+
+const INITIAL_STATE: IAPIsState = {
+  rtrRendered: false,
+  rtrApiReady: false,
+  rtrError: undefined!,
+  rtrDisabled: false
+};
+
+export function startAPIs(configure: IConfigureAPI) {
+  apis.initLuxApi(configure);
+  apis.initAssetsWorkers();
+}
+
+export function startRTR() {
+  const rtrAPI = new RtrAPI(window.rtrViewerMV as IRTRBaseAPI);
+  apis.initRTRAPI(rtrAPI);
+}
+
+/** Store Hook */
+export const useAPIsStore = create(
+  subscribeWithSelector(devtools<IAPIsState>(() => ({ ...INITIAL_STATE }), { name: 'APIs' }))
+);
+
+/** Store Selectors */
+export const useAPIsState = createStoreStateHook(useAPIsStore);
+
+export type APIsStore = StoreApi<IAPIsState>;
+
+export function destroyAPIs() {
+  useAPIsStore.setState(INITIAL_STATE, false, 'Destroyed APIs');
+}

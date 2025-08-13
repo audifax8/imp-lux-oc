@@ -1,14 +1,14 @@
 import { IConfigureAPI, IConfigureInitParams } from '../../declarations/interfaces';
-import { API_KEYS_MAP, OAK_CUSTOMER_ID } from '../../declarations/constants';
+import { API_KEYS_MAP, getHeadlessURL, getUPCAPI, OAK_CUSTOMER_ID } from '../../declarations/constants';
 import { RtrAPI } from './rtr-api';
 //import { API_KEYS_MAP, getHeadlessURL, OAK_CUSTOMER_ID, getUPCAPI } from '@/declarations/constants';
 import { LuxBaseAPI, OakCustomAPI, RbnCustomAPI } from './lux-api';
-//import { AssetsWorker } from '@/workers/asset-manager';
+import { AssetsWorker } from '../../workers/asset-manager';
 
 class APIs {
   params: IConfigureInitParams = undefined!;
   rtrAPI: RtrAPI = undefined!;
-  //assetsWorker: AssetsWorker = undefined!;
+  assetsWorker: AssetsWorker = undefined!;
   luxAPI: LuxBaseAPI = undefined!;
   configureCore: IConfigureAPI = undefined!;
 
@@ -28,13 +28,12 @@ class APIs {
   }
 
   initAssetsWorkers(): void {
-    return;
-    /*const url = this.getRTRAssetsURL();
+    const url = this.getRTRAssetsURL();
     this.assetsWorker = new AssetsWorker(this.params, url);
     this.assetsWorker.downloadAssets([getHeadlessURL(this.params)], 'Product Headless');
     if (this.params.upc) {
       this.assetsWorker.downloadAssets([getUPCAPI(this.params)], 'upc2Token');
-    }*/
+    }
   }
 
   initRTRAPI(rtrApi: RtrAPI): void {
@@ -53,7 +52,7 @@ class APIs {
 
   destroyAPIs(): void {
     this.configureCore?.destroy();
-    //this.assetsWorker?.destroy();
+    this.assetsWorker?.destroy();
     this.luxAPI?.destroy();
     this.rtrAPI?.destroy();
   }

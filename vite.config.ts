@@ -22,7 +22,8 @@ export default defineConfig({
         },
         inlineDynamicImports: false
       }
-    }
+    },
+    commonjsOptions: { transformMixedEsModules: true }
   },
   define: {
     'process.browser': true,

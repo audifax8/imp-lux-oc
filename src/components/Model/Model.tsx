@@ -5,6 +5,7 @@ import { setShowSkeleton, setTokenAndImage } from '../../store/UIStore';
 
 import { apis } from '../../libs/apis';
 import { CDN_FLUID_BASE_URL } from '../../declarations/constants';
+import { startAPIs } from '../../store/APIsStore';
 
 const myPromise = new Promise((resolve, reject) => {
   const { workflow, customer, product, locale, yrEnv } = apis.getParams();
@@ -45,6 +46,7 @@ const myPromise = new Promise((resolve, reject) => {
             setAPIReady(true);
             setTokenAndImage(token, configureImg);
             setShowSkeleton(false);
+            startAPIs(configureCore);
             return resolve(configureImg);
           })
           .catch((e) => {
@@ -55,12 +57,10 @@ const myPromise = new Promise((resolve, reject) => {
       }
     );
   }).catch((e) => reject(e));
-
 });
 
 export default function Model() {
   const configureImg = use(myPromise) as string;
-  console.log({ configureImg });
 
   return (configureImg && 
     <section className="yr-model">
