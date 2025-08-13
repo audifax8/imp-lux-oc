@@ -1,13 +1,13 @@
 import { use } from 'react';
 import { IConfigureAPI } from '../../declarations/interfaces';
 import { setAPIReady } from '../../libs/yr-react/store/ConfigureStore';
-import { setShowSkeleton, setTokenAndImage, useUIState } from '../../store/UIStore';
+import { setShowSkeleton, setTokenAndImage } from '../../store/UIStore';
 
 import { apis } from '../../libs/apis';
 import { CDN_FLUID_BASE_URL } from '../../declarations/constants';
 
 const myPromise = new Promise((resolve, reject) => {
-  const { workflow, customer, product, locale } = apis.getParams();
+  const { workflow, customer, product, locale, yrEnv } = apis.getParams();
   const graph = `${CDN_FLUID_BASE_URL}/static/configs/3.13.0/prod/${workflow}/${customer}/product/${product}/graph-settings-${locale}.json`
   const pref = `${CDN_FLUID_BASE_URL}/static/configs/3.13.0/prod/${workflow}/${customer}/preferences.json`;
   
@@ -39,11 +39,19 @@ const myPromise = new Promise((resolve, reject) => {
         }
         apis.initLuxApi(configureCore);
         const configureImg = apis.luxAPI.getProductImg('LUX-Ray-Ban-8taOhSR5AFyjt9tfxU');
-        const token = apis.luxAPI.getToken();
-        setAPIReady(true);
-        setTokenAndImage(token, configureImg);
-        setShowSkeleton(false);
-        return resolve(configureImg);
+        fetch(configureImg)
+          .then(() => {
+            const token = apis.luxAPI.getToken();
+            setAPIReady(true);
+            setTokenAndImage(token, configureImg);
+            setShowSkeleton(false);
+            return resolve(configureImg);
+          })
+          .catch((e) => {
+            if (yrEnv) {
+              console.log({ e });
+            }
+          });
       }
     );
   }).catch((e) => reject(e));
@@ -51,8 +59,8 @@ const myPromise = new Promise((resolve, reject) => {
 });
 
 export default function Model() {
-  use(myPromise) as string;
-  const [configureImg] = useUIState('configureImg');
+  const configureImg = use(myPromise) as string;
+  console.log({ configureImg });
 
   return (configureImg && 
     <section className="yr-model">
