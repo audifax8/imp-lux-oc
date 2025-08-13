@@ -1,0 +1,1 @@
+(function(){"use strict";self.onmessage=async a=>{const e=a.data,{params:n,assetsURL:c}=e,{yrEnv:s}=n;s&&console.log("Message received in worker:",e);try{const t=await(await fetch(c)).json();s&&console.log("RTR assets: "+t),self.postMessage(t)}catch(o){s&&console.log(o),self.postMessage({})}}})();
