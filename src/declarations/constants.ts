@@ -138,3 +138,26 @@ export const CONFIGURE_INIT_PARAM_NAMES = [
   'number',
   'recipe'
 ];
+
+//TODO
+export const MOCK_RBN_MENU_ITEMS = [
+  {
+    name: 'Front',
+    selected: 'Black',
+    upcharge: null,
+    img: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/frame.webp'
+  },
+  {
+    name: 'Temple',
+    selected: 'Black',
+    upcharge: null,
+    img: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/temple.webp'
+  },
+  {
+    name: 'Lenses',
+    selected: 'Green G-15',
+    upcharge: '+$40.00',
+    img: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/lens.webp'
+  }
+];
+

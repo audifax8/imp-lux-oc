@@ -1,10 +1,11 @@
 import { lazy, Suspense } from 'react';
 import clsx from 'clsx';
 
-import { useTheme } from '../../state/ui';
+import { useTheme } from '@/state/ui';
 
-import { useApiready } from '../../libs/yr-react/hooks/configure';
+//import { useApiready } from '@/libs/yr-react/hooks/configure';
 
+import { Menu } from '@/components/Menu';
 import { Header } from '@/components/Header';
 import { ModelSkeleton } from '@/components/Model/Skeleton';
 
@@ -19,8 +20,7 @@ import { ModelSkeleton } from '@/components/Model/Skeleton';
 const Model = lazy(() => import('../Model/Model'));
 
 export function AppLayout() {
-  const apiReady = useApiready();
-  console.log({ apiReady });
+  //const apiReady = useApiready();
   //const [isCustomizerOpen] = useIsCustomizerOpen();
   const [theme] = useTheme();
   //const [isMobile] = useIsMobile();
@@ -38,6 +38,9 @@ export function AppLayout() {
         <Suspense fallback={<ModelSkeleton />}>
           <Model />
         </Suspense>
+        <>
+          <Menu />
+        </>
       </div>
     </main>
   );
