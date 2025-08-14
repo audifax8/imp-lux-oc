@@ -1,7 +1,9 @@
-import { useTheme } from '../../state/ui';
-import { RemixLogoBlack } from './RemixLogoBlack';
-import { RemixLogoWhite } from './RemixLogoWhite';
-import { Theme } from '../../declarations/enums';
+import { useTheme } from '@/state/ui';
+
+import { Theme } from '@/declarations/enums';
+
+import { RemixLogoBlack } from '@/components/Logo//RemixLogoBlack';
+import { RemixLogoWhite } from '@/components/Logo/RemixLogoWhite';
 
 export function Logo() {
   const [theme] = useTheme();

@@ -1,5 +1,6 @@
-import { useShowSkeleton } from '../state/ui';
 import clsx from 'clsx';
+
+import { useShowSkeleton } from '@/state/ui';
 
 export const useClsxWithSkeleton = () => {
   const [showSkeleton] = useShowSkeleton();

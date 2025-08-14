@@ -1,4 +1,4 @@
-import { useAPIsState } from '../store/APIsStore';
+import { useAPIsState } from '@/store/APIsStore';
 
 type UseRTRRendered = ReturnType<typeof useAPIsState<'rtrRendered'>>;
 export function useRTRRendered(): UseRTRRendered {

@@ -1,9 +1,5 @@
-//import { useConfigureStore } from '@/libs/yr-react/store/ConfigureStore';
-//import { IConfigureInitParams, IRTRAssetsAPI } from '@/declarations/interfaces';
-
-import { IConfigureInitParams, IRTRAssetsAPI } from "../declarations/interfaces";
-import { setToken } from "../store/UIStore";
-//import { useConfigureStore } from "../libs/yr-react/store/ConfigureStore";
+import { IConfigureInitParams, IRTRAssetsAPI } from '@/declarations/interfaces';
+import { setToken } from '@/store/UIStore';
 
 export class AssetsWorker {
   worker: Worker = undefined!;

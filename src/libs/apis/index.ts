@@ -1,9 +1,9 @@
-import { IConfigureAPI, IConfigureInitParams } from '../../declarations/interfaces';
-import { API_KEYS_MAP, getHeadlessURL, getUPCAPI, OAK_CUSTOMER_ID } from '../../declarations/constants';
-import { RtrAPI } from './rtr-api';
-//import { API_KEYS_MAP, getHeadlessURL, OAK_CUSTOMER_ID, getUPCAPI } from '@/declarations/constants';
-import { LuxBaseAPI, OakCustomAPI, RbnCustomAPI } from './lux-api';
-import { AssetsWorker } from '../../workers/asset-manager';
+import { AssetsWorker } from '@/workers/asset-manager';
+import { IConfigureAPI, IConfigureInitParams } from '@/declarations/interfaces';
+import { API_KEYS_MAP, getHeadlessURL, getUPCAPI, OAK_CUSTOMER_ID } from '@/declarations/constants';
+
+import { RtrAPI } from '@/libs/apis/rtr-api';
+import { LuxBaseAPI, OakCustomAPI, RbnCustomAPI } from '@/libs/apis/lux-api';
 
 class APIs {
   params: IConfigureInitParams = undefined!;

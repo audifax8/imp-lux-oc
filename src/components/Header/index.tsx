@@ -1,13 +1,21 @@
 
 
-import { Button } from '../Button';
-import { Switch } from '../Switch';
-import { TryOnIcon, ArrowIcon } from '../Icons';
-import { Logo } from '../Logo';
-import { useIsCustomizerOpen, useTheme, useIsMobile, useParams } from '../../state/ui';
-import { Theme } from '../../declarations/enums';
-import { useClsxWithSkeleton } from '../../hooks/useClsxWithSkeleton';
-import { useGetProduct } from '../../libs/yr-react/hooks/configure';
+import {
+  useIsCustomizerOpen,
+  useTheme,
+  useIsMobile,
+  useParams
+} from '@/state/ui';
+
+import { Theme } from '@/declarations/enums';
+
+import { useGetProduct } from '@/libs/yr-react/hooks/configure';
+import { useClsxWithSkeleton } from '@/hooks/useClsxWithSkeleton';
+
+import { Button } from '@/components/Button';
+import { Switch } from '@/components/Switch';
+import { TryOnIcon, ArrowIcon } from '@/components/Icons';
+import { Logo } from '@/components/Logo';
 
 export function Header() {
   const [params] = useParams();

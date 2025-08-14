@@ -1,5 +1,5 @@
-import { FetchPriority } from './enums';
-import { IConfigureInitParams, IResource } from './interfaces';
+import { FetchPriority } from '@/declarations/enums';
+import { IConfigureInitParams, IResource } from '@/declarations/interfaces';
 
 export const MEGA_WAYFARER_ID = 26101;
 export const RBN_CUSTOMER_ID = 1581;

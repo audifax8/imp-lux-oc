@@ -1,10 +1,13 @@
 import { create } from 'zustand';
 import { devtools, subscribeWithSelector } from 'zustand/middleware';
-import { Theme } from '../declarations/enums';
-import { createStoreStateHook } from '../libs/yr-react/store/zustand-helpers';
-import { IConfigureInitParams } from '../declarations/interfaces';
-import { getInitQueryParams } from '../helpers/params';
-import { apis } from '../libs/apis';
+
+import { Theme } from '@/declarations/enums';
+import { IConfigureInitParams } from '@/declarations/interfaces';
+
+import { apis } from '@/libs/apis';
+import { createStoreStateHook } from '@/libs/yr-react/store/zustand-helpers';
+
+import { getInitQueryParams } from '@/helpers/params';
 
 export interface IUIState {
   theme: Theme;

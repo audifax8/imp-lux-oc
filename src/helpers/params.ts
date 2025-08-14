@@ -4,8 +4,8 @@ import {
   WAYFARER_ID,
   DEFAULT_LOCALE,
   WAYFARER_VENDOR_ID
-} from '../declarations/constants';
-import { IConfigureInitParams } from '../declarations/interfaces';
+} from '@/declarations/constants';
+import { IConfigureInitParams } from '@/declarations/interfaces';
 
 function parseBoolParam(paramToParse: string | undefined): boolean {
   if (paramToParse === undefined) {

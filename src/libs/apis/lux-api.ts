@@ -1,6 +1,6 @@
 /* eslint-disable */
-import { IConfigureAPI, IConfigureInitParams, IProduct, IBaseLuxAPI } from '../../declarations/interfaces';
-import { RBN_TOKEN_ALIASES, OAK_TOKEN_ALIASES, RTR_ASSETS_URL } from '../../declarations/constants';
+import { IConfigureAPI, IConfigureInitParams, IProduct, IBaseLuxAPI } from '@/declarations/interfaces';
+import { RBN_TOKEN_ALIASES, OAK_TOKEN_ALIASES, RTR_ASSETS_URL } from '@/declarations/constants';
 
 export abstract class LuxBaseAPI implements IBaseLuxAPI {
   coreService: IConfigureAPI = undefined!;

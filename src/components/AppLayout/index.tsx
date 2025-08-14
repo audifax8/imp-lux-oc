@@ -1,9 +1,13 @@
 import { lazy, Suspense } from 'react';
 import clsx from 'clsx';
-import { ModelSkeleton } from '../Model/Skeleton';
-import { useApiready } from '../../libs/yr-react/hooks/configure';
-import { Header } from '../Header';
+
 import { useTheme } from '../../state/ui';
+
+import { useApiready } from '../../libs/yr-react/hooks/configure';
+
+import { Header } from '@/components/Header';
+import { ModelSkeleton } from '@/components/Model/Skeleton';
+
 //import { useParams } from '@/state/implementation';
 //import { useIsCustomizerOpen, useIsMobile, useTheme } from '@/state/ui';
 //import { Header } from '@/components/Header';

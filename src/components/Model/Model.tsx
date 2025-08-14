@@ -1,14 +1,17 @@
 import { use, useEffect } from 'react';
 import clsx from 'clsx';
-import { IConfigureAPI } from '../../declarations/interfaces';
-import { setAPIReady } from '../../libs/yr-react/store/ConfigureStore';
-import { setShowSkeleton, setTokenAndImage } from '../../store/UIStore';
 
-import { apis } from '../../libs/apis';
-import { CDN_FLUID_BASE_URL } from '../../declarations/constants';
-import { startAPIs } from '../../store/APIsStore';
-import { useRTRAPIReady } from '../../state/rtr';
-import { useParams, useToken } from '../../state/ui';
+import { useRTRAPIReady } from '@/state/rtr';
+import { useParams, useToken } from '@/state/ui';
+
+import { startAPIs } from '@/store/APIsStore';
+import { setShowSkeleton, setTokenAndImage } from '@/store/UIStore';
+
+import { apis } from '@/libs/apis';
+import { setAPIReady } from '@/libs/yr-react/store/ConfigureStore';
+
+import { IConfigureAPI } from '@/declarations/interfaces';
+import { CDN_FLUID_BASE_URL } from '@/declarations/constants';
 
 const myPromise = new Promise((resolve, reject) => {
   const { workflow, customer, product, locale, yrEnv } = apis.getParams();

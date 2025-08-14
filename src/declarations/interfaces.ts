@@ -1,4 +1,4 @@
-import { FetchPriority } from './enums';
+import { FetchPriority } from '@/declarations/enums';
 
 export interface IConfigureState {
   /** Configure API instance */

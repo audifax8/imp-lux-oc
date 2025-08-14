@@ -1,6 +1,7 @@
-import { IConfigureAPI, IProduct } from '../../../declarations/interfaces';
-import { useConfigureState } from '../store/ConfigureStore';
-import { apis } from '../../apis/index';
+import { IConfigureAPI, IProduct } from '@/declarations/interfaces';
+
+import { apis } from '@/libs/apis';
+import { useConfigureState } from '@/libs/yr-react/store/ConfigureStore';
 
 /**
  * Returns the ConfigureAPI instance

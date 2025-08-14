@@ -1,5 +1,12 @@
 /* eslint-disable */
-import { IRTR_API, IRTRBaseAPI, KeyValueString, KeyValueNumber, IInitRTRPayload } from '../../declarations/interfaces';
+import {
+  IRTR_API,
+  IRTRBaseAPI,
+  KeyValueString,
+  KeyValueNumber,
+  IInitRTRPayload
+} from '@/declarations/interfaces';
+import { waitForScriptToLoad } from '@/libs/helpers';
 export class RtrAPI implements IRTR_API {
   /* Lux rtr API */
   api: IRTRBaseAPI;
@@ -87,30 +94,8 @@ export class RtrAPI implements IRTR_API {
     };
     this.api?.init(initData);
 
-    const waitForScriptToLoad = (checkTimeMs: number, timeOutMs: number) => {
-      let elapsedTime = 0;
-      let isInitialized: boolean | unknown = false;
-      return new Promise(async (resolve, reject) => {
-        const time = setInterval(async () => {
-          elapsedTime += checkTimeMs;
-          isInitialized = window?.rtrViewerMV;
-          //isInitialized = await this.isInitialized();
-          if (isInitialized) {
-            resolve({
-              time: (elapsedTime / 1000).toFixed(2) + 's'
-            });
-            clearInterval(time);
-          } else if (elapsedTime > timeOutMs && !isInitialized) {
-            reject({
-              time: elapsedTime
-            });
-            clearInterval(time);
-          }
-        }, checkTimeMs);
-      });
-    };
     if (cb) {
-      return waitForScriptToLoad(100, 20000)
+      return waitForScriptToLoad(100, 20000, 'rtrViewerMV')
         .then((e) => cb(null, e))
         .catch((err) => cb(err, null));
     }

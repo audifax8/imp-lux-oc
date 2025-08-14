@@ -1,9 +1,11 @@
 import { create, StoreApi } from 'zustand';
 import { devtools, subscribeWithSelector } from 'zustand/middleware';
-import { apis } from '../libs/apis';
-import { RtrAPI } from '../libs/apis/rtr-api';
-import { createStoreStateHook } from '../libs/yr-react/store/zustand-helpers';
-import { IConfigureAPI, IRTRBaseAPI } from '../declarations/interfaces';
+
+import { apis } from '@/libs/apis';
+import { RtrAPI } from '@/libs/apis/rtr-api';
+import { createStoreStateHook } from '@/libs/yr-react/store/zustand-helpers';
+
+import { IConfigureAPI, IRTRBaseAPI } from '@/declarations/interfaces';
 
 export interface IAPIsState {
   rtrRendered?: boolean;

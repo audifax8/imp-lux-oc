@@ -1,12 +1,12 @@
 import { clsx } from 'clsx';
 
-import { usePreconnectStaticAssets } from '../hooks/preconnect';
-import { usePreloadStaticAssets } from '../hooks/preload';
+import { usePreconnectStaticAssets } from '@/hooks/usePreconnectStaticAssets';
+import { usePreloadStaticAssets } from '@/hooks/usePreloadStaticAssets';
+import { useDownloadRTRScript } from '@/hooks/rtrScript';
 
-import { AppLayout } from './AppLayout';
+import { AppLayout } from '@/components/AppLayout';
 
 import '../styles/index.scss';
-import { useDownloadRTRScript } from '../hooks/rtrScript';
 
 /**
  * Implementation content.

@@ -1,11 +1,9 @@
 import { useEffect } from 'react';
-import { useUIState } from '../store/UIStore';
-import { Theme } from '../declarations/enums';
-import { SKELETON_IMG_URL } from '../declarations/constants';
 
-export function mapSkeletonImg(workflow: string): string {
-  return SKELETON_IMG_URL.replace('_workflow_', workflow);
-}
+import { useUIState } from '@/store/UIStore';
+
+import { Theme } from '@/declarations/enums';
+import { SKELETON_IMG_URL } from '@/declarations/constants';
 
 type UseTheme = [ReturnType<typeof useUIState<'theme'>>[0], (newTheme?: Theme) => void];
 
@@ -52,11 +50,10 @@ export const useIsCustomizerOpen = (): UseIsCustomizerOpen => {
 type UseConfigureImg = ReturnType<typeof useUIState<'configureImg'>>;
 
 export const useConfigureImg = (): UseConfigureImg => {
-  const [params] = useUIState('params');
   const [token] = useUIState('token');
   const [configureImg, setConfigureImg] = useUIState('configureImg');
   if (token === undefined) {
-    return [mapSkeletonImg(params.workflow), setConfigureImg];
+    return [SKELETON_IMG_URL, setConfigureImg];
   }
   return [configureImg, setConfigureImg];
 };

@@ -1,10 +1,13 @@
 import { defineConfig,  } from 'vite';
 import react from '@vitejs/plugin-react';
-import { resolve } from 'path';
 import commonjs from 'vite-plugin-commonjs';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
+import path from 'path';
 
 export default defineConfig({
+  server: {
+    open: true
+  },
   base: 'imp-lux-oc',
   plugins: [
     react(),
@@ -31,7 +34,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      'superagent-mock': resolve(
+      '@': path.resolve(__dirname, './src'),
+      'superagent-mock': path.resolve(
         __dirname,
         'node_modules',
         '@cfg.plat',

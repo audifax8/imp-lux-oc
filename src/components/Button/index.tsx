@@ -1,5 +1,6 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react';
-import { useClsxWithSkeleton } from '../../hooks/useClsxWithSkeleton';
+
+import { useClsxWithSkeleton } from '@/hooks/useClsxWithSkeleton';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   icon?: ReactNode;
