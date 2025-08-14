@@ -61,6 +61,12 @@ export function getURLsToPreconnect(params: IConfigureInitParams): string[] {
   return urls;
 }
 
+export function getComponentsURL(vendorId: string, endpoint?: string,  currency?: string): string {
+  const DEFAULT_ENDPOINT = 'https://one-configurator-services-mockup.luxdeepblue.com';
+  const DEFAULT_CURRENCY = 'USD';
+  return `${endpoint ?? DEFAULT_ENDPOINT}/components?vendorId=${vendorId}&currency=${currency ?? DEFAULT_CURRENCY}`;
+}
+
 export function mapURLs(params: IConfigureInitParams): IResource[] {
   const { workflow, customer, product, locale, rtrDisabled } = params;
   const urls = [

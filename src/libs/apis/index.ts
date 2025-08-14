@@ -1,5 +1,5 @@
 import { IConfigureAPI, IConfigureInitParams } from '../../declarations/interfaces';
-import { API_KEYS_MAP, getHeadlessURL, getUPCAPI, OAK_CUSTOMER_ID } from '../../declarations/constants';
+import { API_KEYS_MAP, getComponentsURL, getHeadlessURL, getUPCAPI, OAK_CUSTOMER_ID } from '../../declarations/constants';
 import { RtrAPI } from './rtr-api';
 //import { API_KEYS_MAP, getHeadlessURL, OAK_CUSTOMER_ID, getUPCAPI } from '@/declarations/constants';
 import { LuxBaseAPI, OakCustomAPI, RbnCustomAPI } from './lux-api';
@@ -31,6 +31,14 @@ class APIs {
     const url = this.getRTRAssetsURL();
     this.assetsWorker = new AssetsWorker(this.params, url);
     this.assetsWorker.downloadAssets([getHeadlessURL(this.params)], 'Product Headless');
+    const vendorId = this.configureCore.getProduct().vendorId;
+    const componentsHeaders = new Headers();
+    componentsHeaders.append('Ocp-Apim-Subscription-Key', 'c17dfca82cc14819a4e2b600667c0123');
+    componentsHeaders.append('Accept', 'application/json');
+    componentsHeaders.append('OC-Id', '1ff9e4f3-293e-425d-b17e-4a5cc5578d0b');
+    componentsHeaders.append('OC-Country', 'US');
+    componentsHeaders.append('Cache-Control', 'no-cache');
+    this.assetsWorker.downloadAssets([getComponentsURL(vendorId)], 'Components', true);
     if (this.params.upc) {
       this.assetsWorker.downloadAssets([getUPCAPI(this.params)], 'upc2Token');
     }

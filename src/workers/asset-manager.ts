@@ -3,6 +3,7 @@
 
 import { IConfigureInitParams, IRTRAssetsAPI } from "../declarations/interfaces";
 import { setToken } from "../store/UIStore";
+//import { apis } from '../libs/apis';
 //import { useConfigureStore } from "../libs/yr-react/store/ConfigureStore";
 
 export class AssetsWorker {
@@ -37,10 +38,10 @@ export class AssetsWorker {
     this.worker.postMessage({ params, assetsURL });
   }
 
-  downloadAssets(assetsToDownload: string[], assetDescription?: string): void {
+  downloadAssets(assetsToDownload: string[], assetDescription?: string, isComponents?: boolean): void {
     const { upc, yrEnv } = this.params;
     const worker = new Worker(new URL('./download-asset', import.meta.url), { type: 'module' });
-    worker.onmessage = (event: MessageEvent) => {
+    worker.onmessage = async (event: MessageEvent) => {
       const { data } = event;
       if (yrEnv) {
         console.log(assetDescription);
@@ -50,8 +51,16 @@ export class AssetsWorker {
       if (upc && data?.[upc]) {
         setToken(data?.[upc]?.token);
       }
+      /*if (isComponents) {
+        console.log({ isComponents, data });
+        const { getProductOverrides, RAYBAN_CODE } = await require('@fluid.inc/imp-tools-lux');
+        console.log(getProductOverrides);
+        const options = { configure: apis.configureCore, params: this.params, components: data, appCode: RAYBAN_CODE };
+        const finalProductOverrides = getProductOverrides(options);
+        console.log({ finalProductOverrides });
+      }*/
     };
-    worker.postMessage({ assetsToDownload, params: this.params, assetDescription });
+    worker.postMessage({ assetsToDownload, params: this.params, assetDescription, isComponents });
     this.workers.push(worker);
   }
 
