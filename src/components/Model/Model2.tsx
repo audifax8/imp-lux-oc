@@ -1,5 +1,5 @@
 import { use } from 'react';
-import { IConfigureAPI } from '../../declarations/interfaces';
+import { IConfigureAPI, IRXCBaseAPI } from '../../declarations/interfaces';
 
 declare global {
   interface Window {
@@ -7,7 +7,7 @@ declare global {
     _configure: unknown;
     vmmv: unknown;
     _rxcData: unknown;
-    RXC: unknown;
+    RXC: IRXCBaseAPI;
     RXC_LOADED: boolean;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     YR: any;

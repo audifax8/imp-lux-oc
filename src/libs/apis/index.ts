@@ -1,15 +1,17 @@
 import { AssetsWorker } from '@/workers/asset-manager';
-import { IConfigureAPI, IConfigureInitParams } from '@/declarations/interfaces';
+import { IConfigureAPI, IConfigureInitParams, IRXCBaseAPI } from '@/declarations/interfaces';
 import { API_KEYS_MAP, getHeadlessURL, getUPCAPI, OAK_CUSTOMER_ID } from '@/declarations/constants';
 
 import { RtrAPI } from '@/libs/apis/rtr-api';
+import { VMAPI } from '@/libs/apis/vm-api';
 import { LuxBaseAPI, OakCustomAPI, RbnCustomAPI } from '@/libs/apis/lux-api';
-import { VMAPI } from './vm';
+import { RxcAPI } from './rxc-api';
 
 class APIs {
   params: IConfigureInitParams = undefined!;
   rtrAPI: RtrAPI = undefined!;
   vmApi: VMAPI = undefined!;
+  rxcApi: RxcAPI = undefined!;
   assetsWorker: AssetsWorker = undefined!;
   luxAPI: LuxBaseAPI = undefined!;
   configureCore: IConfigureAPI = undefined!;
@@ -44,6 +46,10 @@ class APIs {
 
   initVMAPI(vmApi: VMAPI): void {
     this.vmApi = vmApi;
+  }
+
+  initRXCAPI(rxcApi: IRXCBaseAPI): void {
+    this.rxcApi = new RxcAPI(rxcApi);
   }
 
   getRTRAssetsURL(): string {

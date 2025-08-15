@@ -15,6 +15,7 @@ import { Switch } from '@/components/Switch';
 import { ArrowIcon } from '@/components/Icons';
 import { Logo } from '@/components/Logo';
 import { VMButton } from '@/components/VM/VMButton';
+import { RXCButton } from '@/components/RXC/RXCButton';
 
 export function Header() {
   const [params] = useParams();
@@ -45,6 +46,7 @@ export function Header() {
       <h2 className={clsxWithSkeleton('yr-header-title')}>{product?.name}</h2>
       <div className="yr-header-cta-container">
         <VMButton />
+        <RXCButton />
       </div>
     </header>
   );

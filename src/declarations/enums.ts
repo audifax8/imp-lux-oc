@@ -1,4 +1,5 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react';
+import { IScriptResult } from '@/declarations/interfaces';
 
 export enum FetchPriority {
   HIGH = 'high',
@@ -23,6 +24,6 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: 'rounded' | 'square';
   className?: string;
   showSkeleton?: boolean;
-  onResourceResult?: (result: boolean) => void;
+  onResourceResult?: (result: IScriptResult) => void;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };

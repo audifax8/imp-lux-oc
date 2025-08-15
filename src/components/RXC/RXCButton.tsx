@@ -1,40 +1,38 @@
  import { Suspense, lazy, useState } from 'react';
 
 import { Button } from '@/components/Button';
-import { TryOnIcon } from '@/components/Icons';
+import { TryLensesIcon } from '@/components/Icons';
 import { useShowSkeleton } from '@/state/ui';
 import { apis } from '@/libs/apis';
-import { VMAPI } from '@/libs/apis/vm-api';
-import { IScriptResult } from '@/declarations/interfaces';
+import { IRXCBaseAPI, IScriptResult } from '@/declarations/interfaces';
 
 const LazyButton = lazy(() => import('./LazyButton'));
 
-export function VMButton() {
+export function RXCButton() {
   const [showSkeleton] = useShowSkeleton();
   const [showLazyButtonButton, setShowButton] = useState(false);
   const [lazyError, setLazyError] = useState(false);
 
   const onResourceResult = (result: IScriptResult) => {
-    if (!result.status) {
+    if (!result?.status) {
       setLazyError(true);
       return;
     }
-    apis.initVMAPI(window.vmmv as VMAPI);
+    apis.initRXCAPI(window.RXC as IRXCBaseAPI);
     onClick();
   };
 
-  const onClick = async () => {
-    const isBrowserSupported = await apis.vmApi.isBrowserSupported();
-    console.log({ isBrowserSupported });
+  const onClick = () => {
+    apis.rxcApi.renderRxc();
   };
-  const buttonLabel = 'Try on';
+  const buttonLabel = 'Try Lenses';
 
   return (
     <>
       {!showLazyButtonButton && !lazyError && 
         <Button
           variant="rounded"
-          icon={<TryOnIcon size={18} />}
+          icon={<TryLensesIcon size={18} />}
           onClick={() => setShowButton(true)}
           showSkeleton={showSkeleton}
         >
@@ -46,7 +44,7 @@ export function VMButton() {
           fallback={
             <Button
               variant="rounded"
-              icon={<TryOnIcon size={18} />}
+              icon={<TryLensesIcon size={18} />}
               showSkeleton={true}
             >
               {buttonLabel}
@@ -55,7 +53,7 @@ export function VMButton() {
         >
           <LazyButton
             variant="rounded"
-            icon={<TryOnIcon size={18} />}
+            icon={<TryLensesIcon size={18} />}
             onResourceResult={onResourceResult}
             onClick={() => onClick()}
           >

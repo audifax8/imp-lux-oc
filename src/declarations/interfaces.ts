@@ -161,7 +161,7 @@ export interface IRXCBaseAPI {
       BackToPdp(): void;
       LoadPrescription(): void;
     };
-    new (): void;
+    new(): void;
     roots: {
       '#rxcApp': HTMLElement;
     };
@@ -223,4 +223,8 @@ export interface IBaseLuxAPI {
   getProductVendorId(product: IProduct): string;
   getVendorIDSize(params: IConfigureInitParams): string;
   getAssetsURL(params: IConfigureInitParams): string;
+}
+export interface IScriptResult {
+  time: string;
+  status: boolean;
 }

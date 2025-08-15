@@ -42,6 +42,7 @@ export function AppLayout() {
           <Menu />
         </>
       </div>
+      <div id='rxcApp' className='rxcApp'></div>
     </main>
   );
 }

@@ -32,7 +32,7 @@ export const VM_URL = `${VM_BASE_URL}/v/${DEFAULT_VM_VERSION}/index.umd.js`;
 //RXC
 const DEFAULT_RXC_VERSION = '1.1.3';
 const RXC_BASE_URL = 'https://rxc.luxottica.com';
-export const RXC_URL = `${RXC_BASE_URL}/rxc3/fe/test/v/${DEFAULT_RXC_VERSION}/dist/rxc.js`;
+export const RXC_URL = `${RXC_BASE_URL}/rxc3/fe/test/v${DEFAULT_RXC_VERSION}/dist/rxc.js`;
 
 export const CDN_FLUID_BASE_URL = 'https://cdn-prod.fluidconfigure.com';
 
