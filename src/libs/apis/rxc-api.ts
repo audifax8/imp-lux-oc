@@ -132,13 +132,13 @@ export class RxcAPI {
         });*/
       },
       saveExtendedPrescription: function (_prescriptionObject: any) {
-        return new Promise(function (resolve, reject) {
+        return new Promise(function (resolve) {
             _prescriptionObject.prescriptionId = 123456789;
             resolve(_prescriptionObject);
         });
       },
       clearExtendedPrescription: function (_prescriptionObject: any) {
-        return new Promise(function (resolve, reject) {
+        return new Promise(function (resolve) {
             resolve({});
         });
       }
