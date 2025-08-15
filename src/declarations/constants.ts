@@ -77,7 +77,7 @@ export function mapURLs(params: IConfigureInitParams): IResource[] {
       crossOrigin: 'anonymous'
     },
     {
-      url: `${CDN_FLUID_BASE_URL}/static/assets/prod/${workflow}/customers/c1628/configureHtml/etc/assets/img/sk_product.png`,
+      url: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/sk.webp',
       as: 'image',
       fetchPriority: FetchPriority.HIGH
     },
