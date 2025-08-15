@@ -77,7 +77,7 @@ export function mapURLs(params: IConfigureInitParams): IResource[] {
       crossOrigin: 'anonymous'
     },
     {
-      url: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/sk.webp',
+      url: SKELETON_IMG_URL,
       as: 'image',
       fetchPriority: FetchPriority.HIGH
     },

@@ -12,10 +12,10 @@ import { apis } from '@/libs/apis';
 import { setAPIReady } from '@/libs/yr-react/store/ConfigureStore';
 
 import { IConfigureAPI } from '@/declarations/interfaces';
-import { CDN_FLUID_BASE_URL } from '@/declarations/constants';
+import { CDN_FLUID_BASE_URL, SKELETON_IMG_URL } from '@/declarations/constants';
 import { FetchPriority } from '@/declarations/enums';
 
-const createCorePromise = new Promise((resolve, reject) => {
+const createCorePromise = new Promise((resolve) => {
   const params = apis?.getParams();
   if (!params) {
     return;
@@ -32,7 +32,10 @@ const createCorePromise = new Promise((resolve, reject) => {
     // eslint-disable-next-line @typescript-eslint/no-require-imports
     const createCore = await require('@cfg.plat/configure-core');
     if (!prefResponse.ok || !graphResponse.ok) {
-      return reject(new Error('Error loading graph or settings JSONs'));
+      if (params.yrEnv) {
+        console.log('Error loading graph or settings JSONs');
+      }
+      return resolve(false);
     }
     const productGraph = await graphResponse.json();
     const preferences = await prefResponse.json();
@@ -48,7 +51,11 @@ const createCorePromise = new Promise((resolve, reject) => {
       },
       (error: Error, configureCore: IConfigureAPI) => {
         if (error) {
-          return reject(error);
+          if (params.yrEnv) {
+            console.log('Error');
+            console.log(error);
+          }
+          return resolve(false);
         }
         apis.initLuxApi(configureCore);
         const configureImg = apis.luxAPI.getProductImg('LUX-Ray-Ban-8taOhSR5AFyjt9tfxU');
@@ -71,14 +78,16 @@ const createCorePromise = new Promise((resolve, reject) => {
             if (yrEnv) {
               console.log({ e });
             }
+            resolve(false);
           });
       }
     );
-  }).catch((e) => reject(e));
+  }).catch(() => resolve(false));
 });
 
 export default function Model() {
   const configureImg = use(createCorePromise) as string;
+  const img = configureImg ? configureImg : SKELETON_IMG_URL;
   const [rtrAPIReady] = useRTRAPIReady();
   const [params] = useParams();
   const [token] = useToken();
@@ -92,11 +101,11 @@ export default function Model() {
     }
   }, [params.rtrDisabled, rtrAPIReady, token]);
 
-  return (configureImg && 
+  return (img && 
     <section className="yr-model">
       <div id="viewer" className={clsx('yr-model__rtr', { 'yr-model__hidden': !rtrAPIReady })}></div>
       <picture className={clsx('yr-model__placeholder', 'yr-image', { 'yr-model__hidden': rtrAPIReady })}>
-        <img src={configureImg} alt="Model" />
+        <img src={img} alt="Model" />
       </picture>
     </section>
   );
