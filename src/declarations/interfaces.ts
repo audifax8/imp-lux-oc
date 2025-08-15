@@ -106,7 +106,15 @@ export interface IResource {
   fetchPriority?: FetchPriority;
 }
 
-export interface IRTR_API {
+export interface IRTRBaseAPI {
+  getVersion(): string;
+  init(payload: IInitRTRPayload): void;
+  isIdAvailable(dataToChekPayload: ITokenPayload, envPayload: IEnvPayload): Promise<boolean>;
+  setId(setIdPayload: ITokenPayload): void;
+  isInitialized(): Promise<boolean>;
+  selectComponent(payload: ISelectComponentPayload): void;
+}
+export interface IRTRAPI {
   getVersion(): string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   init(token: string, cb?: any): void;
@@ -116,6 +124,49 @@ export interface IRTR_API {
   mapCameraNameRTRToComponent(caName: string): number | undefined;
   mapCaNameToRTRCameraName(caAlias: string): string;
   isInitialized(): Promise<boolean>;
+}
+
+export interface IVMBaseAPI {
+  VMConfiguratorsWidget(): void;
+  VMWidgetApp(): void;
+  clearPictureVideoIds(): void;
+  VMWidgetQRCode(): void;
+  isBrowserSupported(): Promise<boolean>;
+  isUPCSupported(): void;
+  isValidConfig(): void;
+  reset(): void;
+  warmUp(): void;
+}
+export interface IVMAPI {
+  VMConfiguratorsWidget(): void;
+  VMWidgetApp(): void;
+  clearPictureVideoIds(): void;
+  VMWidgetQRCode(): void;
+  isBrowserSupported(): Promise<boolean>;
+  isUPCSupported(): void;
+  isValidConfig(): void;
+  reset(): void;
+  warmUp(): void;
+}
+
+export interface IRXCAPI {
+  close(): void;
+}
+
+export interface IRXCBaseAPI {
+  rxcWidget: {
+    close(): void;
+    listeners: {
+      AddToCartEvent(): void;
+      BackToPdp(): void;
+      LoadPrescription(): void;
+    };
+    new (): void;
+    roots: {
+      '#rxcApp': HTMLElement;
+    };
+    selector: string;
+  };
 }
 
 interface ITokenPayload {
@@ -163,14 +214,6 @@ export interface IInitRTRPayload {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onActions: any;
   };
-}
-export interface IRTRBaseAPI {
-  getVersion(): string;
-  init(payload: IInitRTRPayload): void;
-  isIdAvailable(dataToChekPayload: ITokenPayload, envPayload: IEnvPayload): Promise<boolean>;
-  setId(setIdPayload: ITokenPayload): void;
-  isInitialized(): Promise<boolean>;
-  selectComponent(payload: ISelectComponentPayload): void;
 }
 
 export type KeyValueString = Record<string, string>;

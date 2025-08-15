@@ -4,10 +4,12 @@ import { API_KEYS_MAP, getHeadlessURL, getUPCAPI, OAK_CUSTOMER_ID } from '@/decl
 
 import { RtrAPI } from '@/libs/apis/rtr-api';
 import { LuxBaseAPI, OakCustomAPI, RbnCustomAPI } from '@/libs/apis/lux-api';
+import { VMAPI } from './vm';
 
 class APIs {
   params: IConfigureInitParams = undefined!;
   rtrAPI: RtrAPI = undefined!;
+  vmApi: VMAPI = undefined!;
   assetsWorker: AssetsWorker = undefined!;
   luxAPI: LuxBaseAPI = undefined!;
   configureCore: IConfigureAPI = undefined!;
@@ -38,6 +40,10 @@ class APIs {
 
   initRTRAPI(rtrApi: RtrAPI): void {
     this.rtrAPI = rtrApi;
+  }
+
+  initVMAPI(vmApi: VMAPI): void {
+    this.vmApi = vmApi;
   }
 
   getRTRAssetsURL(): string {

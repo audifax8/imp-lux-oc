@@ -1,4 +1,5 @@
 import { use, useEffect } from 'react';
+import { preload, PreloadOptions } from 'react-dom';
 import clsx from 'clsx';
 
 import { useRTRAPIReady } from '@/state/rtr';
@@ -12,9 +13,14 @@ import { setAPIReady } from '@/libs/yr-react/store/ConfigureStore';
 
 import { IConfigureAPI } from '@/declarations/interfaces';
 import { CDN_FLUID_BASE_URL } from '@/declarations/constants';
+import { FetchPriority } from '@/declarations/enums';
 
-const myPromise = new Promise((resolve, reject) => {
-  const { workflow, customer, product, locale, yrEnv } = apis.getParams();
+const createCorePromise = new Promise((resolve, reject) => {
+  const params = apis?.getParams();
+  if (!params) {
+    return;
+  }
+  const { workflow, customer, product, locale, yrEnv } = params;
   const graph = `${CDN_FLUID_BASE_URL}/static/configs/3.13.0/prod/${workflow}/${customer}/product/${product}/graph-settings-${locale}.json`
   const pref = `${CDN_FLUID_BASE_URL}/static/configs/3.13.0/prod/${workflow}/${customer}/preferences.json`;
   
@@ -46,6 +52,12 @@ const myPromise = new Promise((resolve, reject) => {
         }
         apis.initLuxApi(configureCore);
         const configureImg = apis.luxAPI.getProductImg('LUX-Ray-Ban-8taOhSR5AFyjt9tfxU');
+        const options: PreloadOptions = {
+          as: 'image',
+          crossOrigin: 'anonymous',
+          fetchPriority: FetchPriority.HIGH
+        };
+        preload(configureImg, options);
         fetch(configureImg)
           .then(() => {
             const token = apis.luxAPI.getToken();
@@ -66,7 +78,7 @@ const myPromise = new Promise((resolve, reject) => {
 });
 
 export default function Model() {
-  const configureImg = use(myPromise) as string;
+  const configureImg = use(createCorePromise) as string;
   const [rtrAPIReady] = useRTRAPIReady();
   const [params] = useParams();
   const [token] = useToken();

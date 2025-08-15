@@ -1,23 +1,18 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react';
+import clsx from 'clsx';
 
-import { useClsxWithSkeleton } from '@/hooks/useClsxWithSkeleton';
+import { ButtonProps } from '@/declarations/enums';
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  icon?: ReactNode;
-  children?: ReactNode;
-  variant?: 'rounded' | 'square';
-  className?: string;
-};
-
-export function Button({ icon, children, variant = 'rounded', className, ...props }: ButtonProps) {
-  const clsxWithSkeleton = useClsxWithSkeleton();
-
+export function Button(
+  { icon, children, variant = 'rounded', className, showSkeleton, onClick, ...props }: ButtonProps
+) {
   return (
     <button
-      className={clsxWithSkeleton('yr-button', `yr-button-${variant}`, className, {
-        'yr-button-icon-only': !children && icon
+      className={clsx('yr-button', `yr-button-${variant}`, className, {
+        'yr-button-icon-only': !children && icon,
+        'yr-skeleton': showSkeleton
       })}
-      {...props}>
+      {...props}
+      onClick={onClick}>
       {icon && <span className="yr-button-icon">{icon}</span>}
       {children}
     </button>

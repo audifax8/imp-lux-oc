@@ -1,13 +1,13 @@
 /* eslint-disable */
 import {
-  IRTR_API,
+  IRTRAPI,
   IRTRBaseAPI,
   KeyValueString,
   KeyValueNumber,
   IInitRTRPayload
 } from '@/declarations/interfaces';
 import { waitForScriptToLoad } from '@/libs/helpers';
-export class RtrAPI implements IRTR_API {
+export class RtrAPI implements IRTRAPI {
   /* Lux rtr API */
   api: IRTRBaseAPI;
   constructor(api: IRTRBaseAPI) {

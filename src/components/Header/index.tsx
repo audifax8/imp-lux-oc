@@ -1,5 +1,3 @@
-
-
 import {
   useIsCustomizerOpen,
   useTheme,
@@ -14,8 +12,9 @@ import { useClsxWithSkeleton } from '@/hooks/useClsxWithSkeleton';
 
 import { Button } from '@/components/Button';
 import { Switch } from '@/components/Switch';
-import { TryOnIcon, ArrowIcon } from '@/components/Icons';
+import { ArrowIcon } from '@/components/Icons';
 import { Logo } from '@/components/Logo';
+import { VMButton } from '@/components/VM/VMButton';
 
 export function Header() {
   const [params] = useParams();
@@ -45,9 +44,7 @@ export function Header() {
       )}
       <h2 className={clsxWithSkeleton('yr-header-title')}>{product?.name}</h2>
       <div className="yr-header-cta-container">
-        <Button variant="rounded" icon={<TryOnIcon size={18} />}>
-          Try on
-        </Button>
+        <VMButton />
       </div>
     </header>
   );

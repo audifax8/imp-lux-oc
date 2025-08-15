@@ -1,3 +1,5 @@
+import { ButtonHTMLAttributes, ReactNode } from 'react';
+
 export enum FetchPriority {
   HIGH = 'high',
   LOW = 'low',
@@ -14,3 +16,13 @@ export enum SkeletonType {
   BUTTON = 'button',
   IMG = 'img'
 }
+
+export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  icon?: ReactNode;
+  children?: ReactNode;
+  variant?: 'rounded' | 'square';
+  className?: string;
+  showSkeleton?: boolean;
+  onResourceResult?: (result: boolean) => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+};
