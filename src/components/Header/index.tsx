@@ -26,7 +26,7 @@ export function Header() {
   const clsxWithSkeleton = useClsxWithSkeleton();
 
   return (
-    <header className="yr-header">
+    <header className="yr-custom-header">
       {isCustomizerOpen && isMobile ? (
         <Button
           className="yr-header-go-back-button"

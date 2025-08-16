@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { IConfigureAPI, IConfigureInitParams, IProduct, IBaseLuxAPI } from '@/declarations/interfaces';
 import { RBN_TOKEN_ALIASES, OAK_TOKEN_ALIASES, RTR_ASSETS_URL } from '@/declarations/constants';
+import { getImgData } from '@/libs/helpers';
 
 export abstract class LuxBaseAPI implements IBaseLuxAPI {
   coreService: IConfigureAPI = undefined!;
@@ -75,14 +76,13 @@ export abstract class LuxBaseAPI implements IBaseLuxAPI {
   }
 
   getProductImg(apiKey: string): string {
-    const isMobile = false;
+    const imageData = getImgData();
+    const { scale, quality } = imageData;
     const conciseRecipe = this.coreService.getRecipe('legacyConcise');
     const uriRecipe = encodeURI(conciseRecipe);
     const { id, defaultViewName, environment, workflow, customerId } = this.coreService.getProduct();
     const format = 'png';
-    const quality = '50';
-    const sacale = isMobile ? '0.2' : '0.5';
-    const baseURL = `https://prod.fluidconfigure.com/imagecomposer/generate/?view=${defaultViewName}&apiKey=${apiKey}&workflow=${workflow}&environment=${environment}&customerId=${customerId}&productId=${id}&purpose=serverDisplay&format=${format}&trim=false&padding=0&scale=${sacale}&binary=true&quality=${quality}&backgroundColor=%23f6f6f6ff&recipe=${uriRecipe}`;
+    const baseURL = `https://prod.fluidconfigure.com/imagecomposer/generate/?view=${defaultViewName}&apiKey=${apiKey}&workflow=${workflow}&environment=${environment}&customerId=${customerId}&productId=${id}&purpose=serverDisplay&format=${format}&trim=false&padding=0&scale=${scale}&binary=true&quality=${quality}&backgroundColor=%23f6f6f6ff&recipe=${uriRecipe}`;
     return baseURL;
   }
 }

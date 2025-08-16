@@ -1,5 +1,6 @@
 import { FetchPriority } from '@/declarations/enums';
 import { IConfigureInitParams, IResource } from '@/declarations/interfaces';
+import { getSkeletonResolution } from '@/libs/helpers';
 
 export const MEGA_WAYFARER_ID = 26101;
 export const RBN_CUSTOMER_ID = 1581;
@@ -61,6 +62,11 @@ export function getURLsToPreconnect(params: IConfigureInitParams): string[] {
   return urls;
 }
 
+export function getSkeletonURL(): string {
+  const resolution = getSkeletonResolution();
+  return `${CDN_FLUID_BASE_URL}/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/${resolution}_sk.png`;
+}
+
 export function mapURLs(params: IConfigureInitParams): IResource[] {
   const { workflow, customer, product, locale, rtrDisabled } = params;
   const urls = [
@@ -77,7 +83,7 @@ export function mapURLs(params: IConfigureInitParams): IResource[] {
       crossOrigin: 'anonymous'
     },
     {
-      url: SKELETON_IMG_URL,
+      url: getSkeletonURL(),
       as: 'image',
       fetchPriority: FetchPriority.HIGH
     },

@@ -6,8 +6,8 @@ import { useTheme } from '@/state/ui';
 //import { useApiready } from '@/libs/yr-react/hooks/configure';
 
 import { Menu } from '@/components/Menu';
-import { Header } from '@/components/Header';
 import { ModelSkeleton } from '@/components/Model/Skeleton';
+import { RBNHeader } from '@/components/RBNHeader';
 
 //import { useParams } from '@/state/implementation';
 //import { useIsCustomizerOpen, useIsMobile, useTheme } from '@/state/ui';
@@ -33,7 +33,7 @@ export function AppLayout() {
         //{ 'yr-customizer-open': isCustomizerOpen },
         //{ 'yr-show-img': params.showBackgroundImage }
       )}>
-      <Header />
+      <RBNHeader />
       <div className="yr-main-content">
         <Suspense fallback={<ModelSkeleton />}>
           <Model />

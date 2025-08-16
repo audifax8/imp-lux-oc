@@ -14,6 +14,7 @@ import { setAPIReady } from '@/libs/yr-react/store/ConfigureStore';
 import { IConfigureAPI } from '@/declarations/interfaces';
 import { CDN_FLUID_BASE_URL, SKELETON_IMG_URL } from '@/declarations/constants';
 import { FetchPriority } from '@/declarations/enums';
+import { getImgData } from '@/libs/helpers';
 
 const createCorePromise = new Promise((resolve) => {
   const params = apis?.getParams();
@@ -91,6 +92,7 @@ export default function Model() {
   const [rtrAPIReady] = useRTRAPIReady();
   const [params] = useParams();
   const [token] = useToken();
+  const imageData = getImgData();
 
   useEffect(() => {
     if (params.rtrDisabled) {
@@ -105,7 +107,12 @@ export default function Model() {
     <section className="yr-model">
       <div id="viewer" className={clsx('yr-model__rtr', { 'yr-model__hidden': !rtrAPIReady })}></div>
       <picture className={clsx('yr-model__placeholder', 'yr-image', { 'yr-model__hidden': rtrAPIReady })}>
-        <img src={img} alt="Model" />
+        <img
+          src={img}
+          alt="Model"
+          height={imageData.dimentions.height}
+          width={imageData.dimentions.width}
+        />
       </picture>
     </section>
   );
