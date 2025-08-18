@@ -1,5 +1,4 @@
 import { use, useEffect } from 'react';
-import { preload, PreloadOptions } from 'react-dom';
 import clsx from 'clsx';
 
 import { useRTRAPIReady } from '@/state/rtr';
@@ -13,7 +12,6 @@ import { setAPIReady } from '@/libs/yr-react/store/ConfigureStore';
 
 import { IConfigureAPI } from '@/declarations/interfaces';
 import { CDN_FLUID_BASE_URL, SKELETON_IMG_URL } from '@/declarations/constants';
-import { FetchPriority } from '@/declarations/enums';
 import { getImgData } from '@/libs/helpers';
 
 const createCorePromise = new Promise((resolve) => {
@@ -60,12 +58,6 @@ const createCorePromise = new Promise((resolve) => {
         }
         apis.initLuxApi(configureCore);
         const configureImg = apis.luxAPI.getProductImg('LUX-Ray-Ban-8taOhSR5AFyjt9tfxU');
-        const options: PreloadOptions = {
-          as: 'image',
-          crossOrigin: 'anonymous',
-          fetchPriority: FetchPriority.HIGH
-        };
-        preload(configureImg, options);
         fetch(configureImg)
           .then(() => {
             const token = apis.luxAPI.getToken();

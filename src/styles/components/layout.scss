@@ -35,10 +35,31 @@
       grid-row: 1 / 2;
     }
 
-    .yr-customizer {
+    .yr-menu {
       transform: scaleY(0);
       height: 0;
       align-self: self-end;
+
+      & .yr-custom-header {
+        position: relative;
+        display: flex;
+        width: 100%;
+        margin: 10px 0px;
+        justify-content: space-between;
+
+        & .yr-header-title {
+          text-transform: uppercase;
+          width: 100px;
+          height: calc(24px * 1.2);
+          position: relative;
+          display: flex;
+          align-items: center;
+        }
+      }
+
+      & .yr-customizer {
+        
+      }
     }
 
     .yr-add-to-cart {
@@ -49,7 +70,7 @@
       display: grid;
       grid-template-rows: 1fr min-content;
       grid-template-columns: repeat(5, 1fr);
-      margin-top: 24px;
+      margin: 24px 0px;
       gap: 0;
 
       .yr-model {
@@ -58,12 +79,20 @@
         place-self: center center;
       }
 
-      .yr-customizer {
+      .yr-menu {
         height: fit-content;
         transform: scaleY(1);
         grid-row: 1 / 2;
         grid-column: 4 / 6;
         align-self: self-start;
+
+        & .yr-customizer {
+          /*height: fit-content;
+          transform: scaleY(1);
+          grid-row: 1 / 2;
+          grid-column: 4 / 6;
+          align-self: self-start;*/
+        }
       }
 
       .yr-add-to-cart {
@@ -92,6 +121,7 @@
       @include respond(lg) {
         grid-template-rows: 1fr;
 
+        .yr-menu,
         .yr-customizer {
           height: fit-content;
         }

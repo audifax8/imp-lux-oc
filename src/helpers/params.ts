@@ -44,7 +44,8 @@ export function getInitQueryParams(): IConfigureInitParams {
     upc,
     showBackgroundImage,
     showThemeSwitch,
-    darkMode
+    darkMode,
+    showHeader
   } = queryParams;
   //const e2eParam = getQueryParam('e2e')?.toLowerCase();
 
@@ -64,6 +65,7 @@ export function getInitQueryParams(): IConfigureInitParams {
     token,
     showBackgroundImage: parseBoolParam(showBackgroundImage),
     showThemeSwitch: parseBoolParam(showThemeSwitch),
-    darkMode: parseBoolParam(darkMode)
+    darkMode: parseBoolParam(darkMode),
+    showHeader: parseBoolParam(showHeader)
   };
 }

@@ -1,15 +1,15 @@
 import { lazy, Suspense } from 'react';
 import clsx from 'clsx';
 
-import { useTheme } from '@/state/ui';
+import { useParams, useTheme } from '@/state/ui';
 
 //import { useApiready } from '@/libs/yr-react/hooks/configure';
 
 import { Menu } from '@/components/Menu';
 import { ModelSkeleton } from '@/components/Model/Skeleton';
 import { RBNHeader } from '@/components/RBNHeader';
+import { Footer } from '@/components/Footer';
 
-//import { useParams } from '@/state/implementation';
 //import { useIsCustomizerOpen, useIsMobile, useTheme } from '@/state/ui';
 //import { Header } from '@/components/Header';
 //import { Model } from '@/components/Model';
@@ -24,7 +24,7 @@ export function AppLayout() {
   //const [isCustomizerOpen] = useIsCustomizerOpen();
   const [theme] = useTheme();
   //const [isMobile] = useIsMobile();
-  //const params = useParams();
+  const [params] = useParams();
   return (
     <main
       className={clsx(
@@ -33,7 +33,7 @@ export function AppLayout() {
         //{ 'yr-customizer-open': isCustomizerOpen },
         //{ 'yr-show-img': params.showBackgroundImage }
       )}>
-      <RBNHeader />
+      {params?.showHeader && <RBNHeader />}
       <div className="yr-main-content">
         <Suspense fallback={<ModelSkeleton />}>
           <Model />
@@ -42,6 +42,7 @@ export function AppLayout() {
           <Menu />
         </>
       </div>
+      <Footer />
       <div id='rxcApp' className='rxcApp'></div>
     </main>
   );

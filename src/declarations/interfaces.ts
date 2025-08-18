@@ -43,6 +43,7 @@ export interface IConfigureInitParams {
   showBackgroundImage?: boolean;
   showThemeSwitch?: boolean;
   darkMode?: boolean;
+  showHeader?: boolean;
 }
 
 export interface IConfigurableAttribute {
