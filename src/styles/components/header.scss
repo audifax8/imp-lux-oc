@@ -2,8 +2,8 @@
 
 .yr-header {
   text-transform: uppercase;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  //grid-template-columns: 1fr 1fr;
   gap: 16px;
   align-items: center;
   padding: 0 16px;

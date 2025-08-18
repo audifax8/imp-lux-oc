@@ -1,4 +1,4 @@
-import { useShowSkeleton } from '@/state/ui';
+import { useIsMobile, useShowSkeleton } from '@/state/ui';
 
 import { useClsxWithSkeleton } from '@/hooks/useClsxWithSkeleton';
 
@@ -7,15 +7,18 @@ import { VMButton } from '@/components/VM/VMButton';
 import { Button } from '@/components/Button';
 
 export function Footer() {
+  const [isMobile] = useIsMobile();
   const [showSkeleton] = useShowSkeleton();
   const clsxWithSkeleton = useClsxWithSkeleton();
 
   return (
     <div className='yr-footer'>
-      <div className='yr-buttons-section'>
-        <VMButton />
-        <RXCButton />
-      </div>
+      {!isMobile &&
+        <div className='yr-buttons-section'>
+          <VMButton />
+          <RXCButton />
+        </div>
+      }
       <div className='yr-footer-price-info'>
         <div className={`yr-footer--price`}>
           <div className={`yr-footer-final-price ${showSkeleton ? 'yr-skeleton': ''}`}>

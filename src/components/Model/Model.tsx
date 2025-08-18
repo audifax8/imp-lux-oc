@@ -2,7 +2,7 @@ import { use, useEffect } from 'react';
 import clsx from 'clsx';
 
 import { useRTRAPIReady } from '@/state/rtr';
-import { useParams, useToken } from '@/state/ui';
+import { useIsCustomizerOpen, useParams, useToken } from '@/state/ui';
 
 import { startAPIs } from '@/store/APIsStore';
 import { setShowSkeleton, setTokenAndImage } from '@/store/UIStore';
@@ -80,6 +80,7 @@ const createCorePromise = new Promise((resolve) => {
 
 export default function Model() {
   const configureImg = use(createCorePromise) as string;
+  const [, setIsCustomizerOpen] = useIsCustomizerOpen();
   const img = configureImg ? configureImg : SKELETON_IMG_URL;
   const [rtrAPIReady] = useRTRAPIReady();
   const [params] = useParams();
@@ -98,13 +99,15 @@ export default function Model() {
   return (img && 
     <section className="yr-model">
       <div id="viewer" className={clsx('yr-model__rtr', { 'yr-model__hidden': !rtrAPIReady })}></div>
-      <picture className={clsx('yr-model__placeholder', 'yr-image', { 'yr-model__hidden': rtrAPIReady })}>
-        <img
-          src={img}
-          alt="Model"
-          height={imageData.dimentions.height}
-          width={imageData.dimentions.width}
-        />
+      <picture
+        className={clsx('yr-model__placeholder', 'yr-image', { 'yr-model__hidden': rtrAPIReady })}
+        onClick={() => setIsCustomizerOpen()}>
+          <img
+            src={img}
+            alt="Model"
+            height={imageData.dimentions.height}
+            width={imageData.dimentions.width}
+          />
       </picture>
     </section>
   );

@@ -2,9 +2,18 @@
 
 .yr-footer {
   display: grid;
-  grid-template-columns: 3fr 2fr; 
+  grid-template-columns: 3fr 2fr;
   padding: 0;
   gap: 10px;
+
+  @include respond(xs) {
+    grid-template-columns: 1fr;
+    margin: 16px;
+  }
+
+   @include respond(lg) {
+    grid-template-columns: 3fr 2fr;
+  }
 
   & .yr-buttons-section {
     display: flex;

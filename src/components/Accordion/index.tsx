@@ -15,7 +15,7 @@ type AccordionProps = {
   open?: boolean;
 };
 
-const myPromise = new Promise((resolve) => {
+const menuPromise = new Promise((resolve) => {
   //TODO
   //const { workflow, customer, product, locale, yrEnv } = apis.getParams();
   return setTimeout(() => resolve(true), 4000);
@@ -23,7 +23,7 @@ const myPromise = new Promise((resolve) => {
 
 export default function Accordion({ item, open = false }: AccordionProps) {
   const [isOpen, setIsOpen] = useState(open);
-  use(myPromise);
+  use(menuPromise);
   return (
     <details open={isOpen} className="yr-accordion">
       <summary className="yr-accordion-summary">

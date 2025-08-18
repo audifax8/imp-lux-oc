@@ -4,6 +4,19 @@
 .yr-app-layout {
   background-color: var(--background-color);
 
+  @include respond(xs) {
+    & .yr-custom-header {
+      display: flex;
+      justify-content: space-between;
+      margin: 16px;
+
+      & .yr-buttons-section {
+        display: flex;
+        gap: 4px;
+      }
+    }
+  }
+
   &.yr-show-img {
     // background: var(--background-mobile);
   }
@@ -109,6 +122,7 @@
     .yr-main-content {
       grid-template-rows: min-content min-content 1fr;
 
+      .yr-menu,
       .yr-customizer {
         height: 100%;
         transform: scaleY(1);
