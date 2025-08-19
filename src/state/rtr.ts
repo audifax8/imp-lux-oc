@@ -17,3 +17,9 @@ export function useRTRError(): UseRTRError {
   const [rtrError, setRTRError] = useAPIsState('rtrError');
   return [rtrError, setRTRError];
 }
+
+type UseRTRDisabled = ReturnType<typeof useAPIsState<'rtrDisabled'>>;
+export function useRTRDisabled(): UseRTRDisabled {
+  const [rtrDisabled, setRTRDisabled] = useAPIsState('rtrDisabled');
+  return [rtrDisabled, setRTRDisabled];
+}

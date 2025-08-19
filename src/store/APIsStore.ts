@@ -22,6 +22,14 @@ const INITIAL_STATE: IAPIsState = {
   rtrDisabled: false
 };
 
+export function setRTRError(rtrError: string) {
+  useAPIsStore.setState({ rtrError }, false, 'Set RTR error');
+}
+
+export function setRTRDisabled(rtrDisabled: boolean) {
+  useAPIsStore.setState({ rtrDisabled }, false, 'Set RTR Disabled');
+}
+
 export function startAPIs(configure: IConfigureAPI) {
   apis.initLuxApi(configure);
   apis.initAssetsWorkers();
@@ -30,7 +38,7 @@ export function startAPIs(configure: IConfigureAPI) {
 export function startRTR() {
   const rtrAPI = new RtrAPI(window.rtrViewerMV as IRTRBaseAPI);
   apis.initRTRAPI(rtrAPI);
-  useAPIsStore.setState({ rtrApiReady: true }, false, 'Destroyed APIs');
+  useAPIsStore.setState({ rtrApiReady: true }, false, 'Start RTR');
 }
 
 export function startVM() {

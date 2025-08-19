@@ -1,8 +1,8 @@
 import { use, useEffect } from 'react';
 import clsx from 'clsx';
 
-import { useRTRAPIReady } from '@/state/rtr';
-import { useIsCustomizerOpen, useParams, useToken } from '@/state/ui';
+import { useRTRAPIReady, useRTRDisabled, useRTRError } from '@/state/rtr';
+import { useIsCustomizerOpen, useToken } from '@/state/ui';
 
 import { startAPIs } from '@/store/APIsStore';
 import { setShowSkeleton, setTokenAndImage } from '@/store/UIStore';
@@ -83,18 +83,22 @@ export default function Model() {
   const [, setIsCustomizerOpen] = useIsCustomizerOpen();
   const img = configureImg ? configureImg : SKELETON_IMG_URL;
   const [rtrAPIReady] = useRTRAPIReady();
-  const [params] = useParams();
+  //const [params] = useParams();
   const [token] = useToken();
   const imageData = getImgData();
+  const [rtrDisabled] = useRTRDisabled();
+  const [rtrError] = useRTRError();
+  console.log({ rtrDisabled, rtrError });
 
   useEffect(() => {
-    if (params.rtrDisabled) {
+    if (rtrDisabled) {
       return;
     }
     if (rtrAPIReady && token) {
+      console.log('here');
       apis.rtrAPI?.init(token);
     }
-  }, [params.rtrDisabled, rtrAPIReady, token]);
+  }, [rtrDisabled, rtrAPIReady, token, rtrError]);
 
   return (img && 
     <section className="yr-model">

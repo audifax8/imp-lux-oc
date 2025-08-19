@@ -7,6 +7,7 @@ import {
   IInitRTRPayload
 } from '@/declarations/interfaces';
 import { waitForScriptToLoad } from '@/libs/helpers';
+import { setRTRDisabled, setRTRError } from '@/store/APIsStore';
 export class RtrAPI implements IRTRAPI {
   /* Lux rtr API */
   api: IRTRBaseAPI;
@@ -103,6 +104,8 @@ export class RtrAPI implements IRTRAPI {
           console.log(e);
           //Close RTR
           this.api.dispose();
+          setRTRDisabled(true);
+          setRTRError(e?.code);
         },
         onFocus: (detail: any) => {
           console.log('[RTR] onFocus cb');
