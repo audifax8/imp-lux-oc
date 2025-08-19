@@ -62,7 +62,7 @@
 
         & .yr-header-title {
           text-transform: uppercase;
-          width: 100px;
+          //width: 100px;
           height: calc(24px * 1.2);
           position: relative;
           display: flex;
@@ -70,9 +70,9 @@
         }
       }
 
-      & .yr-customizer {
+      /*& .yr-customizer {
         
-      }
+      }*/
     }
 
     .yr-add-to-cart {
@@ -99,13 +99,13 @@
         grid-column: 4 / 6;
         align-self: self-start;
 
-        & .yr-customizer {
-          /*height: fit-content;
+        /*& .yr-customizer {
+          height: fit-content;
           transform: scaleY(1);
           grid-row: 1 / 2;
           grid-column: 4 / 6;
-          align-self: self-start;*/
-        }
+          align-self: self-start;
+        }*/
       }
 
       .yr-add-to-cart {

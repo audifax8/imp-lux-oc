@@ -13,6 +13,9 @@ export class RtrAPI implements IRTRAPI {
   constructor(api: IRTRBaseAPI) {
     this.api = api;
   }
+  dispose(): void {
+    this.api.dispose();
+  }
 
   destroy(): void {
     this.api = undefined!;
@@ -89,7 +92,34 @@ export class RtrAPI implements IRTRAPI {
           // selected component slot in the token. When the user clicks on a
           // configurable part, then the camera frames the clicked component
           // provided that highlightComponentPart has been set to true
-        }
+        },
+        onClose: (e: any) => {
+          console.log('[RTR] onClose cb');
+          console.log(e);
+            /* ... */
+        },
+        onError: (e: any) => {
+          console.log('[RTR] onError cb');
+          console.log(e);
+          //Close RTR
+          this.api.dispose();
+        },
+        onFocus: (detail: any) => {
+          console.log('[RTR] onFocus cb');
+          console.log(detail);
+        },
+        onRendered: (e: any) => {
+          console.log('[RTR] onRender cb');
+          console.log(e);
+        },
+        onSettingsUpdated: (detail: any) => {
+          console.log('[RTR] onSettingsUpdated cb');
+          console.log(detail);
+        },
+        onWarning: (detail: any) => {
+          console.log('[RTR] onWarning cb');
+          console.log(detail);
+        },
       }
     };
     this.api?.init(initData);

@@ -114,6 +114,7 @@ export interface IRTRBaseAPI {
   setId(setIdPayload: ITokenPayload): void;
   isInitialized(): Promise<boolean>;
   selectComponent(payload: ISelectComponentPayload): void;
+  dispose(): void;
 }
 export interface IRTRAPI {
   getVersion(): string;
@@ -125,6 +126,7 @@ export interface IRTRAPI {
   mapCameraNameRTRToComponent(caName: string): number | undefined;
   mapCaNameToRTRCameraName(caAlias: string): string;
   isInitialized(): Promise<boolean>;
+  dispose(): void;
 }
 
 export interface IVMBaseAPI {
@@ -214,6 +216,18 @@ export interface IInitRTRPayload {
     onComponentSelected: any;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onActions: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onClose: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onError: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onFocus: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onRendered: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onSettingsUpdated: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    onWarning: any;
   };
 }
 

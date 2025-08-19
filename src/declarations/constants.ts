@@ -24,6 +24,11 @@ export const BRAND_NAMES_MAP: Record<number, string> = {
 const DEFAULT_RTR_VERSION = '3.1.2';
 const RTR_BASE_URL = 'https://rtrmv.essilorluxottica.com';
 export const RTR_URL = `${RTR_BASE_URL}/lib/v/${DEFAULT_RTR_VERSION}/main.umd.js`;
+//https://rtrmv.essilorluxottica.com/lib/v/3.1.2/main.umd.js
+
+/*const DEFAULT_RTR_VERSION = '6.0.0';
+const RTR_BASE_URL = 'https://rtr-viewer.luxottica.com';
+export const RTR_URL = `${RTR_BASE_URL}/lib/v/${DEFAULT_RTR_VERSION}/main.js`;*/
 
 //VM
 const DEFAULT_VM_VERSION = '4.13';
