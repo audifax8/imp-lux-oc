@@ -11,6 +11,7 @@
     "postinstall": "patch-package",
     "deploy": "gh-pages -d dist",
     "release": "gh-pages -d dist",
+    "publish": "gh-pages -d dist",
     "p": "npm run build && npm run deploy"
   },
   "dependencies": {
