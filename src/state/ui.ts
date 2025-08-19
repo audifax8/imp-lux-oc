@@ -70,6 +70,7 @@ type UseShowSkeleton = ReturnType<typeof useUIState<'showSkeleton'>>;
 export const useShowSkeleton = (): UseShowSkeleton => {
   const [showSkeleton, setShowSkeleton] = useUIState('showSkeleton');
   return [showSkeleton, setShowSkeleton];
+  //return [true, setShowSkeleton];
 };
 
 type UseParams = ReturnType<typeof useUIState<'params'>>;

@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     open: true
   },
-  base: 'imp-lux-oc',
+  base: './',
   plugins: [
     react(),
     commonjs(),

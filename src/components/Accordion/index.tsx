@@ -18,7 +18,7 @@ type AccordionProps = {
 const menuPromise = new Promise((resolve) => {
   //TODO
   //const { workflow, customer, product, locale, yrEnv } = apis.getParams();
-  return setTimeout(() => resolve(true), 4000);
+  //return setTimeout(() => resolve(true), 4000);
 });
 
 export default function Accordion({ item, open = false }: AccordionProps) {
