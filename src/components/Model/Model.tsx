@@ -82,6 +82,9 @@ const createCorePromise = new Promise((resolve) => {
 
 export default function Model() {
   const configureImg = use(createCorePromise) as string;
+  if (configureImg) {
+    import('../../styles/base/fonts.scss');
+  }
   const [, setIsCustomizerOpen] = useIsCustomizerOpen();
   const img = configureImg ? configureImg : getSkeletonURL();
   const [rtrAPIReady] = useRTRAPIReady();

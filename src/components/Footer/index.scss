@@ -1,20 +1,6 @@
 @use '../../styles/mixins' as *;
 
 .yr-footer {
-  display: grid;
-  grid-template-columns: 3fr 2fr;
-  padding: 0;
-  gap: 10px;
-
-  @include respond(xs) {
-    grid-template-columns: 1fr;
-    margin: 16px;
-  }
-
-   @include respond(lg) {
-    grid-template-columns: 3fr 2fr;
-  }
-
   & .yr-buttons-section {
     display: flex;
     justify-content: center;
@@ -33,52 +19,32 @@
       gap: 8px;
 
       & .yr-footer-final-price {
+        @include text-editorial-md;
         color: var(--rbn-red);
-        font-size: 24px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 160%; /* 25.6px */
-        text-transform: uppercase;
-
-        &.yr-skeleton {
-          @include skeleton-text-lg;
-        }
       }
 
       & .yr-footer-total-price {
+        @include text-editorial-sm;
         color: var(--text-color-secondary);
-        font-size: 20px;
         font-style: normal;
         font-weight: 500;
         line-height: 160%; /* 22.4px */
         text-decoration-line: line-through;
-        &.yr-skeleton {
-          @include skeleton-text-lg;
-        }
       }
 
       & .yr-footer-discount-price {
+        @include text-main-xs;
         border-radius: 32px;
         border: 1px solid var(--text-color-primary);
         background: var(--customizer-background);
 
         display: flex;
-        height: 20px;
         padding: 0px 8px;
         justify-content: center;
         align-items: center;
         gap: 4px;
 
         color: var(--text-color-primary);
-        font-size: 12px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 160%; /* 19.2px */
-        text-transform: uppercase;
-
-        &.yr-skeleton {
-          @include skeleton-text-lg;
-        }
       }
     }
 
