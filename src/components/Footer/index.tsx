@@ -6,6 +6,8 @@ import { RXCButton } from '@/components/RXC/RXCButton';
 import { VMButton } from '@/components/VM/VMButton';
 import { Button } from '@/components/Button';
 
+import './index.scss';
+
 export function Footer() {
   const [isMobile] = useIsMobile();
   const [showSkeleton] = useShowSkeleton();

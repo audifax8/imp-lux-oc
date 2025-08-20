@@ -68,10 +68,10 @@ export const useToken = (): UseToken => {
 type UseShowSkeleton = ReturnType<typeof useUIState<'showSkeleton'>>;
 
 export const useShowSkeleton = (): UseShowSkeleton => {
-  //const [showSkeleton, setShowSkeleton] = useUIState('showSkeleton');
-  //return [showSkeleton, setShowSkeleton];
-  const [, setShowSkeleton] = useUIState('showSkeleton');
-  return [true, setShowSkeleton];
+  const [showSkeleton, setShowSkeleton] = useUIState('showSkeleton');
+  return [showSkeleton, setShowSkeleton];
+  //const [, setShowSkeleton] = useUIState('showSkeleton');
+  //return [true, setShowSkeleton];
 };
 
 type UseParams = ReturnType<typeof useUIState<'params'>>;

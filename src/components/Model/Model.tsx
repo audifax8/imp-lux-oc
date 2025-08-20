@@ -14,6 +14,8 @@ import { IConfigureAPI } from '@/declarations/interfaces';
 import { CDN_FLUID_BASE_URL, getSkeletonURL } from '@/declarations/constants';
 import { getImgData } from '@/libs/helpers';
 
+import './index.scss';
+
 const createCorePromise = new Promise((resolve) => {
   const params = apis?.getParams();
   if (!params) {
@@ -34,7 +36,7 @@ const createCorePromise = new Promise((resolve) => {
       if (params.yrEnv) {
         console.log('Error loading graph or settings JSONs');
       }
-      //return resolve(false);
+      return resolve(false);
     }
     const productGraph = await graphResponse.json();
     const preferences = await prefResponse.json();
@@ -54,7 +56,7 @@ const createCorePromise = new Promise((resolve) => {
             console.log('Error');
             console.log(error);
           }
-          //return resolve(false);
+          return resolve(false);
         }
         apis.initLuxApi(configureCore);
         const configureImg = apis.luxAPI.getProductImg('LUX-Ray-Ban-8taOhSR5AFyjt9tfxU');
@@ -71,7 +73,7 @@ const createCorePromise = new Promise((resolve) => {
             if (yrEnv) {
               console.log({ e });
             }
-            //resolve(false);
+            resolve(false);
           });
       }
     );
@@ -83,19 +85,16 @@ export default function Model() {
   const [, setIsCustomizerOpen] = useIsCustomizerOpen();
   const img = configureImg ? configureImg : getSkeletonURL();
   const [rtrAPIReady] = useRTRAPIReady();
-  //const [params] = useParams();
   const [token] = useToken();
   const imageData = getImgData();
   const [rtrDisabled] = useRTRDisabled();
   const [rtrError] = useRTRError();
-  console.log({ rtrDisabled, rtrError });
 
   useEffect(() => {
     if (rtrDisabled) {
       return;
     }
     if (rtrAPIReady && token) {
-      console.log('here');
       apis.rtrAPI?.init(token);
     }
   }, [rtrDisabled, rtrAPIReady, token, rtrError]);
@@ -107,6 +106,7 @@ export default function Model() {
         className={clsx('yr-model__placeholder', 'yr-image', { 'yr-model__hidden': rtrAPIReady })}
         onClick={() => setIsCustomizerOpen()}>
           <img
+            fetchPriority="high"
             src={img}
             alt="Model"
             height={imageData.dimentions.height}

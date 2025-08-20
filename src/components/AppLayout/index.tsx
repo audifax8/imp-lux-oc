@@ -6,7 +6,7 @@ import { useParams, useTheme, useIsCustomizerOpen, useIsMobile } from '@/state/u
 //import { Menu } from '@/components/Menu';
 //import { ModelSkeleton } from '@/components/Model/Skeleton';
 import { RBNHeader } from '@/components/RBNHeader';
-//import { Footer } from '@/components/Footer';
+import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import MobileMock from '@/components/AppMock/Mobile';
 import DesktopMock from '@/components/AppMock/Desktop';
@@ -30,8 +30,9 @@ export function AppLayout() {
       {isMobile && <Header />}
       <Suspense fallback={isMobile ? <MobileMock /> : <DesktopMock />}>
         <div className="yr-main-content">
-        <Model />
+          <Model />
         </div>
+        <Footer />
       </Suspense>
       <div id='rxcApp' className='rxcApp'></div>
     </main>
