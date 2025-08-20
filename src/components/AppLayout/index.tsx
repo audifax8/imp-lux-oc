@@ -3,11 +3,13 @@ import clsx from 'clsx';
 
 import { useParams, useTheme, useIsCustomizerOpen, useIsMobile } from '@/state/ui';
 
-import { Menu } from '@/components/Menu';
-import { ModelSkeleton } from '@/components/Model/Skeleton';
+//import { Menu } from '@/components/Menu';
+//import { ModelSkeleton } from '@/components/Model/Skeleton';
 import { RBNHeader } from '@/components/RBNHeader';
-import { Footer } from '@/components/Footer';
+//import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
+import MobileMock from '@/components/AppMock/Mobile';
+import DesktopMock from '@/components/AppMock/Desktop';
 
 const Model = lazy(() => import('../Model/Model'));
 
@@ -26,15 +28,11 @@ export function AppLayout() {
       )}>
       {params?.showHeader && <RBNHeader />}
       {isMobile && <Header />}
-      <div className="yr-main-content">
-        <Suspense fallback={<ModelSkeleton />}>
-          <Model />
-        </Suspense>
-        <>
-          <Menu />
-        </>
-      </div>
-      <Footer />
+      <Suspense fallback={isMobile ? <MobileMock /> : <DesktopMock />}>
+        <div className="yr-main-content">
+        <Model />
+        </div>
+      </Suspense>
       <div id='rxcApp' className='rxcApp'></div>
     </main>
   );

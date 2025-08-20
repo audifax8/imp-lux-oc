@@ -34,7 +34,7 @@ const createCorePromise = new Promise((resolve) => {
       if (params.yrEnv) {
         console.log('Error loading graph or settings JSONs');
       }
-      return resolve(false);
+      //return resolve(false);
     }
     const productGraph = await graphResponse.json();
     const preferences = await prefResponse.json();
@@ -54,7 +54,7 @@ const createCorePromise = new Promise((resolve) => {
             console.log('Error');
             console.log(error);
           }
-          return resolve(false);
+          //return resolve(false);
         }
         apis.initLuxApi(configureCore);
         const configureImg = apis.luxAPI.getProductImg('LUX-Ray-Ban-8taOhSR5AFyjt9tfxU');
@@ -71,7 +71,7 @@ const createCorePromise = new Promise((resolve) => {
             if (yrEnv) {
               console.log({ e });
             }
-            resolve(false);
+            //resolve(false);
           });
       }
     );
