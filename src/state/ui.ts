@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useUIState } from '@/store/UIStore';
 
 import { Theme } from '@/declarations/enums';
-import { SKELETON_IMG_URL } from '@/declarations/constants';
+import { getSkeletonURL } from '@/declarations/constants';
 
 type UseTheme = [ReturnType<typeof useUIState<'theme'>>[0], (newTheme?: Theme) => void];
 
@@ -53,7 +53,7 @@ export const useConfigureImg = (): UseConfigureImg => {
   const [token] = useUIState('token');
   const [configureImg, setConfigureImg] = useUIState('configureImg');
   if (token === undefined) {
-    return [SKELETON_IMG_URL, setConfigureImg];
+    return [getSkeletonURL(), setConfigureImg];
   }
   return [configureImg, setConfigureImg];
 };

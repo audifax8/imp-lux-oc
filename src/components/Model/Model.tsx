@@ -11,7 +11,7 @@ import { apis } from '@/libs/apis';
 import { setAPIReady } from '@/libs/yr-react/store/ConfigureStore';
 
 import { IConfigureAPI } from '@/declarations/interfaces';
-import { CDN_FLUID_BASE_URL, SKELETON_IMG_URL } from '@/declarations/constants';
+import { CDN_FLUID_BASE_URL, getSkeletonURL } from '@/declarations/constants';
 import { getImgData } from '@/libs/helpers';
 
 const createCorePromise = new Promise((resolve) => {
@@ -81,7 +81,7 @@ const createCorePromise = new Promise((resolve) => {
 export default function Model() {
   const configureImg = use(createCorePromise) as string;
   const [, setIsCustomizerOpen] = useIsCustomizerOpen();
-  const img = configureImg ? configureImg : SKELETON_IMG_URL;
+  const img = configureImg ? configureImg : getSkeletonURL();
   const [rtrAPIReady] = useRTRAPIReady();
   //const [params] = useParams();
   const [token] = useToken();

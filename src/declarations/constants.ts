@@ -43,7 +43,6 @@ export const RXC_URL = `${RXC_BASE_URL}/rxc3/fe/test/v${DEFAULT_RXC_VERSION}/dis
 export const CDN_FLUID_BASE_URL = 'https://cdn-prod.fluidconfigure.com';
 
 export const RTR_ASSETS_URL = 'https://cp.luxottica.com/public/v1/prefetch/_vendorId_?qa=_rtrQa_';
-export const SKELETON_IMG_URL = `${CDN_FLUID_BASE_URL}/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/sk.webp`;
 
 export function getHeadlessURL(params: IConfigureInitParams): string {
   const { customer, product } = params;

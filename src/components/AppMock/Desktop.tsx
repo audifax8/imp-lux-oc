@@ -1,3 +1,4 @@
+import { getSkeletonURL } from '@/declarations/constants';
 import '../../styles/index.scss';
 
 export default function DesktopMock() {
@@ -6,7 +7,13 @@ export default function DesktopMock() {
       <div className="yr-main-content">
         <section className="yr-model">
           <picture className="yr-model__placeholder yr-image yr-model__hidden">
-            <img alt="Model" height="550" width="1100" src="https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/sk.webp" />
+            <img
+              fetchPriority="high"
+              alt="Model"
+              height="550"
+              width="1100"
+              src={getSkeletonURL()}
+            />
           </picture>
         </section>
         <div className="yr-menu">
