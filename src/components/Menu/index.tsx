@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
+import clsx from 'clsx';
 
-import { useIsMobile } from '@/state/ui';
+import { useIsCustomizerOpen, useIsMobile } from '@/state/ui';
 
 import { MOCK_RBN_MENU_ITEMS } from '@/declarations/constants';
 
@@ -13,17 +14,28 @@ import './index.scss';
 
 export function Menu() {
   const [isMobile] = useIsMobile();
+  const [isCustomizerOpen] = useIsCustomizerOpen();
   return (
-    <div className='yr-menu'>
-      {!isMobile && <Header />}
-      <div className='yr-customizer'>
-        <Suspense
-          fallback={
-            MOCK_RBN_MENU_ITEMS.map((item) => <AccordionSkeleton key={item.name} item={item} />)}
-          >
-            {MOCK_RBN_MENU_ITEMS.map((item) => <Configurator key={item.name} item={item} />)}
-        </Suspense>
-      </div>
-    </div>
+    <>
+      <Suspense
+        fallback={
+          <>
+            <div className={clsx('yr-menu', { 'yr-customizer-open': isCustomizerOpen })}>
+              {!isMobile && <Header />}
+              <div className='yr-customizer'>
+                {MOCK_RBN_MENU_ITEMS.map((item) => <AccordionSkeleton key={item.name} item={item} />)}
+              </div>
+            </div>
+          </>
+          }
+        >
+          <div className='yr-menu'>
+            {!isMobile && <Header />}
+            <div className={clsx('yr-customizer', { 'yr-customizer-open': isCustomizerOpen })}>
+              {MOCK_RBN_MENU_ITEMS.map((item) => <Configurator key={item.name} item={item} />)}
+            </div>
+          </div>
+      </Suspense>
+    </>
   );
 }

@@ -3,4 +3,12 @@
     visibility: hidden;
     display: none;
   }
+
+  & .yr-model__placeholder {
+    @media only screen and (max-width: 600px) {
+      &.yr-customizer-open {
+        grid-template-rows: min-content min-content 1fr;
+      }
+    }
+  }
 }

@@ -42,5 +42,11 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
+
+    & .yr-button-icon {
+      svg {
+        fill: var(--text-color-primary);
+      }
+    }
   }
 }
