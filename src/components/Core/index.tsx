@@ -4,13 +4,20 @@ import { IConfigureAPI, IConfigureInitParams } from '@/declarations/interfaces';
 import { CDN_FLUID_BASE_URL } from '@/declarations/constants';
 
 import { setAPIReady } from '@/libs/yr-react/store/ConfigureStore';
-import { setShowSkeleton } from '@/store/UIStore';
+import { setCasToRender, setShowSkeleton } from '@/store/UIStore';
 
 const promiseCache = new Map();
 const cacheKey = 'core';
+//TODO fix
+let promiseSent = false;
 
 export function createCorePromise(params: IConfigureInitParams): Promise<IConfigureAPI | null> {
+  if (promiseSent) {
+    return new Promise<IConfigureAPI | null>((resolve) => resolve(null));
+  }
   return new Promise((resolve) => {
+    promiseSent = true;
+    console.log(promiseCache.has(cacheKey));
     if (promiseCache.has(cacheKey)) {
       return resolve(promiseCache.get(cacheKey));
     }
@@ -53,6 +60,7 @@ export function createCorePromise(params: IConfigureInitParams): Promise<IConfig
             resolve(null);
           }
           apis.initLuxApi(configureCore);
+          setCasToRender(apis.luxAPI.mapCas());
           setAPIReady(true);
           setShowSkeleton(false);
           promiseCache.set(cacheKey, configureCore);

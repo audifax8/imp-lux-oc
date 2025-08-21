@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { IConfigureAPI, IConfigureInitParams, IProduct, IBaseLuxAPI } from '@/declarations/interfaces';
+import { IConfigureAPI, IConfigureInitParams, IProduct, IBaseLuxAPI, ICAMap, IConfigurableAttribute } from '@/declarations/interfaces';
 import { RBN_TOKEN_ALIASES, OAK_TOKEN_ALIASES, RTR_ASSETS_URL } from '@/declarations/constants';
 import { getImgData } from '@/libs/helpers';
 
@@ -9,6 +9,8 @@ export abstract class LuxBaseAPI implements IBaseLuxAPI {
   constructor() {}
 
   abstract getToken(): string;
+  abstract mapCas(): ICAMap[];
+  abstract getAttributeByAlias(alias: string): IConfigurableAttribute;
 
   destroy(): void {
     this.coreService?.destroy();
@@ -92,6 +94,14 @@ export class OakCustomAPI extends LuxBaseAPI {
     super();
   }
 
+  getAttributeByAlias(alias: string): IConfigurableAttribute {
+    throw new Error('Method not implemented.');
+  }
+
+  mapCas(): ICAMap[] {
+    throw new Error('Method not implemented.');
+  }
+
   getToken(): string {
     const consoleCSS = 'background: #f5f785; color: black; padding: 5px; font-weight: 700;';
     const recipe = this.coreService.getRecipe('custom', 'alias', 'vendorId');
@@ -157,6 +167,63 @@ export class OakCustomAPI extends LuxBaseAPI {
   }
 }
 export class RbnCustomAPI extends LuxBaseAPI {
+
+  getAttributeByAlias(alias: string): IConfigurableAttribute {
+    return this.coreService.getAttribute({ alias });
+  }
+
+  mapCas(): ICAMap[] {
+    const casToMap: ICAMap[] = [
+      {
+        id: null,
+        alias: 'frame_sku',
+        icon: 'frame',
+        selectedAvId: null
+      },
+      {
+        id: null,
+        alias: 'lenses_sku',
+        icon: 'lens',
+        selectedAvId: null
+      },    
+      {
+        id: null,
+        alias: 'temple_tips_sku',
+        icon: 'temple',
+        selectedAvId: null
+      },
+      {
+        id: null,
+        alias: '',
+        icon: 'temple',
+        selectedAvId: null
+      }
+    ];
+
+    const mappedCAs = casToMap.map(
+      (ca: ICAMap) => {
+        const { alias } = ca;
+        try {
+          const configurableAttibute = this.getAttributeByAlias(alias);
+          //const av = this.getSelectedAV(alias);
+          const av = configurableAttibute.values.find(av => av.selected);
+          if (configurableAttibute && av) {
+            return {
+              ...ca,
+              id: configurableAttibute.id,
+              selectedAvId: av.id,
+              selectedAvName: av.name
+            };
+          }
+        } catch (e) {
+          return undefined;
+        }
+      }
+    ) as ICAMap[];
+    const sanitizedCas = mappedCAs.filter((ca: ICAMap) => ca);
+    return sanitizedCas;
+  }
+
   getToken(): string {
     const skipServices = true;
     const recipe = this.coreService.getRecipe('custom', 'alias', 'vendorId');

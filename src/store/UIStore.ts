@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { devtools, subscribeWithSelector } from 'zustand/middleware';
 
 import { Theme } from '@/declarations/enums';
-import { IConfigureInitParams } from '@/declarations/interfaces';
+import { ICAMap, IConfigureInitParams } from '@/declarations/interfaces';
 
 import { apis } from '@/libs/apis';
 import { createStoreStateHook } from '@/libs/yr-react/store/zustand-helpers';
@@ -17,6 +17,7 @@ export interface IUIState {
   token: string;
   configureImg: string;
   params: IConfigureInitParams;
+  cas: ICAMap[];
 }
 
 const params = getInitQueryParams();
@@ -28,7 +29,8 @@ const INITIAL_STATE = {
   showSkeleton: true,
   token: undefined!,
   configureImg: undefined!,
-  params
+  params,
+  cas: []
 }
 
 export function startUIStore() {
@@ -42,6 +44,10 @@ export function setShowSkeleton(showSkeleton: boolean): void {
 
 export function setTokenAndImage(token: string, configureImg: string) {
   useUIStore.setState({ configureImg, token }, false, 'Set Token & Img');
+}
+
+export function setCasToRender(cas: ICAMap[]) {
+  useUIStore.setState({ cas }, false, 'Set CAS');
 }
 
 export function setToken(token: string) {

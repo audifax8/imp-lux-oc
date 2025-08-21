@@ -6,6 +6,16 @@ export interface IConfigureState {
   product: IProduct;
   token: string;
 }
+
+export interface ICAMap {
+  id: number | null;
+  alias: string;
+  icon: string;
+  //ca: IConfigurableAttribute | null;
+  selectedAvId: number | null;
+  skeleton?: boolean;
+  selectedAvName?: string;
+};
 export interface IConfigureAPI {
   product: { id: number };
   getProduct(): IProduct;
@@ -238,6 +248,9 @@ export interface IBaseLuxAPI {
   getProductVendorId(product: IProduct): string;
   getVendorIDSize(params: IConfigureInitParams): string;
   getAssetsURL(params: IConfigureInitParams): string;
+  mapCas(): ICAMap[];
+  getAttributeByAlias(alias: string): IConfigurableAttribute;
+  
 }
 export interface IScriptResult {
   time: string;

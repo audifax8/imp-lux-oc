@@ -15,11 +15,11 @@ type AccordionProps = {
   open?: boolean;
 };
 
-//const menuPromise = new Promise((resolve) => {
-const menuPromise = new Promise(() => {
+const menuPromise = new Promise((resolve) => {
+//const menuPromise = new Promise(() => {
   //TODO
   //const { workflow, customer, product, locale, yrEnv } = apis.getParams();
-  //return setTimeout(() => resolve(true), 4000);
+  return setTimeout(() => resolve(true), 4000);
 });
 
 import './index.scss';
