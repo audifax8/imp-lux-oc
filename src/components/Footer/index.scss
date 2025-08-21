@@ -1,5 +1,5 @@
-//@use '../../styles/mixins' as *;
-/*
+@use '../../styles/mixins' as *;
+
 .yr-footer {
   & .yr-buttons-section {
     display: flex;
@@ -18,33 +18,26 @@
       align-items: center;
       gap: 8px;
 
-      & .yr-footer-final-price {
-        @include text-editorial-md;
+      & .yr-footer--price__final {
         color: var(--rbn-red);
       }
 
-      & .yr-footer-total-price {
-        @include text-editorial-sm;
-        color: var(--text-color-secondary);
+      & .yr-footer--price__total {
         font-style: normal;
         font-weight: 500;
         line-height: 160%;
         text-decoration-line: line-through;
       }
 
-      & .yr-footer-discount-price {
-        @include text-main-xs;
+      & .yr-footer--price__discount {
         border-radius: 32px;
         border: 1px solid var(--text-color-primary);
-        background: var(--customizer-background);
 
         display: flex;
         padding: 0px 8px;
         justify-content: center;
         align-items: center;
         gap: 4px;
-
-        color: var(--text-color-primary);
       }
     }
 
@@ -55,4 +48,3 @@
     }
   }
 }
-*/

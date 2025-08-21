@@ -3,6 +3,9 @@ import { apis } from '@/libs/apis';
 import { IConfigureAPI, IConfigureInitParams } from '@/declarations/interfaces';
 import { CDN_FLUID_BASE_URL } from '@/declarations/constants';
 
+import { setAPIReady } from '@/libs/yr-react/store/ConfigureStore';
+import { setShowSkeleton } from '@/store/UIStore';
+
 const promiseCache = new Map();
 const cacheKey = 'core';
 
@@ -49,21 +52,9 @@ export function createCorePromise(params: IConfigureInitParams): Promise<IConfig
             promiseCache.set(cacheKey, null);
             resolve(null);
           }
-          //return resolve(configureCore);
           apis.initLuxApi(configureCore);
-          /*const configureImg = apis.luxAPI.getProductImg('LUX-Ray-Ban-8taOhSR5AFyjt9tfxU');
-          fetch(configureImg)
-            .then(() => {
-              promiseCache.set(cacheKey, configureCore);
-              return resolve(configureCore);
-            })
-            .catch((e) => {
-              if (yrEnv) {
-                console.log({ e });
-              }
-              promiseCache.set(cacheKey, null);
-              resolve(null);
-            });*/
+          setAPIReady(true);
+          setShowSkeleton(false);
           promiseCache.set(cacheKey, configureCore);
           return resolve(configureCore);
         }

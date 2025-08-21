@@ -7,7 +7,9 @@ import { useClsxWithSkeleton } from '@/hooks/useClsxWithSkeleton';
 import { Button } from '@/components/Button';
 import { ArrowIcon } from '@/components/Icons';
 import { VMButton } from '@/components/VM/VMButton';
-import { RXCButton } from '../RXC/RXCButton';
+import { RXCButton } from '@/components/RXC/RXCButton';
+
+import './index.scss';
 
 export function Header() {
   const [isMobile] = useIsMobile();
@@ -17,7 +19,7 @@ export function Header() {
   const name = product?.name ?? 'TEST NAME';
 
   return (
-    <header className="yr-custom-header">
+    <header className='yr-custom-header'>
       {!isCustomizerOpen &&
         <div className={clsxWithSkeleton('yr-header-title')}>
           <span>{name}</span>
@@ -31,8 +33,8 @@ export function Header() {
       }
       {isMobile && isCustomizerOpen &&
         <Button
-          className="yr-header-go-back-button"
-          icon={<ArrowIcon direction="right" size={24} />}
+          className='yr-header-go-back-button'
+          icon={<ArrowIcon direction='right' size={24} />}
           onClick={() => toggleCustomizer(false)}
         />
       }

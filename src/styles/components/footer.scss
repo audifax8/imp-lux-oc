@@ -1,4 +1,4 @@
-@use '../mixins' as *;
+/*@use '../mixins' as *;
 
 .yr-footer {
   display: grid;
@@ -37,7 +37,7 @@
         font-size: 24px;
         font-style: normal;
         font-weight: 500;
-        line-height: 160%; /* 25.6px */
+        line-height: 160%;
         text-transform: uppercase;
 
         &.yr-skeleton {
@@ -50,7 +50,7 @@
         font-size: 20px;
         font-style: normal;
         font-weight: 500;
-        line-height: 160%; /* 22.4px */
+        line-height: 160%;
         text-decoration-line: line-through;
         &.yr-skeleton {
           @include skeleton-text-lg;
@@ -73,7 +73,7 @@
         font-size: 12px;
         font-style: normal;
         font-weight: 700;
-        line-height: 160%; /* 19.2px */
+        line-height: 160%;
         text-transform: uppercase;
 
         &.yr-skeleton {
@@ -83,3 +83,4 @@
     }
   }
 }
+*/

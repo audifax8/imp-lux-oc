@@ -1,4 +1,4 @@
-import { useIsMobile, useShowSkeleton } from '@/state/ui';
+import { useIsMobile } from '@/state/ui';
 
 import { useClsxWithSkeleton } from '@/hooks/useClsxWithSkeleton';
 
@@ -21,7 +21,6 @@ export default function Footer({ corePromise }: IFooterProps) {
   corePromise.read();
 
   const [isMobile] = useIsMobile();
-  const [showSkeleton] = useShowSkeleton();
   const clsxWithSkeleton = useClsxWithSkeleton();
 
   return (
@@ -34,18 +33,18 @@ export default function Footer({ corePromise }: IFooterProps) {
       }
       <div className='yr-footer-price-info'>
         <div className={`yr-footer--price`}>
-          <div className={`yr-footer-final-price ${showSkeleton ? 'yr-skeleton': ''}`}>
+          <div className={`yr-footer--price__final`}>
             <label>$180.00</label>
           </div>
-          <div className={`yr-footer-total-price ${showSkeleton ? 'yr-skeleton': ''}`}>
+          <div className={`yr-footer--price__total`}>
             <label>$200.00</label>
           </div>
-          <div className={`yr-footer-discount-price ${showSkeleton ? 'yr-skeleton': ''}`}>
+          <div className={`yr-footer--price__discount`}>
             <label>-20%</label>
           </div>
         </div>
         <div className='yr-footer--cart'>
-          <Button className={clsxWithSkeleton('yr-add-to-cart-button')} variant="square">
+          <Button className={clsxWithSkeleton('yr-add-to-cart-button')} variant='square'>
             Add to Cart
           </Button>
         </div>

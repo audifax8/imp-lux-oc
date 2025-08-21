@@ -28,10 +28,10 @@ export default function Accordion({ item, open = false }: AccordionProps) {
   const [isOpen, setIsOpen] = useState(open);
   use(menuPromise);
   return (
-    <details open={isOpen} className="yr-accordion">
-      <summary className="yr-accordion-summary">
-        <Image src={item.img} alt={item.name} className="yr-accordion-summary-image" />
-        <div className="yr-accordion-header">
+    <details open={isOpen} className='yr-accordion'>
+      <summary className='yr-accordion-summary'>
+        <Image src={item.img} alt={item.name} className='yr-accordion-summary-image' />
+        <div className='yr-accordion-header'>
           <h3 className={'yr-accordion-header-title'}>{item.name}</h3>
           <p className={'yr-accordion-header-selected'}>{item.selected}</p>
         </div>
@@ -44,7 +44,7 @@ export default function Accordion({ item, open = false }: AccordionProps) {
           }}
         />
       </summary>
-      <div className="yr-accordion-content">
+      <div className='yr-accordion-content'>
         <p>Accordion content</p>
       </div>
     </details>

@@ -1,3 +1,6 @@
+@use '../../styles/mixins/skeleton.scss' as *;
+@use '../../styles/mixins/typography.scss' as *;
+
 .yr-footer {
   display: grid;
   grid-template-columns: 3fr 2fr;
@@ -29,6 +32,30 @@
       justify-content: center;
       align-items: center;
       gap: 8px;
+
+      &__final {
+        @include text-editorial-sm;
+        &.yr-skeleton {
+          @include skeleton-text(14px);
+          color: transparent !important;
+        }
+      }
+
+      &__total {
+        @include text-editorial-sm;
+        &.yr-skeleton {
+          @include skeleton-text(14px);
+          color: transparent !important;
+        }
+      }
+
+      &__discount {
+        @include text-editorial-xs;
+        &.yr-skeleton {
+          @include skeleton-text(12px);
+          color: transparent !important;
+        }
+      }
     }
   }
 }
