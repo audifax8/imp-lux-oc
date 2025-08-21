@@ -1,27 +1,4 @@
 .yr-model {
-  padding: 0 30px;
-  min-height: 200px;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &__placeholder {
-    img {
-      width: 100%;
-      max-width: 590px;
-      object-fit: contain;
-    }
-  }
-
-  &__rtr {
-    height: 100%;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-  }
-
   &__hidden {
     visibility: hidden;
     display: none;

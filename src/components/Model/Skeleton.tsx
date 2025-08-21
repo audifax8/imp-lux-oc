@@ -1,6 +1,8 @@
 import { getSkeletonURL } from "@/declarations/constants";
 import { getImgData } from "@/libs/helpers";
 
+import './skeleton.scss';
+
 export function ModelSkeleton() {
   const skeletonURL = getSkeletonURL();
   const imageData = getImgData();

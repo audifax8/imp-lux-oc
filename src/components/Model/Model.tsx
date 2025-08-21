@@ -80,7 +80,7 @@ const createCorePromise = new Promise((resolve) => {
   }).catch(() => resolve(false));
 });
 
-export default function Model() {
+export default function Model() {  
   const configureImg = use(createCorePromise) as string;
   if (configureImg) {
     import('../../styles/base/fonts.scss');

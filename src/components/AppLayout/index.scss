@@ -1,0 +1,13 @@
+.yr-main-content {
+  display: grid;
+  grid-template-rows: 1fr min-content;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 24px 0;
+  gap: 0;
+  height: 100%;
+  flex-grow: 1;
+
+  @media only screen and (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
