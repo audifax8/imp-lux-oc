@@ -61,7 +61,7 @@ export function getURLsToPreconnect(params: IConfigureInitParams): string[] {
   const urls = [
     getSkeletonURL(),
     CDN_FLUID_BASE_URL,
-    //'https://prod.fluidconfigure.com'
+    'https://prod.fluidconfigure.com'
   ];
   if (!rtrDisabled) {
     urls.push('https://cp.luxottica.com');
@@ -76,15 +76,14 @@ export function getSkeletonURL(): string {
 }
 
 export function mapURLs(params: IConfigureInitParams): IResource[] {
-  const { /*workflow, customer, product, locale,*/ rtrDisabled } = params;
-  //console.log({ params });
+  const { workflow, customer, product, locale, rtrDisabled } = params;
   const urls: IResource[] = [
     {
       url: getSkeletonURL(),
       as: 'image',
       fetchPriority: FetchPriority.HIGH
-    }
-    /*{
+    },
+    {
       url: `${CDN_FLUID_BASE_URL}/static/configs/3.13.0/prod/${workflow}/${customer}/product/${product}/graph-settings-${locale}.json`,
       as: 'fetch',
       fetchPriority: FetchPriority.HIGH,
@@ -113,26 +112,6 @@ export function mapURLs(params: IConfigureInitParams): IResource[] {
       }
     );
   }
-  /*if (customer === RBN_CUSTOMER_ID) {
-    urls.push({
-      url: 'fonts/Lato/Lato-Regular.woff2',
-      as: 'font',
-      fetchPriority: FetchPriority.LOW,
-      crossOrigin: 'anonymous'
-    });
-    urls.push({
-      url: 'fonts/Oswald/Oswald-Regular.woff2',
-      as: 'font',
-      fetchPriority: FetchPriority.LOW,
-      crossOrigin: 'anonymous'
-    });
-    urls.push({
-      url: 'fonts/Oswald/Oswald-Medium.woff2',
-      as: 'font',
-      fetchPriority: FetchPriority.LOW,
-      crossOrigin: 'anonymous'
-    });
-  }*/
   return urls;
 }
 

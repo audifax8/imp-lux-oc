@@ -63,7 +63,7 @@ export function createCorePromise(params: IConfigureInitParams): Promise<IConfig
           setAPIReady(true);
           setShowSkeleton(false);
           promiseCache.set(cacheKey, configureCore);
-          import('../../styles/base/fonts.scss');
+          import('../styles/base/fonts.scss');
           return resolve(configureCore);
         }
       );

@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react';
 
-import { coreResource, createCorePromise } from '@/components/Core';
+import { coreResource, createCorePromise } from '@/libs/core';
 
 import { ModelSkeleton } from './Skeleton';
 import { apis } from '@/libs/apis';

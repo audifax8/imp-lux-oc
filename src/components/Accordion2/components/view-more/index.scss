@@ -1,0 +1,51 @@
+@use '../../../../styles/base/variables.scss' as *;
+
+.fc-view-more {
+  display: flex;
+  padding: 16px 16px 0px 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  border: none;
+  background-color: inherit;
+
+  @media (max-width: 700px) {
+    width: 109px;
+    padding: 8px 4px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  &--wrapper {
+    display: flex;
+    width: 126px;
+    padding: 8px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+
+    &--amount {
+      height: 40px;
+      width: 40px;
+      color: var(--text-color-primary);
+      font-family: $font-family-secondary;
+      text-align: center;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 155%; /* 31px */
+    }
+
+    &--name {
+      font-family: $font-family-secondary;
+      text-align: center;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 155%; /* 21.7px */
+      text-transform: capitalize;
+    }
+  }
+}

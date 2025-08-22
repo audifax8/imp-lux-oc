@@ -18,6 +18,28 @@ export interface ICAMap {
   selectedAvName?: string;
   open?: boolean;
 };
+export interface IMenuCA {
+  id: number;
+  alias: string;
+  caName: string;
+  icon: string;
+  selectedAvId: number | null;
+  selectedAvName: string;
+  avs: IAttributeValue[];
+  open: boolean;
+  avsLenght: number;
+  currentPage: number;
+  skeleton?: boolean;
+};
+
+export interface IMenuPagination {
+  avs: IAttributeValue[];
+  currentPage: number;
+  avsLenght: number;
+};
+export interface IMenu {
+  cas: IMenuCA[];
+}
 export interface IConfigureAPI {
   product: { id: number };
   getProduct(): IProduct;
@@ -90,6 +112,13 @@ export interface IAttributeValue {
   name: string;
   metadata: KeyValueString[];
   facets: IAVFacet;
+  testUrl?: string;
+}
+
+export interface IFacetFacetValueMap {
+  id?: number;
+  name?: string;
+  facetValuesMapped?: IFacetValue;
 }
 
 export interface ICAFacet {
@@ -252,6 +281,7 @@ export interface IBaseLuxAPI {
   getAssetsURL(params: IConfigureInitParams): string;
   mapCas(): ICAMap[];
   getAttributeByAlias(alias: string): IConfigurableAttribute;
+  getSwatchURL(av: IAttributeValue, caName: string): string;
   
 }
 export interface IScriptResult {

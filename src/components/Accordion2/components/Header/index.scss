@@ -1,0 +1,18 @@
+.yr-accordion-content {
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  & .fc-attribute-values {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    flex-flow: wrap;
+    padding: 8px 8px 0px 8px;
+    align-items: flex-start;
+    justify-content: center;
+  }
+}

@@ -2,13 +2,12 @@ import { create } from 'zustand';
 import { devtools, subscribeWithSelector } from 'zustand/middleware';
 
 import { Theme } from '@/declarations/enums';
-import { ICAMap, IConfigureInitParams } from '@/declarations/interfaces';
+import { IConfigureInitParams, IMenuCA } from '@/declarations/interfaces';
 
 import { apis } from '@/libs/apis';
 import { createStoreStateHook } from '@/libs/yr-react/store/zustand-helpers';
 
-import { getInitQueryParams } from '@/helpers/params';
-import { MOCK_RBN_MENU_ITEMS } from '@/declarations/constants';
+import { getInitQueryParams } from '@/libs/helpers';
 
 export interface IUIState {
   theme: Theme;
@@ -18,7 +17,7 @@ export interface IUIState {
   token: string;
   configureImg: string;
   params: IConfigureInitParams;
-  cas: ICAMap[];
+  cas: IMenuCA[];
 }
 
 const params = getInitQueryParams();
@@ -31,7 +30,7 @@ const INITIAL_STATE = {
   token: undefined!,
   configureImg: undefined!,
   params,
-  cas: MOCK_RBN_MENU_ITEMS
+  cas: []
 }
 
 export function startUIStore() {
@@ -47,7 +46,7 @@ export function setTokenAndImage(token: string, configureImg: string) {
   useUIStore.setState({ configureImg, token }, false, 'Set Token & Img');
 }
 
-export function setCasToRender(cas: ICAMap[]) {
+export function setCasToRender(cas: IMenuCA[]) {
   useUIStore.setState({ cas }, false, 'Set CAS');
 }
 
@@ -58,5 +57,9 @@ export function setToken(token: string) {
 export const useUIStore = create(
   subscribeWithSelector(devtools<IUIState>(() => ({ ...INITIAL_STATE }), { name: 'UI Store' }))
 );
+
+export function createDynamicStore(storeName: string) {
+  console.log(storeName);
+}
 
 export const useUIState = createStoreStateHook<IUIState>(useUIStore);
