@@ -58,7 +58,11 @@ export function getUPCAPI(params: IConfigureInitParams): string {
 
 export function getURLsToPreconnect(params: IConfigureInitParams): string[] {
   const { rtrDisabled } = params;
-  const urls = [CDN_FLUID_BASE_URL, 'https://prod.fluidconfigure.com'];
+  const urls = [
+    getSkeletonURL(),
+    CDN_FLUID_BASE_URL,
+    //'https://prod.fluidconfigure.com'
+  ];
   if (!rtrDisabled) {
     urls.push('https://cp.luxottica.com');
     urls.push(RTR_BASE_URL);
@@ -72,9 +76,15 @@ export function getSkeletonURL(): string {
 }
 
 export function mapURLs(params: IConfigureInitParams): IResource[] {
-  const { workflow, customer, product, locale, rtrDisabled } = params;
-  const urls = [
+  const { /*workflow, customer, product, locale,*/ rtrDisabled } = params;
+  //console.log({ params });
+  const urls: IResource[] = [
     {
+      url: getSkeletonURL(),
+      as: 'image',
+      fetchPriority: FetchPriority.HIGH
+    }
+    /*{
       url: `${CDN_FLUID_BASE_URL}/static/configs/3.13.0/prod/${workflow}/${customer}/product/${product}/graph-settings-${locale}.json`,
       as: 'fetch',
       fetchPriority: FetchPriority.HIGH,
@@ -85,11 +95,6 @@ export function mapURLs(params: IConfigureInitParams): IResource[] {
       as: 'fetch',
       fetchPriority: FetchPriority.HIGH,
       crossOrigin: 'anonymous'
-    },
-    {
-      url: getSkeletonURL(),
-      as: 'image',
-      fetchPriority: FetchPriority.HIGH
     }
     /*{
       url: getHeadlessURL(params),
@@ -99,7 +104,14 @@ export function mapURLs(params: IConfigureInitParams): IResource[] {
     }*/
   ];
   if (!rtrDisabled) {
-    urls.push({ url: RTR_URL, as: 'script', fetchPriority: FetchPriority.HIGH, crossOrigin: 'anonymous' });
+    urls.push(
+      {
+        url: RTR_URL,
+        as: 'script',
+        fetchPriority: FetchPriority.HIGH,
+        crossOrigin: 'anonymous'
+      }
+    );
   }
   /*if (customer === RBN_CUSTOMER_ID) {
     urls.push({
