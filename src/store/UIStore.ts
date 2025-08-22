@@ -8,6 +8,7 @@ import { apis } from '@/libs/apis';
 import { createStoreStateHook } from '@/libs/yr-react/store/zustand-helpers';
 
 import { getInitQueryParams } from '@/helpers/params';
+import { MOCK_RBN_MENU_ITEMS } from '@/declarations/constants';
 
 export interface IUIState {
   theme: Theme;
@@ -30,7 +31,7 @@ const INITIAL_STATE = {
   token: undefined!,
   configureImg: undefined!,
   params,
-  cas: []
+  cas: MOCK_RBN_MENU_ITEMS
 }
 
 export function startUIStore() {

@@ -17,7 +17,6 @@ export function createCorePromise(params: IConfigureInitParams): Promise<IConfig
   }
   return new Promise((resolve) => {
     promiseSent = true;
-    console.log(promiseCache.has(cacheKey));
     if (promiseCache.has(cacheKey)) {
       return resolve(promiseCache.get(cacheKey));
     }
@@ -57,19 +56,20 @@ export function createCorePromise(params: IConfigureInitParams): Promise<IConfig
               console.log(error);
             }
             promiseCache.set(cacheKey, null);
-            resolve(null);
+            return resolve(null);
           }
           apis.initLuxApi(configureCore);
           setCasToRender(apis.luxAPI.mapCas());
           setAPIReady(true);
           setShowSkeleton(false);
           promiseCache.set(cacheKey, configureCore);
+          import('../../styles/base/fonts.scss');
           return resolve(configureCore);
         }
       );
     }).catch(() => {
       promiseCache.set(cacheKey, null);
-      resolve(null);
+      return resolve(null);
     });
   });
 };

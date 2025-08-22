@@ -151,7 +151,7 @@ export const CONFIGURE_INIT_PARAM_NAMES = [
 
 export const MOCK_RBN_MENU_ITEMS = [
   {
-    id: null,
+    id: 0,
     alias: 'frame_sku',
     name: 'frame_sku',
     icon: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/frame.webp',
@@ -159,7 +159,7 @@ export const MOCK_RBN_MENU_ITEMS = [
     selectedAvName: 'frame_sku'
   },
   {
-    id: null,
+    id: 1,
     alias: 'temple_tips_sku',
     name: 'temple_tips_sku',
     icon: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/lens.webp',
@@ -167,7 +167,7 @@ export const MOCK_RBN_MENU_ITEMS = [
     selectedAvName: 'lenses_sku'
   },    
   {
-    id: null,
+    id: 2,
     alias: 'temple_tips_sku',
     name: 'temple_tips_sku',
     icon: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/temple.webp',
@@ -175,7 +175,7 @@ export const MOCK_RBN_MENU_ITEMS = [
     selectedAvName: 'temple_tips_sku'
   },
   {
-    id: null,
+    id: 3,
     alias: 'temple_sku',
     name: 'temple_sku',
     icon: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/temple.webp',
