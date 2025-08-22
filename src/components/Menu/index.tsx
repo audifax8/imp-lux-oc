@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
 import clsx from 'clsx';
 
-import { useIsCustomizerOpen, useIsMobile } from '@/state/ui';
+import { useCAS, useIsCustomizerOpen, useIsMobile } from '@/state/ui';
 
 import { MOCK_RBN_MENU_ITEMS } from '@/declarations/constants';
 
@@ -15,6 +15,7 @@ import './index.scss';
 export function Menu() {
   const [isMobile] = useIsMobile();
   const [isCustomizerOpen] = useIsCustomizerOpen();
+  const [cas] = useCAS();
   return (
     <>
       <Suspense
@@ -23,7 +24,19 @@ export function Menu() {
             <div className={clsx('yr-menu', { 'yr-customizer-open': isCustomizerOpen })}>
               {!isMobile && <Header />}
               <div className={clsx('yr-customizer', { 'yr-customizer-open': isCustomizerOpen })}>
-                {MOCK_RBN_MENU_ITEMS.map((item) => <AccordionSkeleton key={item.name} item={item} />)}
+                {MOCK_RBN_MENU_ITEMS
+                  .map(
+                    ({ id, name, alias, selectedAvId, selectedAvName, icon }) =>
+                      <AccordionSkeleton
+                        id={id}
+                        key={id}
+                        alias={name || alias}
+                        icon={icon}
+                        selectedAvName={selectedAvName}
+                        selectedAvId={selectedAvId}
+                      />
+                  )
+                }
               </div>
             </div>
           </>
@@ -32,7 +45,19 @@ export function Menu() {
           <div className={clsx('yr-menu', { 'yr-customizer-open': isCustomizerOpen })}>
             {!isMobile && <Header />}
             <div className={clsx('yr-customizer', { 'yr-customizer-open': isCustomizerOpen })}>
-              {MOCK_RBN_MENU_ITEMS.map((item) => <Configurator key={item.name} item={item} />)}
+              {cas
+                .map(
+                  ({ id, name, alias, selectedAvId, selectedAvName, icon }) =>
+                    <Configurator 
+                      id={id}
+                      key={id}
+                      alias={name || alias}
+                      icon={icon}
+                      selectedAvName={selectedAvName}
+                      selectedAvId={selectedAvId}
+                    />
+                )
+              }
             </div>
           </div>
       </Suspense>

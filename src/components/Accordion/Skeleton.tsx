@@ -1,24 +1,15 @@
 import { Image } from '@/components/Image';
 import { Button } from '@/components/Button';
+import { ICAMap } from '@/declarations/interfaces';
 
-type AccordionProps = {
-  item: {
-    name: string;
-    selected: string;
-    upcharge: string | null;
-    img: string;
-  };
-  open?: boolean;
-};
-
-export function AccordionSkeleton({ item }: AccordionProps) {
+export function AccordionSkeleton({ alias, selectedAvName }: ICAMap) {
   return (
     <details open={false} className="yr-accordion">
       <summary className="yr-accordion-summary">
-        <Image showSkeleton={true} alt={item.name} className="yr-accordion-summary-image" />
+        <Image showSkeleton={true} alt={alias} className="yr-accordion-summary-image" />
         <div className="yr-accordion-header">
-          <h3 className={'yr-skeleton yr-accordion-header-title'}>{item.name}</h3>
-          <p className={'yr-skeleton yr-accordion-header-selected'}>{item.selected}</p>
+          <h3 className={'yr-skeleton yr-accordion-header-title'}>{alias}</h3>
+          <p className={'yr-skeleton yr-accordion-header-selected'}>{selectedAvName}</p>
         </div>
         <Button className='yr-skeleton' tabIndex={-1} />
       </summary>

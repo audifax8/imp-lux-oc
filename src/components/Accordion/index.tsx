@@ -5,16 +5,6 @@ import { Image } from '@/components/Image';
 import { Button } from '@/components/Button';
 import { ArrowIcon } from '@/components/Icons';
 
-type AccordionProps = {
-  item: {
-    name: string;
-    selected: string;
-    upcharge: string | null;
-    img: string;
-  };
-  open?: boolean;
-};
-
 const menuPromise = new Promise((resolve) => {
 //const menuPromise = new Promise(() => {
   //TODO
@@ -23,17 +13,19 @@ const menuPromise = new Promise((resolve) => {
 });
 
 import './index.scss';
+import { ICAMap } from '@/declarations/interfaces';
 
-export default function Accordion({ item, open = false }: AccordionProps) {
+export default function Accordion(props: ICAMap) {
+  const { alias, icon, selectedAvName, open } = props;
   const [isOpen, setIsOpen] = useState(open);
   use(menuPromise);
   return (
     <details open={isOpen} className='yr-accordion'>
       <summary className='yr-accordion-summary'>
-        <Image src={item.img} alt={item.name} className='yr-accordion-summary-image' />
+        <Image src={icon} alt={alias} className='yr-accordion-summary-image' />
         <div className='yr-accordion-header'>
-          <h3 className={'yr-accordion-header-title'}>{item.name}</h3>
-          <p className={'yr-accordion-header-selected'}>{item.selected}</p>
+          <h3 className={'yr-accordion-header-title'}>{alias}</h3>
+          <p className={'yr-accordion-header-selected'}>{selectedAvName}</p>
         </div>
         <Button
           icon={<ArrowIcon size={16} direction={isOpen ? 'up' : 'down'} />}

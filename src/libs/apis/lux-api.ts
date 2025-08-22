@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { IConfigureAPI, IConfigureInitParams, IProduct, IBaseLuxAPI, ICAMap, IConfigurableAttribute } from '@/declarations/interfaces';
-import { RBN_TOKEN_ALIASES, OAK_TOKEN_ALIASES, RTR_ASSETS_URL } from '@/declarations/constants';
+import { RBN_TOKEN_ALIASES, OAK_TOKEN_ALIASES, RTR_ASSETS_URL, MOCK_RBN_MENU_ITEMS } from '@/declarations/constants';
 import { getImgData } from '@/libs/helpers';
 
 export abstract class LuxBaseAPI implements IBaseLuxAPI {
@@ -95,6 +95,7 @@ export class OakCustomAPI extends LuxBaseAPI {
   }
 
   getAttributeByAlias(alias: string): IConfigurableAttribute {
+    console.log({ alias });
     throw new Error('Method not implemented.');
   }
 
@@ -173,43 +174,17 @@ export class RbnCustomAPI extends LuxBaseAPI {
   }
 
   mapCas(): ICAMap[] {
-    const casToMap: ICAMap[] = [
-      {
-        id: null,
-        alias: 'frame_sku',
-        icon: 'frame',
-        selectedAvId: null
-      },
-      {
-        id: null,
-        alias: 'lenses_sku',
-        icon: 'lens',
-        selectedAvId: null
-      },    
-      {
-        id: null,
-        alias: 'temple_tips_sku',
-        icon: 'temple',
-        selectedAvId: null
-      },
-      {
-        id: null,
-        alias: '',
-        icon: 'temple',
-        selectedAvId: null
-      }
-    ];
 
-    const mappedCAs = casToMap.map(
+    const mappedCAs = MOCK_RBN_MENU_ITEMS.map(
       (ca: ICAMap) => {
         const { alias } = ca;
         try {
           const configurableAttibute = this.getAttributeByAlias(alias);
-          //const av = this.getSelectedAV(alias);
           const av = configurableAttibute.values.find(av => av.selected);
           if (configurableAttibute && av) {
             return {
               ...ca,
+              name: configurableAttibute.name,
               id: configurableAttibute.id,
               selectedAvId: av.id,
               selectedAvName: av.name

@@ -149,25 +149,37 @@ export const CONFIGURE_INIT_PARAM_NAMES = [
   'recipe'
 ];
 
-//TODO
 export const MOCK_RBN_MENU_ITEMS = [
   {
-    name: 'Front',
-    selected: 'Black',
-    upcharge: null,
-    img: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/frame.webp'
+    id: null,
+    alias: 'frame_sku',
+    name: 'frame_sku',
+    icon: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/frame.webp',
+    selectedAvId: null,
+    selectedAvName: 'frame_sku'
   },
   {
-    name: 'Temple',
-    selected: 'Black',
-    upcharge: null,
-    img: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/temple.webp'
+    id: null,
+    alias: 'temple_tips_sku',
+    name: 'temple_tips_sku',
+    icon: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/lens.webp',
+    selectedAvId: null,
+    selectedAvName: 'lenses_sku'
+  },    
+  {
+    id: null,
+    alias: 'temple_tips_sku',
+    name: 'temple_tips_sku',
+    icon: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/temple.webp',
+    selectedAvId: null,
+    selectedAvName: 'temple_tips_sku'
   },
   {
-    name: 'Lenses',
-    selected: 'Green G-15',
-    upcharge: '+$40.00',
-    img: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/lens.webp'
+    id: null,
+    alias: 'temple_sku',
+    name: 'temple_sku',
+    icon: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/temple.webp',
+    selectedAvId: null,
+    selectedAvName: 'temple'
   }
 ];
-

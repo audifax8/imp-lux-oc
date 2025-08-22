@@ -9,12 +9,14 @@ export interface IConfigureState {
 
 export interface ICAMap {
   id: number | null;
+  name?: string;
   alias: string;
   icon: string;
   //ca: IConfigurableAttribute | null;
   selectedAvId: number | null;
   skeleton?: boolean;
   selectedAvName?: string;
+  open?: boolean;
 };
 export interface IConfigureAPI {
   product: { id: number };

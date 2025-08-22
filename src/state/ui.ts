@@ -80,3 +80,10 @@ export const useParams = (): UseParams => {
   const [params, setParams] = useUIState('params');
   return [params, setParams];
 };
+
+type UseCAS = ReturnType<typeof useUIState<'cas'>>;
+
+export const useCAS = (): UseCAS => {
+  const [cas, setCAS] = useUIState('cas');
+  return [cas, setCAS];
+};
