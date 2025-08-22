@@ -103,15 +103,15 @@ export default function Model() {
   }, [rtrDisabled, rtrAPIReady, token, rtrError]);
 
   return (img && 
-    <section className="yr-model">
-      <div id="viewer" className={clsx('yr-model__rtr', { 'yr-model__hidden': !rtrAPIReady })}></div>
+    <section className='yr-model'>
+      <div id='viewer' className={clsx('yr-model__rtr', { 'yr-model__hidden': !rtrAPIReady })}></div>
       <picture
         className={clsx('yr-model__placeholder', 'yr-image', { 'yr-model__hidden': rtrAPIReady })}
         onClick={() => setIsCustomizerOpen()}>
           <img
-            fetchPriority="high"
+            fetchPriority='high'
             src={img}
-            alt="Model"
+            alt='Model'
             height={imageData.dimentions.height}
             width={imageData.dimentions.width}
           />

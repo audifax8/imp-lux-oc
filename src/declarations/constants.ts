@@ -90,13 +90,13 @@ export function mapURLs(params: IConfigureInitParams): IResource[] {
       url: getSkeletonURL(),
       as: 'image',
       fetchPriority: FetchPriority.HIGH
-    },
-    {
+    }
+    /*{
       url: getHeadlessURL(params),
       as: 'fetch',
       fetchPriority: FetchPriority.HIGH,
       crossOrigin: 'anonymous'
-    }
+    }*/
   ];
   if (!rtrDisabled) {
     urls.push({ url: RTR_URL, as: 'script', fetchPriority: FetchPriority.HIGH, crossOrigin: 'anonymous' });
