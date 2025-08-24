@@ -8,8 +8,10 @@ import { Button } from '@/components/Button';
 import { ArrowIcon } from '@/components/Icons';
 import { Swatch } from '../swatch';
 import { ViewMore } from '../view-more';
+import { apis } from '@/libs/apis';
 
 import './index.scss';
+import { setTokenAndImage } from '@/store/UIStore';
 
 type IAccordeon = {
   menu: IMenuCA
@@ -25,9 +27,19 @@ export default function Accordion(props: IAccordeon) {
     console.log(e);
   }
 
-  const onSwatchClick = (av: IAttributeValue) => {
-    setSelectedAvId(av.id);
-    setSelectedName(av.name);
+  const onSwatchClick = async (av: IAttributeValue) => {
+    try {
+      await apis.setRecipe(
+        [{ ca: { alias }, av: { id: av.id } }]
+      );
+      const token = apis.luxAPI.getToken();
+      const img = apis.getImg();
+      setTokenAndImage(token, img);
+      setSelectedAvId(av.id);
+      setSelectedName(av.name);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const onOpenClick = (e: React.MouseEvent) => {

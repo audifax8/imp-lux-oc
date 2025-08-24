@@ -4,7 +4,7 @@ import { IConfigureAPI, IConfigureInitParams } from '@/declarations/interfaces';
 import { CDN_FLUID_BASE_URL } from '@/declarations/constants';
 
 import { setAPIReady } from '@/libs/yr-react/store/ConfigureStore';
-import { setCasToRender, setShowSkeleton } from '@/store/UIStore';
+import { setCasToRender, setShowSkeleton, setTokenAndImage } from '@/store/UIStore';
 
 const promiseCache = new Map();
 const cacheKey = 'core';
@@ -60,8 +60,12 @@ export function createCorePromise(params: IConfigureInitParams): Promise<IConfig
           }
           apis.initLuxApi(configureCore);
           setCasToRender(apis.luxAPI.mapCas());
-          setAPIReady(true);
+          const recipe = configureCore.getRecipe('human');
+          const token = apis.luxAPI.getToken();
+          const img = apis.getImg();
+          setAPIReady(true, recipe);
           setShowSkeleton(false);
+          setTokenAndImage(token, img);
           promiseCache.set(cacheKey, configureCore);
           import('../styles/base/fonts.scss');
           return resolve(configureCore);

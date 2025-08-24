@@ -52,6 +52,8 @@ export interface IConfigureAPI {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getFcParams(): any;
   destroy(): void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setRecipe(changes: any[], cb: any): any[];
 }
 export interface IConfigureInitParams {
   /**  Customer ID. */
@@ -282,7 +284,6 @@ export interface IBaseLuxAPI {
   mapCas(): ICAMap[];
   getAttributeByAlias(alias: string): IConfigurableAttribute;
   getSwatchURL(av: IAttributeValue, caName: string): string;
-  
 }
 export interface IScriptResult {
   time: string;

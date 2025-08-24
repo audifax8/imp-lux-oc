@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { useUIState } from '@/store/UIStore';
 
 import { Theme } from '@/declarations/enums';
-import { getSkeletonURL } from '@/declarations/constants';
 
 type UseTheme = [ReturnType<typeof useUIState<'theme'>>[0], (newTheme?: Theme) => void];
 
@@ -50,11 +49,7 @@ export const useIsCustomizerOpen = (): UseIsCustomizerOpen => {
 type UseConfigureImg = ReturnType<typeof useUIState<'configureImg'>>;
 
 export const useConfigureImg = (): UseConfigureImg => {
-  const [token] = useUIState('token');
   const [configureImg, setConfigureImg] = useUIState('configureImg');
-  if (token === undefined) {
-    return [getSkeletonURL(), setConfigureImg];
-  }
   return [configureImg, setConfigureImg];
 };
 

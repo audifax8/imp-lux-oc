@@ -176,6 +176,17 @@ export class OakCustomAPI extends LuxBaseAPI {
 }
 export class RbnCustomAPI extends LuxBaseAPI {
 
+  setRecipe(changes: any[]) {
+    return new Promise((resolve, reject) => {
+      return this.coreService.setRecipe(changes, (e: any, c: any) => {
+        if (e) {
+          return reject(e);
+        }
+        return resolve(c);
+      });
+    });
+  }
+  
   getAttributeByAlias(alias: string): IConfigurableAttribute {
     return this.coreService.getAttribute({ alias });
   }

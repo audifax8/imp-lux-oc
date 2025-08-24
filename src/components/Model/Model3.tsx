@@ -1,11 +1,10 @@
 import React from 'react';
 import clsx from 'clsx';
 
-import { useIsCustomizerOpen, useIsMobile } from '@/state/ui';
+import { useConfigureImg, useIsCustomizerOpen, useIsMobile } from '@/state/ui';
 
 import { IConfigureAPI } from '@/declarations/interfaces';
 
-import { apis } from '@/libs/apis';
 import { getImgData } from '@/libs/helpers';
 
 import './index.scss';
@@ -19,7 +18,7 @@ export type IModelProps = {
 
 export default React.memo(function Model({ corePromise }: IModelProps) {
   corePromise.read();
-  const img = apis?.luxAPI?.getProductImg('LUX-Ray-Ban-8taOhSR5AFyjt9tfxU');
+  const [img] = useConfigureImg();
   const imageData = getImgData();
   const [isCustomizerOpen, setIsCustomizerOpen] = useIsCustomizerOpen();
   const [isMobile] = useIsMobile();
