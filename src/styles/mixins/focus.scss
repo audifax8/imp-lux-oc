@@ -11,6 +11,6 @@ textarea,
 [tabindex] {
   &:focus,
   &:focus-visible {
-    @extend %focus-style;
+    //@extend %focus-style;
   }
 }

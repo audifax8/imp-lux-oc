@@ -1,5 +1,5 @@
-@use '../../styles/mixins/skeleton.scss' as *;
-@use '../../styles/mixins/typography.scss' as *;
+//@use '../../styles/mixins/skeleton.scss' as *;
+//@use '../../styles/mixins/typography.scss' as *;
 
 .yr-custom-header {
   position: relative;
@@ -16,10 +16,10 @@
     color: var(--text-color-primary);
     font-size: 20px;
 
-    @include text-editorial-lg;
+    //@include text-editorial-lg;
 
     &.yr-skeleton {
-      @include skeleton-text(20px);
+      //@include skeleton-text(20px);
       height: 32px;
     }
 

@@ -1,5 +1,5 @@
-@use '../base/variables.scss' as *;
-@use '../mixins' as *;
+//@use '../base/variables.scss' as *;
+//@use '../mixins' as *;
 
 %icon-only-style {
   background: inherit;
@@ -11,7 +11,7 @@
 }
 
 .yr-button {
-  @include text-editorial-xs;
+  //@include text-editorial-xs;
 
   display: flex;
   height: 32px;
@@ -25,7 +25,7 @@
   cursor: pointer;
 
   &.yr-skeleton {
-    @include skeleton-button;
+    //@include skeleton-button;
 
     span {
       visibility: hidden;
@@ -39,8 +39,8 @@
   }
 
   &-rounded {
-    background-color: $color-dark;
-    color: $color-light !important;
+    //background-color: $color-dark;
+    //color: $color-light !important;
     border-radius: 48px;
 
     &.yr-skeleton {
@@ -57,10 +57,10 @@
   }
 
   &-square {
-    @include text-editorial-sm;
+    //@include text-editorial-sm;
 
-    background-color: $color-dark;
-    color: $color-light !important;
+    //background-color: $color-dark;
+    //color: $color-light !important;
     border-radius: 0;
     padding: 9px 24px;
 

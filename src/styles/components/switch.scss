@@ -1,6 +1,6 @@
-@use '../base/variables.scss' as *;
-@use '../mixins/typography.scss' as *;
-@use '../mixins/focus.scss' as *;
+//@use '../base/variables.scss' as *;
+//@use '../mixins/typography.scss' as *;
+//@use '../mixins/focus.scss' as *;
 
 .yr-switch {
   display: flex;
@@ -10,7 +10,7 @@
   margin-left: auto;
 
   &:focus-within {
-    @extend %focus-style;
+    //@extend %focus-style;
   }
 
   &-track {
@@ -18,8 +18,8 @@
     height: 20px;
     border-radius: 999px;
     position: relative;
-    background: $color-dark;
-    border: 1px solid $color-dark-gray;
+    //background: $color-dark;
+    //border: 1px solid $color-dark-gray;
   }
 
   &-knob {
@@ -46,7 +46,7 @@
   }
 
   &-label {
-    @include text-editorial-sm;
+    //@include text-editorial-sm;
 
     text-transform: uppercase;
   }
