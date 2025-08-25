@@ -1,6 +1,3 @@
-//@use '../../styles/mixins/skeleton.scss' as *;
-//@use '../../styles/mixins/typography.scss' as *;
-
 .yr-footer {
   display: grid;
   grid-template-columns: 3fr 2fr;
@@ -34,6 +31,12 @@
       gap: 8px;
 
       &__final {
+        font-family: var(--font-family-primary);
+        font-weight: 500;
+        font-style: normal;
+        line-height: 160%;
+        color: var(--text-color-primary);
+        font-size: 24px;
         //@include text-editorial-sm;
         &.yr-skeleton {
           //@include skeleton-text(14px);
@@ -42,6 +45,12 @@
       }
 
       &__total {
+        font-family: var(--font-family-primary);
+        font-weight: 500;
+        font-style: normal;
+        line-height: 160%;
+        color: var(--text-color-secondary);
+        font-size: 20px;
         //@include text-editorial-sm;
         &.yr-skeleton {
           //@include skeleton-text(14px);
@@ -50,6 +59,12 @@
       }
 
       &__discount {
+        font-family: var(--font-family-primary);
+        font-weight: 500;
+        font-style: normal;
+        line-height: 160%;
+        color: var(--text-color-primary);
+        font-size: 12px;
         //@include text-editorial-xs;
         &.yr-skeleton {
           //@include skeleton-text(12px);

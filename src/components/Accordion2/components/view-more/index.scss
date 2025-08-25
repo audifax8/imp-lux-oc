@@ -1,4 +1,4 @@
-@use '../../../../styles/base/variables.scss' as *;
+//@use '../../../../styles/base/variables.scss' as *;
 
 .fc-view-more {
   display: flex;
@@ -30,7 +30,7 @@
       height: 40px;
       width: 40px;
       color: var(--text-color-primary);
-      font-family: $font-family-secondary;
+      font-family: var(--font-family-secondary);
       text-align: center;
       font-size: 20px;
       font-style: normal;
@@ -39,7 +39,7 @@
     }
 
     &--name {
-      font-family: $font-family-secondary;
+      font-family: var(--font-family-secondary);
       text-align: center;
       font-size: 14px;
       font-style: normal;

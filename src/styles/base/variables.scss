@@ -1,26 +1,10 @@
-$color-dark: #1f1f24;
-$color-light: #fff;
-$color-rb-red: #e80c00;
-$color-dark-gray: #666;
-$color-medium-gray: #e2e2e5;
-$font-family-primary: 'Oswald', sans-serif;
-$font-family-secondary: 'Lato', sans-serif;
-$breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px,
-  xxl: 1400px
-);
-
 .light {
-  --rbn-red: #{$color-rb-red};
-  --text-color-primary: #{$color-dark};
-  --text-color-secondary: #{$color-dark-gray};
+  --rbn-red:#e80c00;
+  --text-color-primary: #1f1f24;
+  --text-color-secondary: #666;
   --customizer-background: rgb(255 255 255 / 60%);
-  --customizer-border: 1px solid #{$color-light};
-  --divider-color: #{$color-light};
+  --customizer-border: 1px solid #fff;
+  --divider-color: #fff;
   --accordion-content-background: linear-gradient(180deg, rgb(0 0 0 / 3%) 0%, rgb(0 0 0 / 5%) 100%);
 
   // --background-mobile: url('/src/assets/png/background-mobile-light.png') no-repeat center / cover;
@@ -28,20 +12,25 @@ $breakpoints: (
   --background-color: #f6f6f6;
   --skeleton-base: #eee;
   --skeleton-highlight: #ddd;
+  --font-family-primary: 'Oswald', sans-serif;
+  --font-family-secondary: 'Lato', sans-serif;
 }
 
 .dark {
-  --rbn-red: #{$color-rb-red};
-  --text-color-primary: #{$color-light};
-  --text-color-secondary: #{$color-medium-gray};
+  --rbn-red: #e80c00;
+  --text-color-primary: #fff;
+  --text-color-secondary: #e2e2e5;
   --customizer-background: rgb(0 0 0 / 50%);
-  --customizer-border: 1px solid #{$color-dark-gray};
+  --customizer-border: 1px solid #666;
   --divider-color: rgb(255 255 255 / 20%);
   --accordion-content-background: linear-gradient(180deg, rgb(255 255 255 / 8%) 0%, rgb(255 255 255 / 13%) 100%);
 
   // --background-mobile: url('/src/assets/png/background-mobile-dark.png') no-repeat center / cover;
   // --background-desktop: url('/src/assets/png/background-mobile-dark.png') no-repeat center / cover;
-  --background-color: #{$color-dark};
+  --background-color: #1f1f24;
   --skeleton-base: #3a3a3a;
   --skeleton-highlight: #555;
+  --font-family-primary: 'Oswald', sans-serif;
+  --font-family-secondary: 'Lato', sans-serif;
 }
+

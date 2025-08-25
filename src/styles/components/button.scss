@@ -12,6 +12,12 @@
 
 .yr-button {
   //@include text-editorial-xs;
+  font-family: var(--font-family-primary);
+  //font-weight: 500;
+  font-style: normal;
+  //line-height: 160%;
+  color: var(--text-color-primary);
+  font-size: 12px;
 
   display: flex;
   height: 32px;
@@ -39,8 +45,8 @@
   }
 
   &-rounded {
-    //background-color: $color-dark;
-    //color: $color-light !important;
+    background-color: var(--text-color-primary);
+    color: var(--divider-color) !important;
     border-radius: 48px;
 
     &.yr-skeleton {
@@ -57,10 +63,18 @@
   }
 
   &-square {
+    font-family: var(--font-family-primary);
+    font-weight: 500;
+    font-style: normal;
+    line-height: 160%;
+    color: var(--text-color-primary);
+    font-size: 14px;
     //@include text-editorial-sm;
 
     //background-color: $color-dark;
     //color: $color-light !important;
+    background-color: var(--text-color-primary);
+    color: var(--divider-color) !important;
     border-radius: 0;
     padding: 9px 24px;
 
