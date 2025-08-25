@@ -28,11 +28,11 @@ export function Menu() {
               <div className={clsx('yr-customizer', { 'yr-customizer-open': isCustomizerOpen })}>
                 {MOCK_RBN_MENU_ITEMS
                   .map(
-                    ({ id, name, alias, selectedAvId, selectedAvName, icon }) =>
+                    ({ id, caName, alias, selectedAvId, selectedAvName, icon }) =>
                       <AccordionSkeleton
                         id={id}
                         key={id}
-                        alias={name || alias}
+                        alias={caName || alias}
                         icon={icon}
                         selectedAvName={selectedAvName}
                         selectedAvId={selectedAvId}
