@@ -8,7 +8,7 @@ import { startAPIs } from '@/store/APIsStore';
 import { setShowSkeleton, setTokenAndImage } from '@/store/UIStore';
 
 import { apis } from '@/libs/apis';
-import { setAPIReady } from '@/libs/yr-react/store/ConfigureStore';
+//import { setAPIReady } from '@/libs/yr-react/store/ConfigureStore';
 
 import { IConfigureAPI } from '@/declarations/interfaces';
 import { CDN_FLUID_BASE_URL, getSkeletonURL } from '@/declarations/constants';
@@ -63,7 +63,7 @@ const createCorePromise = new Promise((resolve) => {
         fetch(configureImg)
           .then(() => {
             const token = apis.luxAPI.getToken();
-            setAPIReady(true);
+            //setAPIReady(true);
             setTokenAndImage(token, configureImg);
             setShowSkeleton(false);
             startAPIs(configureCore);

@@ -41,6 +41,13 @@ export default React.memo(function Model({ corePromise }: IModelProps) {
     if (params.rtrDisabled) {
       return;
     }
+    if (rtrError) {
+      if (params.yrEnv) {
+        console.log('RTR turned off due to internal error');
+      }
+      apis.rtrAPI.dispose();
+      return;
+    }
     if (rtrAPIReady && token && rtrStarted) {
       apis.rtrAPI.setId(token);
     }
@@ -55,10 +62,10 @@ export default React.memo(function Model({ corePromise }: IModelProps) {
 
   return (img && 
     <section className='yr-model'>
-      {!params.rtrDisabled && <div id='viewer' className={clsx('yr-model__rtr', { 'yr-model__hidden': !rtrAPIReady })}></div>}
-      {params.rtrDisabled && 
+      {(!params.rtrDisabled && !rtrError) && <div id='viewer' className={clsx('yr-model__rtr', { 'yr-model__hidden': !rtrAPIReady })}></div>}
+      {(params.rtrDisabled || rtrError)&& 
       <picture
-        className={clsx('yr-model__placeholder yr-image', { 'yr-model__hidden': rtrAPIReady }, { 'yr-customizer-open': (isCustomizerOpen && isMobile) })}
+        className={clsx('yr-model__placeholder yr-image', { 'yr-customizer-open': (isCustomizerOpen && isMobile) })}
         onClick={() => {
           if (!isMobile) {
             return;

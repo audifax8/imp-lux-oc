@@ -1,3 +1,9 @@
+.yr-accordion-summary {
+  & .yr-accordion-header {
+    display: flex;
+  }
+}
+
 .yr-accordion-content {
   ul {
     margin: 0;

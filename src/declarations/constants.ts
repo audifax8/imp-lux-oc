@@ -1,5 +1,5 @@
 import { FetchPriority } from '@/declarations/enums';
-import { IConfigureInitParams, IResource } from '@/declarations/interfaces';
+import { IConfigureInitParams, IMenuCA, IResource } from '@/declarations/interfaces';
 import { getSkeletonResolution } from '@/libs/helpers';
 
 export const MEGA_WAYFARER_ID = 26101;
@@ -140,37 +140,53 @@ export const CONFIGURE_INIT_PARAM_NAMES = [
   'recipe'
 ];
 
-export const MOCK_RBN_MENU_ITEMS = [
+export const MOCK_RBN_MENU_ITEMS: IMenuCA[] = [
   {
     id: 0,
-    alias: 'frame_sku',
-    name: 'frame_sku',
-    icon: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/frame.webp',
+    alias: 'lenses_sku',
+    caName: 'lenses',
+    icon: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/lens.webp',
     selectedAvId: null,
-    selectedAvName: 'frame_sku'
+    selectedAvName: 'lenses_sku',
+    avs: [],
+    open: false,
+    avsLenght: 0,
+    currentPage: 0
   },
   {
     id: 1,
-    alias: 'temple_tips_sku',
-    name: 'temple_tips_sku',
-    icon: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/lens.webp',
+    alias: 'frame_sku',
+    caName: 'frame',
+    icon: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/frame.webp',
     selectedAvId: null,
-    selectedAvName: 'lenses_sku'
-  },    
+    selectedAvName: 'frame_sku',
+    avs: [],
+    open: false,
+    avsLenght: 0,
+    currentPage: 0
+  }, 
   {
     id: 2,
     alias: 'temple_tips_sku',
-    name: 'temple_tips_sku',
+    caName: 'temple',
     icon: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/temple.webp',
     selectedAvId: null,
-    selectedAvName: 'temple_tips_sku'
+    selectedAvName: 'temple_tips_sku',
+    avs: [],
+    open: false,
+    avsLenght: 0,
+    currentPage: 0
   },
   {
     id: 3,
     alias: 'temple_sku',
-    name: 'temple_sku',
+    caName: 'temple',
     icon: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/temple.webp',
     selectedAvId: null,
-    selectedAvName: 'temple'
+    selectedAvName: 'temple',
+    avs: [],
+    open: false,
+    avsLenght: 0,
+    currentPage: 0
   }
 ];

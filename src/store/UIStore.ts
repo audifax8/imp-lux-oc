@@ -3,6 +3,7 @@ import { devtools, subscribeWithSelector } from 'zustand/middleware';
 
 import { Theme } from '@/declarations/enums';
 import { IConfigureInitParams, IMenuCA } from '@/declarations/interfaces';
+import { MOCK_RBN_MENU_ITEMS } from '@/declarations/constants';
 
 import { apis } from '@/libs/apis';
 import { createStoreStateHook } from '@/libs/yr-react/store/zustand-helpers';
@@ -30,7 +31,7 @@ const INITIAL_STATE = {
   token: undefined!,
   configureImg: undefined!,
   params,
-  cas: []
+  cas: MOCK_RBN_MENU_ITEMS
 }
 
 export function startUIStore() {

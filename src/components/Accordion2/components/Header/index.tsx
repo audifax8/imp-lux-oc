@@ -18,7 +18,7 @@ type IAccordeon = {
 };
 
 export default function Accordion(props: IAccordeon) {
-  const { alias, icon, avs, currentPage, avsLenght } = props.menu;
+  const { alias, icon, avs, currentPage, avsLenght, caName } = props.menu;
   const [selectedAvId, setSelectedAvId] = useState(props.menu.selectedAvId);
   const [selectedAvName, setSelectedName] = useState(props.menu.selectedAvName);
   const [isOpen, setIsOpen] = useState(false);
@@ -56,7 +56,7 @@ export default function Accordion(props: IAccordeon) {
       <summary className='yr-accordion-summary'>
         <Image src={icon} alt={alias} className='yr-accordion-summary-image' />
         <div className='yr-accordion-header'>
-          <h3 className={'yr-accordion-header-title'}>{alias}</h3>
+          <h3 className={'yr-accordion-header-title'}>{caName}</h3>
           <p className={'yr-accordion-header-selected'}>{selectedAvName}</p>
         </div>
         <Button
