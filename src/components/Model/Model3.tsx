@@ -3,8 +3,14 @@ import clsx from 'clsx';
 
 import { apis } from '@/libs/apis';
 
-import { useConfigureImg, useIsCustomizerOpen, useIsMobile, useToken } from '@/state/ui';
-import { useRTRAPIReady, useRTRDisabled, useRTRError } from '@/state/rtr';
+import {
+  useConfigureImg,
+  useIsCustomizerOpen,
+  useIsMobile,
+  useParams,
+  useToken
+} from '@/state/ui';
+import { useRTRAPIReady, useRTRError } from '@/state/rtr';
 
 import { IConfigureAPI } from '@/declarations/interfaces';
 
@@ -27,28 +33,32 @@ export default React.memo(function Model({ corePromise }: IModelProps) {
   const [token] = useToken();
   const [isCustomizerOpen, setIsCustomizerOpen] = useIsCustomizerOpen();
   const [isMobile] = useIsMobile();
-  const [rtrDisabled] = useRTRDisabled();
+  const [params] = useParams();
   const [rtrError] = useRTRError();
   const [rtrAPIReady] = useRTRAPIReady();
 
   useEffect(() => {
-    if (rtrDisabled) {
+    if (params.rtrDisabled) {
       return;
     }
     if (rtrAPIReady && token && rtrStarted) {
       apis.rtrAPI.setId(token);
     }
     if (rtrAPIReady && token && !rtrStarted) {
-      apis.rtrAPI?.init(token);
-      setRTRStarted(true);
+      //TODO
+      setTimeout(() => {
+        apis.rtrAPI?.init(token);
+        setRTRStarted(true);
+      }, 50);
     }
-  }, [rtrDisabled, rtrAPIReady, token, rtrError, rtrStarted]);
+  }, [params.rtrDisabled, rtrAPIReady, token, rtrError, rtrStarted]);
 
   return (img && 
     <section className='yr-model'>
-      <div id='viewer' className={clsx('yr-model__rtr', { 'yr-model__hidden': !rtrAPIReady })}></div>
+      {!params.rtrDisabled && <div id='viewer' className={clsx('yr-model__rtr', { 'yr-model__hidden': !rtrAPIReady })}></div>}
+      {params.rtrDisabled && 
       <picture
-        className={clsx('yr-model__placeholder', 'yr-image', { 'yr-model__hidden': rtrAPIReady }, { 'yr-customizer-open': (isCustomizerOpen && isMobile) })}
+        className={clsx('yr-model__placeholder yr-image', { 'yr-model__hidden': rtrAPIReady }, { 'yr-customizer-open': (isCustomizerOpen && isMobile) })}
         onClick={() => {
           if (!isMobile) {
             return;
@@ -62,7 +72,7 @@ export default React.memo(function Model({ corePromise }: IModelProps) {
             height={imageData.dimentions.height}
             width={imageData.dimentions.width}
           />
-      </picture>
+      </picture>}
     </section>
   );
 });
