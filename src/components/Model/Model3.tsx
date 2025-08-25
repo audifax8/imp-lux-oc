@@ -52,11 +52,13 @@ export default React.memo(function Model({ corePromise }: IModelProps) {
       apis.rtrAPI.setId(token);
     }
     if (rtrAPIReady && token && !rtrStarted) {
+      apis.rtrAPI?.init(token);
+      setRTRStarted(true);
       //TODO
-      setTimeout(() => {
+      /*setTimeout(() => {
         apis.rtrAPI?.init(token);
         setRTRStarted(true);
-      }, 50);
+      }, 50);*/
     }
   }, [params.rtrDisabled, rtrAPIReady, token, rtrError, rtrStarted]);
 

@@ -5,6 +5,7 @@ import { CDN_FLUID_BASE_URL } from '@/declarations/constants';
 
 import { setAPIReady } from '@/libs/yr-react/store/ConfigureStore';
 import { setCasToRender, setShowSkeleton, setTokenAndImage } from '@/store/UIStore';
+import { startAPIs } from '@/store/APIsStore';
 
 const promiseCache = new Map();
 const cacheKey = 'core';
@@ -66,6 +67,7 @@ export function createCorePromise(params: IConfigureInitParams): Promise<IConfig
           setAPIReady(true, recipe);
           setShowSkeleton(false);
           setTokenAndImage(token, img);
+          startAPIs(configureCore);
           promiseCache.set(cacheKey, configureCore);
           import('../styles/base/fonts.scss');
           return resolve(configureCore);
