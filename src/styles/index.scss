@@ -3,6 +3,34 @@
 @use 'components2';
 //@use 'mixins';
 
+/* init Skeleton */
+.yr-skeleton {
+  animation: skeleton-loader 1s linear infinite alternate;
+  color: transparent;
+}
+
+.yr-skeleton-text {
+  width: 7em;
+  height: .5em;
+  border-radius: .2rem;
+}
+
+.yr-skeleton-button {
+  width: auto;
+  height: auto;
+}
+
+@keyframes skeleton-loader {
+  0% {
+    background-color: hsl(195, 2%, 63%);
+  }
+
+  100% {
+    background-color: hsl(200, 20%, 95%);
+  }
+}
+/* end Skeleton */
+
 * {
   box-sizing: border-box;
 }

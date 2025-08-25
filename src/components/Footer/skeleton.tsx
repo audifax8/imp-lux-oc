@@ -44,7 +44,7 @@ export default function FooterSkeleton() {
           <div className='yr-footer--price__total yr-skeleton'>
             <label>$200.00</label>
           </div>
-          <div className='yr-footer--price__discount yr-button yr-skeleton'>
+          <div className='yr-footer--price__discount yr-skeleton'>
             <label>-20%</label>
           </div>
         </div>
