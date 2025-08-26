@@ -1,4 +1,4 @@
-import { preconnect } from 'react-dom';
+import { preconnect, PreconnectOptions } from 'react-dom';
 
 import { apis } from '@/libs/apis';
 
@@ -10,6 +10,9 @@ export const usePreconnectStaticAssets = () => {
     if (params.yrEnv) {
       console.info('preconnecting resource: ' + url);
     }
-    preconnect(url);
+    const options: PreconnectOptions = {
+      crossOrigin: 'anonymous',
+    };
+    preconnect(url, options);
   });
 };
