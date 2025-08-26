@@ -11,7 +11,7 @@ import { ViewMore } from '../view-more';
 import { apis } from '@/libs/apis';
 
 import './index.scss';
-import { setTokenAndImage } from '@/store/UIStore';
+import { reloadPagination, setTokenAndImage } from '@/store/UIStore';
 
 type IAccordeon = {
   menu: IMenuCA
@@ -23,8 +23,9 @@ export default function Accordion(props: IAccordeon) {
   const [selectedAvName, setSelectedName] = useState(props.menu.selectedAvName);
   const [isOpen, setIsOpen] = useState(false);
 
-  const onViewMoreClick = (e: React.MouseEvent) => {
-    console.log(e);
+  const onViewMoreClick = () => {
+    const newData = apis.luxAPI.reloadPagination(props.menu);
+    return reloadPagination(newData);
   }
 
   const onSwatchClick = async (av: IAttributeValue) => {

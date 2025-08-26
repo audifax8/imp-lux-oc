@@ -59,8 +59,15 @@ export const useUIStore = create(
   subscribeWithSelector(devtools<IUIState>(() => ({ ...INITIAL_STATE }), { name: 'UI Store' }))
 );
 
-export function createDynamicStore(storeName: string) {
-  console.log(storeName);
+export function reloadPagination(menuCa: IMenuCA) {
+  const currentCas = useUIStore.getState().cas;
+  const newCas = currentCas.map((menu) => {
+    if (menu.alias === menuCa.alias) {
+      return menuCa;
+    }
+    return menu;
+  });
+  useUIStore.setState({ cas: newCas }, false, 'Update pagination menu: ' + menuCa.alias);
 }
 
 export const useUIState = createStoreStateHook<IUIState>(useUIStore);

@@ -281,7 +281,8 @@ export interface IBaseLuxAPI {
   getProductVendorId(product: IProduct): string;
   getVendorIDSize(params: IConfigureInitParams): string;
   getAssetsURL(params: IConfigureInitParams): string;
-  mapCas(): ICAMap[];
+  mapCas(): IMenuCA[];
+  reloadPagination(menu: IMenuCA): IMenuCA;
   getAttributeByAlias(alias: string): IConfigurableAttribute;
   getSwatchURL(av: IAttributeValue, caName: string): string;
 }

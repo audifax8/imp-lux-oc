@@ -8,7 +8,7 @@ export abstract class LuxBaseAPI implements IBaseLuxAPI {
 
   constructor() {}
 
-
+  abstract reloadPagination(menu: IMenuCA): IMenuCA;
   abstract getSwatchURL(av: IAttributeValue, caName: string): string;
   abstract getToken(): string;
   abstract mapCas(): IMenuCA[];
@@ -96,6 +96,11 @@ export class OakCustomAPI extends LuxBaseAPI {
     super();
   }
 
+  reloadPagination(menu: IMenuCA): IMenuCA {
+    console.log(menu);
+    throw new Error('Method not implemented.');
+  }
+
   getSwatchURL(av: IAttributeValue, caName: string): string {
     console.log(av, caName);
     return '';
@@ -175,6 +180,37 @@ export class OakCustomAPI extends LuxBaseAPI {
   }
 }
 export class RbnCustomAPI extends LuxBaseAPI {
+
+  reloadPagination(menu: IMenuCA): IMenuCA {
+    const ITEMS_BY_PAGE = 5;
+    try {
+      const { alias } = menu;
+      const configurableAttibute = this.getAttributeByAlias(alias);
+      if (!configurableAttibute) {
+        return menu;
+      }
+      
+      const av = this.getSelectedAV(alias);
+
+      const { avs, currentPage, avsLenght} =
+            this.getPaginatedAVsToRenderByCA(alias, (ITEMS_BY_PAGE + menu.currentPage));
+      return {
+        caName: configurableAttibute.name,
+        alias: configurableAttibute.alias,
+        id: configurableAttibute.id,
+        avs,
+        selectedAvId: av.id,
+        selectedAvName: av.name,
+        avsLenght,
+        open: false,
+        currentPage,
+        skeleton: false,
+        icon: menu.icon
+      };
+    } catch (e) {
+      return menu;
+    }
+  }
 
   setRecipe(changes: any[]) {
     return new Promise((resolve, reject) => {
