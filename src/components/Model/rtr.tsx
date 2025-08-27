@@ -49,8 +49,8 @@ export default React.memo(function RTR({ corePromise }: IModelProps) {
   }, [params.rtrDisabled, rtrAPIReady, token, rtrError, rtrStarted]);
 
   return ( 
-    <section className='yr-model'>
+    <div className='yr-model'>
       <div id='viewer' className={clsx('yr-model__rtr')}></div>
-    </section>
+    </div>
   );
 });

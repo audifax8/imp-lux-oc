@@ -7,9 +7,16 @@
   box-sizing: border-box;
 }
 
+html,
 body {
+  height: 100%;
+  margin: 0;
   margin: unset;
   line-height: 1;
+}
+
+#root {
+  height: 100%;
 }
 
 h1,
@@ -64,3 +71,37 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+.yr-implementation-root {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+/*header {
+  flex: 0 1 auto;
+  /* The above is shorthand for:
+  flex-grow: 0,
+  flex-shrink: 1,
+  flex-basis: auto
+  */
+  /*background: brown;
+}
+
+.yr-main-content,
+.content {
+  flex: 1 1 auto;
+  display: flex;
+  overflow: hidden;
+}
+
+aside {
+  width: 200px;
+  background: yellow;
+}
+
+main {
+  background: green;
+  flex: 1;
+  overflow: scroll;
+}*/

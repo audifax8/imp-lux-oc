@@ -28,7 +28,7 @@ export default React.memo(function Model({ corePromise }: IModelProps) {
   const [isMobile] = useIsMobile();
 
   return (img && 
-    <section className='yr-model'>
+    <div className='yr-model'>
       {<picture
         className={clsx('yr-model__placeholder yr-image', { 'yr-customizer-open': (isCustomizerOpen && isMobile) })}
         onClick={() => {
@@ -45,6 +45,6 @@ export default React.memo(function Model({ corePromise }: IModelProps) {
             width={imageData.dimentions.width}
           />
       </picture>}
-    </section>
+    </div>
   );
 });

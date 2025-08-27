@@ -1,17 +1,71 @@
-.yr-main-content {
-  display: grid;
-  grid-template-rows: 1fr min-content;
-  grid-template-columns: repeat(5, 1fr);
-  margin: 24px 0;
-  gap: 0;
+.yr-app-layout {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-color);
   height: 100%;
-  flex-grow: 1;
 
-  @media only screen and (max-width: 600px) {
-    grid-template-columns: 1fr;
+  & .yr-main-content{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 16px;
+    background-color: var(--background-color);
+    height: 100%;
+
+    header {
+      flex: 0 1 auto;
+      /* The above is shorthand for:
+      flex-grow: 0,
+      flex-shrink: 1,
+      flex-basis: auto
+      */
+      //background: brown;
+    }
+
+    aside {
+      width: 200px;
+      background: yellow;
+    }
+
+    //.yr-main-content,
+    .content {
+      flex: 1 1 auto;
+      display: flex;
+      overflow: hidden;
+    }
+
+    & .yr-model {
+      width: 60%;
+      //background: yellow;
+    }
+
+    & .yr-menu {
+      width: 40%;
+      //background: green;
+      flex: 1;
+      overflow: scroll;
+    }
+
+    & main {
+      background: green;
+      flex: 1;
+      overflow: scroll;
+    }
+
+    & footer {
+      flex: 0 1 40px;
+      background: lightblue;
+    }
+
+    & .yr-footer {
+      padding: 16px;
+      flex: 0 1 40px;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+  }
+
+  & .yr-main-content {
+    @media only screen and (max-width: 600px) {
+    }
   }
 }

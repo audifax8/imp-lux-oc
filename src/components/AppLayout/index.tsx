@@ -10,25 +10,42 @@ import { RBNHeader } from '@/components/RBNHeader';
 
 import './index.scss';
 
-export function AppLayout() {
-  const [isMobile] = useIsMobile();
-  const [theme] = useTheme();
-  const [params] = useParams();
-
-  return (
-    <main
-      className={clsx(
-        'yr-app-layout',
-        theme
-      )}>
-        {params?.showHeader && <RBNHeader />}
+/**
+{params?.showHeader && <RBNHeader />}
         {isMobile && <Header />}
         <div className='yr-main-content'>
           <Model />
           <Menu />
         </div>
         <Footer />
+*/
+
+export function AppLayout() {
+  const [isMobile] = useIsMobile();
+  const [theme] = useTheme();
+  const [params] = useParams();
+
+  return (
+    <div
+      className={clsx(
+        'yr-app-layout',
+        theme
+      )}>
+        <div className='yr-main-content'>
+          {params?.showHeader && <RBNHeader />}
+          {isMobile && <Header />}
+          <div className="content">
+            <Model />
+            <Menu />
+          </div>
+          <Footer />
+        </div>
         <div id='rxcApp' className='rxcApp'></div>
-    </main>
+    </div>
   );
 }
+
+/*
+
+      
+  */

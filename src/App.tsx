@@ -2,6 +2,8 @@ import { startUIStore } from '@/store/UIStore';
 
 import { startConfigureStore } from '@/libs/yr-react/store/ConfigureStore';
 
+import './styles/index.scss';
+
 import { Wrapper } from '@/components/wrapper';
 
 function App() {
@@ -9,7 +11,7 @@ function App() {
   startUIStore();
 
   return (
-    <Wrapper />
+    <Wrapper />    
   )
 }
 

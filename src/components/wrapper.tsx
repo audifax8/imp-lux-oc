@@ -19,9 +19,7 @@ export function Wrapper() {
   useDownloadRTRScript();
   return (
     <main className={clsx('yr-implementation-root')}>
-      <section>
-        <AppLayout />
-      </section>
+      <AppLayout />
     </main>
   );
 }
