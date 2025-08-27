@@ -2,6 +2,10 @@
   & .yr-accordion-header {
     display: flex;
   }
+
+  & .yr-accordion-arrow {
+    fill: var(--text-color-primary);
+  }
 }
 
 .yr-accordion-content {

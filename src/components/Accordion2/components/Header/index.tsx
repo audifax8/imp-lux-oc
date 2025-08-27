@@ -61,7 +61,7 @@ export default function Accordion(props: IAccordeon) {
           <p className={'yr-accordion-header-selected'}>{selectedAvName}</p>
         </div>
         <Button
-          icon={<ArrowIcon size={16} direction={isOpen ? 'up' : 'down'} />}
+          icon={<ArrowIcon size={16} direction={isOpen ? 'up' : 'down'} className='yr-accordion-arrow'/>}
           tabIndex={-1}
           onClick={onOpenClick}
         />

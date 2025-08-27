@@ -10,16 +10,6 @@ import { RBNHeader } from '@/components/RBNHeader';
 
 import './index.scss';
 
-/**
-{params?.showHeader && <RBNHeader />}
-        {isMobile && <Header />}
-        <div className='yr-main-content'>
-          <Model />
-          <Menu />
-        </div>
-        <Footer />
-*/
-
 export function AppLayout() {
   const [isMobile] = useIsMobile();
   const [theme] = useTheme();
@@ -45,8 +35,3 @@ export function AppLayout() {
     </div>
   );
 }
-
-/*
-
-      
-  */
