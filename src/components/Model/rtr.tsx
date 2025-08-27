@@ -4,6 +4,8 @@ import clsx from 'clsx';
 import { apis } from '@/libs/apis';
 
 import {
+  useIsCustomizerOpen,
+  useIsMobile,
   useParams,
   useToken
 } from '@/state/ui';
@@ -27,6 +29,8 @@ export default React.memo(function RTR({ corePromise }: IModelProps) {
   const [params] = useParams();
   const [rtrError] = useRTRError();
   const [rtrAPIReady] = useRTRAPIReady();
+  const [isCustomizerOpen] = useIsCustomizerOpen();
+  const [isMobile] = useIsMobile();
 
   useEffect(() => {
     if (params.rtrDisabled) {
@@ -49,7 +53,7 @@ export default React.memo(function RTR({ corePromise }: IModelProps) {
   }, [params.rtrDisabled, rtrAPIReady, token, rtrError, rtrStarted]);
 
   return ( 
-    <div className='yr-model'>
+    <div className={clsx('yr-model', { 'yr-customizer-open': (isCustomizerOpen && isMobile) })}>
       <div id='viewer' className={clsx('yr-model__rtr')}></div>
     </div>
   );

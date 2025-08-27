@@ -28,7 +28,7 @@ export default React.memo(function Model({ corePromise }: IModelProps) {
   const [isMobile] = useIsMobile();
 
   return (img && 
-    <div className='yr-model'>
+    <div className={clsx('yr-model', { 'yr-customizer-open': (isCustomizerOpen && isMobile) })}>
       {<picture
         className={clsx('yr-model__placeholder yr-image', { 'yr-customizer-open': (isCustomizerOpen && isMobile) })}
         onClick={() => {

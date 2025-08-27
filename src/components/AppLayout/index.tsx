@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import { useIsMobile, useParams, useTheme } from '@/state/ui';
+import { useIsCustomizerOpen, useIsMobile, useParams, useTheme } from '@/state/ui';
 
 import Model from '@/components/Model';
 import { Menu } from '@/components/Menu';
@@ -24,6 +24,7 @@ export function AppLayout() {
   const [isMobile] = useIsMobile();
   const [theme] = useTheme();
   const [params] = useParams();
+  const [isCustomizerOpen] = useIsCustomizerOpen();
 
   return (
     <div
@@ -31,10 +32,10 @@ export function AppLayout() {
         'yr-app-layout',
         theme
       )}>
-        <div className='yr-main-content'>
+        <div className='yr-content'>
           {params?.showHeader && <RBNHeader />}
           {isMobile && <Header />}
-          <div className="content">
+          <div className={clsx('yr-main', { 'yr-customizer-open': (isCustomizerOpen && isMobile) })}>
             <Model />
             <Menu />
           </div>

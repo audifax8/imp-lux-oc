@@ -4,55 +4,59 @@
   background-color: var(--background-color);
   height: 100%;
 
-  & .yr-main-content{
+  & .yr-content{
     display: flex;
     flex-direction: column;
     background-color: var(--background-color);
     height: 100%;
 
-    header {
-      flex: 0 1 auto;
-      /* The above is shorthand for:
-      flex-grow: 0,
-      flex-shrink: 1,
-      flex-basis: auto
-      */
-      //background: brown;
+    & .yr-header {
+      padding: 16px;
+      flex: 0 1 40px;
     }
 
-    aside {
-      width: 200px;
-      background: yellow;
-    }
-
-    //.yr-main-content,
-    .content {
+    & .yr-main {
       flex: 1 1 auto;
       display: flex;
       overflow: hidden;
+
+      @media only screen and (max-width: 600px) {
+        &.yr-customizer-open {
+          display: inline-block;
+          overflow: scroll;
+        }
+      }
     }
 
     & .yr-model {
       width: 60%;
-      //background: yellow;
+
+      @media only screen and (max-width: 600px) {
+        width: 100%;
+
+        &.yr-customizer-open {
+          height: 40%;
+          position: sticky;
+          top: 0;
+          z-index: 100;
+          background-color: var(--background-color);
+        }
+      }
     }
 
     & .yr-menu {
       width: 40%;
-      //background: green;
       flex: 1;
       overflow: scroll;
-    }
 
-    & main {
-      background: green;
-      flex: 1;
-      overflow: scroll;
-    }
+      @media only screen and (max-width: 600px) {
+        display: none;
 
-    & footer {
-      flex: 0 1 40px;
-      background: lightblue;
+        &.yr-customizer-open {
+          display: unset;
+          width: 100%;
+        }
+      }
     }
 
     & .yr-footer {

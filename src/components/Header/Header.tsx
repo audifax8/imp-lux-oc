@@ -1,5 +1,5 @@
 
-import { useIsCustomizerOpen, useIsMobile } from '@/state/ui';
+import { useIsCustomizerOpen, useIsMobile, useParams, useShowSkeleton } from '@/state/ui';
 
 import { useGetProduct } from '@/libs/yr-react/hooks/configure';
 import { useClsxWithSkeleton } from '@/hooks/useClsxWithSkeleton';
@@ -16,6 +16,9 @@ export function Header() {
   const [isCustomizerOpen, toggleCustomizer] = useIsCustomizerOpen();
   const product = useGetProduct();
   const clsxWithSkeleton = useClsxWithSkeleton();
+  const [showSkeleton] = useShowSkeleton();
+  const [params] = useParams();
+
   const name = product?.name ?? 'TEST NAME';
 
   return (
@@ -29,6 +32,13 @@ export function Header() {
         <div className='yr-buttons-section'>
           <VMButton />
           <RXCButton />
+          {!params.rtrDisabled &&
+            <Button
+              variant="rounded"
+              onClick={() => toggleCustomizer(true)}
+              showSkeleton={showSkeleton}
+            >Open menu </Button>
+          }
         </div>
       }
       {isMobile && isCustomizerOpen &&
