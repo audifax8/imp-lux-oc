@@ -38,12 +38,14 @@ export default function Accordion(props: IAccordeon) {
       setTokenAndImage(token, img);
       setSelectedAvId(av.id);
       setSelectedName(av.name);
+      apis.assetsWorker.preloadAssets(alias);
     } catch (e) {
       console.log(e);
     }
   };
 
   const onOpenClick = (e: React.MouseEvent) => {
+    apis.assetsWorker.preloadAssets(alias);
     e.preventDefault();
     setIsOpen(!isOpen);
   };

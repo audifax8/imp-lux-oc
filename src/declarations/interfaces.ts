@@ -139,8 +139,8 @@ export interface IFacetValue {
 
 export interface IRTRAssetsAPI {
   prefetchListStartup?: string[];
-  prefetchListConfigurableAttributes?: Record<string, string[]>;
-  prefetchListHierarchy?: Record<string, string[]>;
+  prefetchListConfigurableAttributes?: { [key: string]: string[] };
+  prefetchListHierarchy?: { [key: string]: string[] };
 }
 
 export interface IResource {
