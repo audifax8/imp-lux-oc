@@ -7,19 +7,15 @@ import { setAPIReady } from '@/libs/yr-react/store/ConfigureStore';
 import { setCasToRender, setShowSkeleton, setTokenAndImage } from '@/store/UIStore';
 import { startAPIs } from '@/store/APIsStore';
 
-const promiseCache = new Map();
-const cacheKey = 'core';
-//TODO fix
-let promiseSent = false;
-
-export function createCorePromise(params: IConfigureInitParams): Promise<IConfigureAPI | null> {
-  if (promiseSent) {
-    return new Promise<IConfigureAPI | null>((resolve) => resolve(null));
+export function createCorePromise(
+  params: IConfigureInitParams
+): Promise<IConfigureAPI | null> {
+  if (apis.configureCore) {
+    return new Promise<IConfigureAPI | null>((resolve) => resolve(apis.configureCore));
   }
   return new Promise((resolve) => {
-    promiseSent = true;
-    if (promiseCache.has(cacheKey)) {
-      return resolve(promiseCache.get(cacheKey));
+    if (apis.configureCore) {
+      return resolve(apis.configureCore);
     }
     const { workflow, customer, product, locale, yrEnv } = params;
     const graph = `${CDN_FLUID_BASE_URL}/static/configs/3.13.0/prod/${workflow}/${customer}/product/${product}/graph-settings-${locale}.json`
@@ -35,7 +31,6 @@ export function createCorePromise(params: IConfigureInitParams): Promise<IConfig
         if (yrEnv) {
           console.log('Error loading graph or settings JSONs');
         }
-        promiseCache.set(cacheKey, null);
         return resolve(null);
       }
       const productGraph = await graphResponse.json();
@@ -56,7 +51,6 @@ export function createCorePromise(params: IConfigureInitParams): Promise<IConfig
               console.log('Error');
               console.log(error);
             }
-            promiseCache.set(cacheKey, null);
             return resolve(null);
           }
           apis.initLuxApi(configureCore);
@@ -64,17 +58,33 @@ export function createCorePromise(params: IConfigureInitParams): Promise<IConfig
           const recipe = configureCore.getRecipe('human');
           const token = apis.luxAPI.getToken();
           const img = apis.getImg();
+          /*fetch(img)
+            .then(async (r) => {
+              console.log(r);
+              const t = await r.bytes();
+              console.log(t);
+              setAPIReady(true, recipe);
+              setShowSkeleton(false);
+              setTokenAndImage(token, img);
+              startAPIs(configureCore);
+              //promiseCache.set(cacheKey, configureCore);
+              import('../styles/base/fonts.scss');
+              return resolve(configureCore);
+            })
+            .catch((e) => {
+              if (params.yrEnv) {
+                console.log({e});
+              }
+            });*/
           setAPIReady(true, recipe);
           setShowSkeleton(false);
           setTokenAndImage(token, img);
           startAPIs(configureCore);
-          promiseCache.set(cacheKey, configureCore);
           import('../styles/base/fonts.scss');
           return resolve(configureCore);
         }
       );
     }).catch(() => {
-      promiseCache.set(cacheKey, null);
       return resolve(null);
     });
   });

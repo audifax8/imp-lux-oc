@@ -8,15 +8,21 @@ type ScriptType = {
 };
 
 export function rtrLoadedPromise(params: IConfigureInitParams): Promise<boolean | null> {
-  const { yrEnv } = params;
+  const { yrEnv, rtrDisabled } = params;
   return new Promise((resolve) => {
+    if (rtrDisabled) {
+      if (yrEnv) {
+        console.log('RTR disabled by URL param');
+      }
+      return resolve(false);
+    }
     waitForScriptToLoad(100, 20000, 'rtrViewerMV')
       .then((e: ScriptType) => {
         if (!e.status) {
           if (yrEnv) {
             console.log('RTR error');
           }
-          return;
+          return resolve(false);
         }
         startRTR();
         return resolve(true);

@@ -83,8 +83,8 @@ const resolutions: Record<ResolutionType, IImageData> = {
     scale: 0.6,
     quality: 91,
     dimentions: {
-      width: 1100,
-      height: 550
+      width: 550,
+      height: 300
     }
   }
 };

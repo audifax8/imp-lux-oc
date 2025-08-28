@@ -1,0 +1,59 @@
+@use '../../styles/mixins' as *;
+
+%icon-only-style {
+  background: inherit;
+  color: inherit;
+  width: fit-content;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+}
+
+.yr-button {
+  display: flex;
+  height: 32px;
+  width: fit-content;
+  padding: 0 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  border: unset;
+  cursor: pointer;
+
+  &.yr-button-icon-only {
+    @extend %icon-only-style;
+  }
+
+  &.yr-skeleton {
+    @include skeleton-button;
+    min-width: 110px;
+
+    span {
+      display: none;
+    }
+  }
+
+  &-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-rounded {
+    border-radius: 48px;
+
+    &.yr-skeleton {
+      border-radius: 48px;
+    }
+
+    &.yr-button-icon-only {
+      padding: 5px;
+    }
+  }
+
+  &-square {
+    border-radius: 0;
+    padding: 9px 24px;
+  }
+}
