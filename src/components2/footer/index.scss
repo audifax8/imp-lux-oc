@@ -5,6 +5,11 @@
     display: flex;
     justify-content: center;
     gap: 10px;
+
+    & .yr-button {
+      background-color: var(--text-color-primary);
+      color: var(--divider-color);
+    }
   }
 
   & .yr-footer-price-info {
@@ -44,6 +49,7 @@
     & .yr-footer--cart {
       & .yr-add-to-cart-button {
         background-color: var(--rbn-red);
+        color: var(--divider-color);
       }
     }
   }

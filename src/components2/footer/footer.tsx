@@ -6,7 +6,7 @@ import { IConfigureAPI } from '@/declarations/interfaces';
 
 import { RXCButton } from '@/components2/RXC/RXCButton';
 import { VMButton } from '@/components2/VM/VMButton';
-import { Button } from '@/components/Button';
+import { Button } from '@/components2/button';
 
 import './index.scss';
 

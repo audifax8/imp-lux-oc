@@ -6,7 +6,7 @@ import { useIsCustomizerOpen, useIsMobile } from '@/state/ui';
 import MenuSkeleton from './skeleton';
 import { coreResource, waitForCoreReady } from '@/libs/core';
 
-import { Header } from '@/components2/Header/Header';
+import { Header } from '@/components2/header';
 
 const Accordion = lazy(() => import('./accordion'));
 

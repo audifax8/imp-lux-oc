@@ -6,7 +6,7 @@ import { useIsCustomizerOpen, useIsMobile } from '@/state/ui';
 import { MOCK_RBN_MENU_ITEMS } from '@/declarations/constants';
 
 import { AccordionSkeleton } from '@/components/Accordion/Skeleton';
-import { Header } from '@/components2/Header/Header';
+import { Header } from '@/components2/header';
 
 import { apis } from '@/libs/apis';
 import { coreResource, createCorePromise } from '@/libs/core';

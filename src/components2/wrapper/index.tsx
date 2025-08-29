@@ -4,9 +4,9 @@ import { usePreconnectStaticAssets } from '@/hooks/usePreconnectStaticAssets';
 import { usePreloadStaticAssets } from '@/hooks/usePreloadStaticAssets';
 import { useDownloadRTRScript } from '@/hooks/rtrScript';
 
-import { AppLayout } from '@/components/AppLayout';
+import { AppLayout } from '@/components2/layout';
 
-import '../styles/index.scss';
+import '../../styles/index.scss';
 
 /**
  * Implementation content.
