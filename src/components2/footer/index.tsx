@@ -1,14 +1,12 @@
 import { lazy, Suspense } from 'react';
 
-import { coreResource, createCorePromise } from '@/libs/core';
-
 import FooterSkeleton from './skeleton';
-import { apis } from '@/libs/apis';
+import { coreResource, waitForCoreReady } from '@/libs/core';
 
-const Foot = lazy(() => import('./Footer'));
+const Foot = lazy(() => import('./footer'));
 
 export default function Footer() {
-  const corePromise = coreResource(createCorePromise(apis.getParams()));
+  const corePromise = coreResource(waitForCoreReady());
   return(
     <Suspense fallback={<FooterSkeleton />}>
       <Foot corePromise={corePromise} />

@@ -10,9 +10,11 @@ import { Button } from '@/components2/button';
 
 import './index.scss';
 
-type ISuspender = {
+
+export type ISuspender = {
   read(): IConfigureAPI | null;
 };
+
 export type IFooterProps = {
   corePromise: ISuspender; 
 };
