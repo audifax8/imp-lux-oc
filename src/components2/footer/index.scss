@@ -1,4 +1,5 @@
 @use '../../styles/mixins' as *;
+@use '../../styles/base/variables.scss';
 
 .yr-footer {
   & .yr-buttons-section {
@@ -7,8 +8,8 @@
     gap: 10px;
 
     & .yr-button {
-      background-color: var(--text-color-primary);
-      color: var(--divider-color);
+      background-color: var(--customizer-background);
+      color: var(--text-color-primary);
     }
   }
 
@@ -49,7 +50,7 @@
     & .yr-footer--cart {
       & .yr-add-to-cart-button {
         background-color: var(--rbn-red);
-        color: var(--divider-color);
+        color: var(--text-color-primary);
       }
     }
   }
