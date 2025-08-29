@@ -9,17 +9,17 @@ import { IConfigureAPI, IRTRBaseAPI, IVMBaseAPI } from '@/declarations/interface
 import { VMAPI } from '@/libs/apis/vm-api';
 
 export interface IAPIsState {
-  rtrRendered?: boolean;
   rtrApiReady: boolean;
   rtrError: string;
   rtrDisabled: boolean;
+  tokenValid: boolean;
 }
 
 const INITIAL_STATE: IAPIsState = {
-  rtrRendered: false,
   rtrApiReady: false,
   rtrError: undefined!,
-  rtrDisabled: false
+  rtrDisabled: false,
+  tokenValid: false
 };
 
 export function setRTRError(rtrError: string) {
@@ -45,6 +45,19 @@ export function startVM() {
   const vmAPI = new VMAPI(window.vmmv as IVMBaseAPI);
   apis.initVMAPI(vmAPI);
 }
+
+export function startAPIsInitialStore(
+  rtrDisabled: boolean,
+  rtrApiReady: boolean,
+  tokenValid: boolean,
+  rtrError: string
+) {
+  useAPIsStore.setState(
+    { rtrDisabled, rtrApiReady, tokenValid, rtrError },
+    false,
+    'Start UI Store'
+  );
+};
 
 /** Store Hook */
 export const useAPIsStore = create(

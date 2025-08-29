@@ -1,20 +1,19 @@
 import { IConfigureInitParams, IRTRBaseAPI } from '@/declarations/interfaces';
 import { waitForScriptToLoad } from '@/libs/helpers';
-import { startRTR } from '@/store/APIsStore';
 
 type ScriptType = {
   time: string;
   status: boolean
 };
 
-export function rtrLoadedPromise(params: IConfigureInitParams): Promise<boolean | null> {
+export function rtrLoadedPromise(params: IConfigureInitParams): Promise<IRTRBaseAPI | null> {
   const { yrEnv, rtrDisabled } = params;
   return new Promise((resolve) => {
     if (rtrDisabled) {
       if (yrEnv) {
         console.log('RTR disabled by URL param');
       }
-      return resolve(false);
+      return resolve(null);
     }
     waitForScriptToLoad(100, 20000, 'rtrViewerMV')
       .then((e: ScriptType) => {
@@ -22,17 +21,16 @@ export function rtrLoadedPromise(params: IConfigureInitParams): Promise<boolean 
           if (yrEnv) {
             console.log('RTR error');
           }
-          return resolve(false);
+          return resolve(null);
         }
-        startRTR();
-        return resolve(true);
+        return resolve(window.rtrViewerMV as IRTRBaseAPI);
       })
       .catch((err) => {
         if (yrEnv) {
           console.log('RTR error');
           console.error(err);
         }
-        return resolve(false);
+        return resolve(null);
       });
   });
 };

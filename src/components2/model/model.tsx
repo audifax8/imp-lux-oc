@@ -1,85 +1,68 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 
 import { apis } from '@/libs/apis';
 
 import {
   useConfigureImg,
-  useIsCustomizerOpen,
-  useParams,
+  //useIsCustomizerOpen,
+  //useParams,
   useToken
 } from '@/state/ui';
 
 import {
   useRTRAPIReady,
-  useRTRError
+  useRTRError,
+  useTokenValid
 } from '@/state/rtr';
-
-import {
-  IConfigureAPI,
-  IRTRBaseAPI
-} from '@/declarations/interfaces';
 
 import { getImgData } from '@/libs/helpers';
 
-import './model.scss';
-import { getSkeletonURL } from '@/declarations/constants';
+//import { getSkeletonURL } from '@/declarations/constants';
+import { ISuspender } from '@/libs/main';
 
-type ISuspender = {
-  read(): IRTRBaseAPI | IConfigureAPI | null;
-};
+
 export type IModelProps = {
-  corePromise: ISuspender; 
+  mainAPIsPromise: ISuspender; 
 };
 
-export default React.memo(function Model({ corePromise }: IModelProps) {
-  const r = corePromise.read();
-  const [rtrStarted, setRTRStarted] = useState(false);
-  const [token] = useToken();
-  const [params] = useParams();
+import './model.scss';
+
+export default React.memo(function Model({ mainAPIsPromise }: IModelProps) {
+  mainAPIsPromise.read();
   const [rtrError] = useRTRError();
   const [rtrAPIReady] = useRTRAPIReady();
-  const [isCustomizerOpen, setIsCustomizerOpen] = useIsCustomizerOpen();
+  const [tokenValid] = useTokenValid();
+
+  const [token] = useToken();
+
   const imageData = getImgData();
   const [img] = useConfigureImg();
-  const skeletonURL = getSkeletonURL();
 
-  useEffect(() => {
-    if (params.rtrDisabled) {
-      return;
-    }
-    if (rtrError) {
-      if (params.yrEnv) {
-        console.log('RTR turned off due to internal error');
+  useEffect(
+    () => {
+      if (tokenValid) {
+        apis.rtrAPI.init(token);
       }
-      apis.rtrAPI.dispose();
-      return;
-    }
-    if (rtrAPIReady && token && rtrStarted) {
-      apis.rtrAPI.setId(token);
-    }
-    if (rtrAPIReady && token && !rtrStarted) {
-      apis.rtrAPI?.init(token);
-      setRTRStarted(true);
-    }
-  }, [params.rtrDisabled, rtrAPIReady, token, rtrError, rtrStarted, r]);
+    }, [tokenValid, token]
+  );
 
-  return ( 
+  return (
     <>
-      {(!rtrError && !params.rtrDisabled) &&
+      {(!rtrError && rtrAPIReady) &&
         <div
           id='viewer'
           className={clsx('yr-model__rtr')}
         ></div>
       }
-      {(rtrError || params.rtrDisabled) &&
+      {(rtrError) &&
         <picture
           className={clsx('yr-model__placeholder yr-image')}
-          onClick={() => setIsCustomizerOpen(!isCustomizerOpen)}
+          //onClick={() => setIsCustomizerOpen(!isCustomizerOpen)}
           >
             <img
               fetchPriority='high'
-              src={img || skeletonURL}
+              src={img}
               alt='Model'
               height={imageData.dimentions.height}
               width={imageData.dimentions.width}

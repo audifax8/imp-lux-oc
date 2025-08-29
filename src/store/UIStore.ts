@@ -34,10 +34,18 @@ const INITIAL_STATE = {
   cas: MOCK_RBN_MENU_ITEMS
 }
 
-export function startUIStore() {
+export function loadDefaultUIStore() {
   apis.setParams(params);
-  useUIStore.setState(INITIAL_STATE, false, 'INIT UI store');
+  useUIStore.setState(INITIAL_STATE, false, 'Default UI store');
 }
+
+export function startInitialStore(
+  token: string,
+  configureImg: string,
+  cas: IMenuCA[]
+) {
+  useUIStore.setState({ token, configureImg, cas }, false, 'Start UI Store');
+};
 
 export function setShowSkeleton(showSkeleton: boolean): void {
   useUIStore.setState({ showSkeleton }, false, 'Set showSkeleleton');

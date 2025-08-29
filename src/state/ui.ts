@@ -11,12 +11,13 @@ export const useTheme = (): UseTheme => {
   const toggleTheme = (newTheme?: Theme) => {
     setTheme((prev) => newTheme ?? (prev === Theme.DARK ? Theme.LIGHT : Theme.DARK));
   };
-  const [params] = useUIState('params');
+  /*const [params] = useUIState('params');
   useEffect(() => {
     if (params.darkMode !== undefined) {
+      console.log('@here');
       setTheme(params.darkMode ? Theme.DARK : Theme.LIGHT);
     }
-  }, [params.darkMode, setTheme]);
+  }, [params.darkMode, setTheme]);*/
   return [theme, toggleTheme];
 };
 
