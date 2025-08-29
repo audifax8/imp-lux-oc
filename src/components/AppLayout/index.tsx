@@ -11,6 +11,8 @@ import { RBNHeader } from '@/components/RBNHeader';*/
 
 import Model from '@/components2/model';
 import { Menu } from '@/components2/menu';
+import { Header } from '@/components2/Header/Header';
+
 //import { ArrowIcon, TryOnIcon } from '../Icons';
 //import { TryOnIcon } from '@/components2/Icons';
 //import { Button } from '@/components2/button';
@@ -50,6 +52,7 @@ export function AppLayout() {
         theme
       )}>
         <div className='yr-content'>
+          {isMobile && <Header />}
           <div
             className={clsx(
               'yr-main',

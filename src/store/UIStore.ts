@@ -42,9 +42,10 @@ export function loadDefaultUIStore() {
 export function startInitialStore(
   token: string,
   configureImg: string,
-  cas: IMenuCA[]
+  cas: IMenuCA[],
+  showSkeleton: boolean
 ) {
-  useUIStore.setState({ token, configureImg, cas }, false, 'Start UI Store');
+  useUIStore.setState({ token, configureImg, cas, showSkeleton }, false, 'Start UI Store');
 };
 
 export function setShowSkeleton(showSkeleton: boolean): void {

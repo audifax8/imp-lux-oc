@@ -20,6 +20,8 @@ export default React.memo(function Accordion({ corePromise }: IAccordionProps) {
   const [cas] = useCAS();
 
   return (
-    <>{cas.map((ca) => <Header menu={ca} key={ca.id} />)}</>
+    <>
+      {cas.map((ca) => <Header menu={ca} key={ca.id} />)}
+    </>
   );
 });

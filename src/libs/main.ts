@@ -86,7 +86,7 @@ export async function startInitialStores(
 
   const token = apis.luxAPI.getToken();
   const casToRender = apis.luxAPI.mapCas();
-  startInitialStore(token, configureImg, casToRender);
+  startInitialStore(token, configureImg, casToRender, false);
 
   const rtrEnabled = isRTREnabled(configureCore, params);
   if (rtr) {

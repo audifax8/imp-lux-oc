@@ -1,38 +1,41 @@
  import { Suspense, lazy, useState } from 'react';
 
-import { Button } from '@/components/Button';
-import { TryLensesIcon } from '@/components/Icons';
+import { Button } from '@/components2/button';
+import { TryOnIcon } from '@/components2/Icons';
+
 import { useShowSkeleton } from '@/state/ui';
 import { apis } from '@/libs/apis';
-import { IRXCBaseAPI, IScriptResult } from '@/declarations/interfaces';
+import { VMAPI } from '@/libs/apis/vm-api';
+import { IScriptResult } from '@/declarations/interfaces';
 
 const LazyButton = lazy(() => import('./LazyButton'));
 
-export function RXCButton() {
+export function VMButton() {
   const [showSkeleton] = useShowSkeleton();
   const [showLazyButtonButton, setShowButton] = useState(false);
   const [lazyError, setLazyError] = useState(false);
 
   const onResourceResult = (result: IScriptResult) => {
-    if (!result?.status) {
+    if (!result.status) {
       setLazyError(true);
       return;
     }
-    apis.initRXCAPI(window.RXC as IRXCBaseAPI);
+    apis.initVMAPI(window.vmmv as VMAPI);
     onClick();
   };
 
-  const onClick = () => {
-    apis.rxcApi.renderRxc();
+  const onClick = async () => {
+    const isBrowserSupported = await apis.vmApi.isBrowserSupported();
+    console.log({ isBrowserSupported });
   };
-  const buttonLabel = 'Try Lenses';
+  const buttonLabel = 'Try on';
 
   return (
     <>
       {!showLazyButtonButton && !lazyError && 
         <Button
           variant="rounded"
-          icon={<TryLensesIcon size={18} />}
+          icon={<TryOnIcon size={18} />}
           onClick={() => setShowButton(true)}
           showSkeleton={showSkeleton}
         >
@@ -44,7 +47,7 @@ export function RXCButton() {
           fallback={
             <Button
               variant="rounded"
-              icon={<TryLensesIcon size={18} />}
+              icon={<TryOnIcon size={18} />}
               showSkeleton={true}
             >
               {buttonLabel}
@@ -53,7 +56,7 @@ export function RXCButton() {
         >
           <LazyButton
             variant="rounded"
-            icon={<TryLensesIcon size={18} />}
+            icon={<TryOnIcon size={18} />}
             onResourceResult={onResourceResult}
             onClick={() => onClick()}
           >

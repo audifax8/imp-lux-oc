@@ -35,7 +35,13 @@
     @media only screen and (max-width: 600px) {
       display: flex;
       gap: 10px;
-    }  
+    }
+
+    & .yr-button {
+      @include text-editorial-xs;
+      background-color: var(--text-color-primary);
+      color: var(--divider-color);
+    }
   }
 
   @media only screen and (max-width: 600px) {

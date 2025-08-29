@@ -4,10 +4,10 @@ import { useIsCustomizerOpen, useIsMobile, useParams, useShowSkeleton } from '@/
 import { useGetProduct } from '@/libs/yr-react/hooks/configure';
 import { useClsxWithSkeleton } from '@/hooks/useClsxWithSkeleton';
 
-import { Button } from '@/components/Button';
-import { ArrowIcon } from '@/components/Icons';
-import { VMButton } from '@/components/VM/VMButton';
-import { RXCButton } from '@/components/RXC/RXCButton';
+import { Button } from '@/components2/button';
+import { ArrowIcon } from '@/components2/Icons';
+import { VMButton } from '@/components2/VM/VMButton';
+import { RXCButton } from '@/components2/RXC/RXCButton';
 
 import './index.scss';
 
