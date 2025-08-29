@@ -1,0 +1,1 @@
+import{j as s,c}from"./index-C5v71PTv.js";function x({icon:t,children:n,variant:o="rounded",className:r,showSkeleton:u,onClick:e,...a}){return s.jsxs("button",{className:c("yr-button",`yr-button-${o}`,r,{"yr-button-icon-only":!n&&t,"yr-skeleton":u}),...a,onClick:e,children:[t&&s.jsx("span",{className:"yr-button-icon",children:t}),n]})}export{x as B};
