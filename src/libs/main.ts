@@ -76,7 +76,6 @@ export async function startInitialStores(
 
   const options: PreloadOptions = {
     as: 'image',
-    crossOrigin: 'anonymous',
     fetchPriority: 'high'
   };
   if (yrEnv) {

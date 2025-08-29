@@ -14,6 +14,7 @@ import { coreResource, createCorePromise } from '@/libs/core';
 const Configurator = lazy(() => import('../Accordion2/index'));
 
 import './index.scss';
+
 export function Menu() {
   const [isMobile] = useIsMobile();
   const [isCustomizerOpen] = useIsCustomizerOpen();

@@ -7,6 +7,26 @@ import { setAPIReady } from '@/libs/yr-react/store/ConfigureStore';
 import { setCasToRender, setShowSkeleton, setTokenAndImage } from '@/store/UIStore';
 import { startAPIs } from '@/store/APIsStore';
 
+export function waitForCoreReady(): Promise<IConfigureAPI | null> {
+  const checkTimeMs: number = 100;
+  const timeOutMs: number = 20000;
+  let elapsedTime = 0;
+  let isInitialized: boolean | unknown = false;
+
+  return new Promise((resolve) => {
+    const time = setInterval(() => {
+      elapsedTime += checkTimeMs;
+      isInitialized = apis.configureCore;
+      if (isInitialized) {
+        resolve(apis.configureCore);
+        clearInterval(time);
+      } else if (elapsedTime > timeOutMs && !isInitialized) {
+        resolve(null);
+        clearInterval(time);
+      }
+    }, checkTimeMs);
+  });
+};
 
 export function core(
   params: IConfigureInitParams
@@ -144,7 +164,7 @@ export function createCorePromise(
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function coreResource(promise: any) {
+export function coreResource(promise: any)  {
   let status = 'pending';
   let result: IConfigureAPI | null = null;
 

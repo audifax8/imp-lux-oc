@@ -41,6 +41,7 @@ export default React.memo(function Model({ mainAPIsPromise }: IModelProps) {
 
   useEffect(
     () => {
+      if (!tokenValid && !token) { return; }
       if (tokenValid) {
         apis.rtrAPI.init(token);
       }

@@ -1,5 +1,4 @@
-//@use '../../styles/base/variables.scss' as *;
-@use '../../styles//mixins' as *;
+@use '../../../../../styles/mixins/' as *;
 
 .yr-accordion {
   &-summary {
@@ -93,27 +92,6 @@
 
     .yr-accordion-content {
       border-bottom: unset;
-    }
-  }
-
-  @include respond(lg) {
-    &-summary {
-      padding: 16px 24px;
-      gap: 0 16px;
-    }
-
-    &:last-of-type {
-      border-radius: 0 0 24px 24px;
-
-      .yr-accordion-summary {
-        border-radius: 0 0 24px 24px;
-      }
-
-      &[open] {
-        .yr-accordion-summary {
-          border-radius: 0;
-        }
-      }
     }
   }
 }

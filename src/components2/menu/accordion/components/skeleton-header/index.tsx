@@ -1,10 +1,10 @@
-import { Image } from '@/components/Image';
-import { Button } from '@/components/Button';
+import { Image } from '@/components2/img';
+import { Button } from '@/components2/button';
 import { ICAMap } from '@/declarations/interfaces';
 
 import './index.scss';
 
-export function AccordionSkeleton({ alias, selectedAvName }: ICAMap) {
+export function HeaderSkeleton({ alias, selectedAvName }: ICAMap) {
   return (
     <details open={false} className='yr-accordion'>
       <summary className='yr-accordion-summary'>
