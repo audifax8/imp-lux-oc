@@ -11,9 +11,30 @@ import { setRTRDisabled, setRTRError } from '@/store/APIsStore';
 export class RtrAPI implements IRTRAPI {
   /* Lux rtr API */
   api: IRTRBaseAPI;
+  lastTokenRendered: string;
   constructor(api: IRTRBaseAPI) {
     this.api = api;
+    this.lastTokenRendered = '';
   }
+
+  async handleTokenChange(token: string): Promise<void> {
+    if (!token || !this.api) { return; }
+    const isTokenValid = await this.isIdAvailable(token);
+    const isRTROn = await this.isInitialized();
+    if (!isRTROn && isTokenValid) {
+      this.lastTokenRendered = token;
+      return this.init(token);
+    }
+
+    const isSameToken = this.lastTokenRendered === token;
+    if (isRTROn && isTokenValid && !isSameToken) {
+      this.setId(token);
+      this.lastTokenRendered = token;
+      return;
+    }
+
+  }
+
   dispose(): void {
     this.api.dispose();
   }

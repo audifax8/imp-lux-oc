@@ -1,26 +1,17 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 
-import { apis } from '@/libs/apis';
-
 import {
-  useConfigureImg,
-  //useIsCustomizerOpen,
-  //useParams,
-  useToken
+  useConfigureImg
 } from '@/state/ui';
 
 import {
   useRTRAPIReady,
-  useRTRError,
-  useTokenValid
+  useRTRError
 } from '@/state/rtr';
 
 import { getImgData } from '@/libs/helpers';
-
-//import { getSkeletonURL } from '@/declarations/constants';
 import { ISuspender } from '@/libs/main';
-
 
 export type IModelProps = {
   mainAPIsPromise: ISuspender; 
@@ -32,21 +23,9 @@ export default React.memo(function Model({ mainAPIsPromise }: IModelProps) {
   mainAPIsPromise.read();
   const [rtrError] = useRTRError();
   const [rtrAPIReady] = useRTRAPIReady();
-  const [tokenValid] = useTokenValid();
-
-  const [token] = useToken();
 
   const imageData = getImgData();
   const [img] = useConfigureImg();
-
-  useEffect(
-    () => {
-      if (!tokenValid && !token) { return; }
-      if (tokenValid) {
-        apis.rtrAPI.init(token);
-      }
-    }, [tokenValid, token]
-  );
 
   return (
     <>

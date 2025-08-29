@@ -11,7 +11,7 @@ import { rtrLoadedPromise } from './rtr';
 import { apis } from './apis';
 import { RtrAPI } from './apis/rtr-api';
 import { startInitialStore } from '@/store/UIStore';
-import { startAPIsInitialStore } from '@/store/APIsStore';
+import { startAPIs, startAPIsInitialStore } from '@/store/APIsStore';
 
 export type IMainAPIs = {
   core: IConfigureAPI | null,
@@ -36,7 +36,7 @@ const getCookie = (cookieKey: string) => {
   }
 };
 
-const isEnableRTR = (
+const isRTREnabled = (
   configureCore: IConfigureAPI,
   params: IConfigureInitParams
 ) => {
@@ -72,6 +72,7 @@ export async function startInitialStores(
   const { yrEnv } = params;
   let isTokenValid = false;
   apis.initLuxApi(configureCore);
+  startAPIs(configureCore);
   const configureImg = apis.luxAPI.getProductImg('LUX-Ray-Ban-8taOhSR5AFyjt9tfxU');
 
   const options: PreloadOptions = {
@@ -85,16 +86,19 @@ export async function startInitialStores(
 
   const token = apis.luxAPI.getToken();
   const casToRender = apis.luxAPI.mapCas();
-  const isRTREnabled = isEnableRTR(configureCore, params);
+  startInitialStore(token, configureImg, casToRender);
+
+  const rtrEnabled = isRTREnabled(configureCore, params);
   if (rtr) {
     const rtrAPI = new RtrAPI(window.rtrViewerMV as IRTRBaseAPI);
     apis.initRTRAPI(rtrAPI);
     isTokenValid = await apis.rtrAPI.isIdAvailable(token);
+    const rtrAPIReady = rtr ? true : false;
+    const rtrError = !isTokenValid ? 'Invalid token' : '';
+    startAPIsInitialStore(rtrEnabled, rtrAPIReady, isTokenValid, rtrError);
+    apis.rtrAPI.handleTokenChange(token);
   }
-  startInitialStore(token, configureImg, casToRender);
-  const rtrAPIReady = rtr ? true : false;
-  const rtrError = !isTokenValid ? 'Invalid token' : '';
-  startAPIsInitialStore(isRTREnabled, rtrAPIReady, isTokenValid, rtrError);
+  import('../styles/base/fonts.scss');
 }
 
 export async function mainResourcesPromise(

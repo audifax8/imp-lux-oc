@@ -4,10 +4,6 @@ import clsx from 'clsx';
 import { useIsCustomizerOpen } from '@/state/ui';
 //import { useIsCustomizerOpen, useIsMobile } from '@/state/ui';
 
-//import { Header } from '@/components/Header/Header';
-
-//import { apis } from '@/libs/apis';
-//import { mainResourcesPromise, mainSuspender } from '@/libs/main';
 import MenuSkeleton from './skeleton';
 import { coreResource, waitForCoreReady } from '@/libs/core';
 
