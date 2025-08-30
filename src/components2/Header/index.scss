@@ -41,6 +41,10 @@
       @include text-editorial-xs;
       background-color: var(--customizer-background);
       color: var(--text-color-primary);
+
+      &.yr-skeleton {
+        color: transparent;
+      }
     }
   }
 
