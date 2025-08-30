@@ -3,7 +3,8 @@ import clsx from 'clsx';
 
 import {
   useConfigureImg,
-  useIsCustomizerOpen
+  useIsCustomizerOpen,
+  useIsMobile
 } from '@/state/ui';
 
 import {
@@ -24,6 +25,7 @@ export default React.memo(function Model({ mainAPIsPromise }: IModelProps) {
   mainAPIsPromise.read();
   const [rtrError] = useRTRError();
   const [rtrAPIReady] = useRTRAPIReady();
+  const [isMobile] = useIsMobile();
 
   const [isCustomizerOpen, setIsCustomizerOpen] = useIsCustomizerOpen();
 
@@ -41,7 +43,12 @@ export default React.memo(function Model({ mainAPIsPromise }: IModelProps) {
       {(rtrError) &&
         <picture
           className={clsx('yr-model__placeholder yr-image')}
-          onClick={() => setIsCustomizerOpen(!isCustomizerOpen)}
+          onClick={() => {
+            if (!isMobile) {
+              return;
+            }
+            setIsCustomizerOpen(!isCustomizerOpen);
+          }}
           >
             <img
               fetchPriority='high'

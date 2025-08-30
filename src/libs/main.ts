@@ -86,7 +86,7 @@ export async function startInitialStores(
 
   const token = apis.luxAPI.getToken();
   const casToRender = apis.luxAPI.mapCas();
-  startInitialStore(token, configureImg, casToRender, false);
+  startInitialStore(token, configureImg, casToRender, false, false);
 
   const rtrEnabled = isRTREnabled(configureCore, params);
   if (rtr) {
@@ -105,6 +105,9 @@ export async function mainResourcesPromise(
   params: IConfigureInitParams
 ): Promise<IMainAPIs> {
   return new Promise((resolve) => {
+    if (apis.configureCore) {
+      return resolve({ core: apis.configureCore, rtr: apis.rtrAPI.api });
+    }
     try {
       const { rtrDisabled } = params;
 

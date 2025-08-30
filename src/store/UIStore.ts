@@ -19,6 +19,7 @@ export interface IUIState {
   configureImg: string;
   params: IConfigureInitParams;
   cas: IMenuCA[];
+  initialLoad: boolean;
 }
 
 const params = getInitQueryParams();
@@ -31,7 +32,8 @@ const INITIAL_STATE = {
   token: undefined!,
   configureImg: undefined!,
   params,
-  cas: MOCK_RBN_MENU_ITEMS
+  cas: MOCK_RBN_MENU_ITEMS,
+  initialLoad: true
 }
 
 export function loadDefaultUIStore() {
@@ -43,9 +45,10 @@ export function startInitialStore(
   token: string,
   configureImg: string,
   cas: IMenuCA[],
-  showSkeleton: boolean
+  showSkeleton: boolean,
+  initialLoad: boolean
 ) {
-  useUIStore.setState({ token, configureImg, cas, showSkeleton }, false, 'Start UI Store');
+  useUIStore.setState({ token, configureImg, cas, showSkeleton, initialLoad }, false, 'Start UI Store');
 };
 
 export function setShowSkeleton(showSkeleton: boolean): void {

@@ -83,3 +83,11 @@ export const useCAS = (): UseCAS => {
   const [cas, setCAS] = useUIState('cas');
   return [cas, setCAS];
 };
+
+
+type UseIsInitialLoad = ReturnType<typeof useUIState<'initialLoad'>>;
+
+export const useInitialLoad = (): UseIsInitialLoad => {
+  const [initialLoad, setInitialLoad] = useUIState('initialLoad');
+  return [initialLoad, setInitialLoad];
+};

@@ -39,8 +39,8 @@
 
     & .yr-button {
       @include text-editorial-xs;
-      background-color: var(--text-color-primary);
-      color: var(--divider-color);
+      background-color: var(--customizer-background);
+      color: var(--text-color-primary);
     }
   }
 

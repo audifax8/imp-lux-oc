@@ -8,6 +8,9 @@ import { setCasToRender, setShowSkeleton, setTokenAndImage } from '@/store/UISto
 import { startAPIs } from '@/store/APIsStore';
 
 export function waitForCoreReady(): Promise<IConfigureAPI | null> {
+  if (apis.configureCore) {
+    return new Promise<IConfigureAPI | null>((resolve) => resolve(apis.configureCore));
+  }
   const checkTimeMs: number = 100;
   const timeOutMs: number = 20000;
   let elapsedTime = 0;
