@@ -1,13 +1,9 @@
 import clsx from 'clsx';
 
-import { SkeletonVariant } from '@/declarations/enums';
+import { ISkeletonProps } from '@/declarations/interfaces';
 
 import './index.scss';
 
-interface ISkeletonProps {
-  variant: SkeletonVariant;
-  style?: React.CSSProperties
-};
 
 export function Skeleton(props: ISkeletonProps) {
   const { variant, style } = props;

@@ -1,6 +1,3 @@
-@use '../../styles/mixins' as *;
-@use '../../styles/base/variables.scss';
-
 .yr-footer {
   & .yr-buttons-section {
     display: flex;
@@ -8,8 +5,14 @@
     gap: 10px;
 
     & .yr-button {
-      background-color: var(--customizer-background);
-      color: var(--text-color-primary);
+      background-color: var(--background-lux-ctas);
+      color: var(--text-color-lux-ctas);
+      font-family: var(--font-primary);
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 160%;
+      text-transform: uppercase;
     }
   }
 
@@ -26,6 +29,15 @@
 
       & .yr-footer--price__final {
         color: var(--rbn-red);
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 160%;
+        font-family: var(--font-primary);
+
+        @media only screen and (max-width: 600px) {
+          font-size: 16px;
+        }
       }
 
       & .yr-footer--price__total {
@@ -33,6 +45,12 @@
         font-weight: 500;
         line-height: 160%;
         text-decoration-line: line-through;
+        font-size: 16px;
+        font-family: var(--font-primary);
+
+        @media only screen and (max-width: 600px) {
+          font-size: 14px;
+        }
       }
 
       & .yr-footer--price__discount {
@@ -44,13 +62,31 @@
         justify-content: center;
         align-items: center;
         gap: 4px;
+
+        font-family: var(--font-secondary);
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 160%;
+        text-transform: uppercase;
       }
     }
 
     & .yr-footer--cart {
       & .yr-add-to-cart-button {
+        border-radius: 1px;
+        display: flex;
+        width: 148px;
+        height: 40px;
+        padding: 9px 24px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        flex-shrink: 0;
         background-color: var(--rbn-red);
-        color: var(--text-color-primary);
+        color: var(--atc-color);
+        font-family: var(--font-primary);
+        font-size: 14px;
       }
     }
   }

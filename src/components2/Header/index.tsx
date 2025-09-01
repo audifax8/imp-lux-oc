@@ -1,8 +1,13 @@
+import clsx from 'clsx';
 
-import { useIsCustomizerOpen, useIsMobile, useParams, useShowSkeleton } from '@/state/ui';
+import {
+  useIsCustomizerOpen,
+  useIsMobile,
+  useParams,
+  useShowSkeleton
+} from '@/state/ui';
 
 import { useGetProduct } from '@/libs/yr-react/hooks/configure';
-import { useClsxWithSkeleton } from '@/hooks/useClsxWithSkeleton';
 
 import { Button } from '@/components2/button';
 import { ArrowIcon } from '@/components2/Icons';
@@ -15,7 +20,6 @@ export function Header() {
   const [isMobile] = useIsMobile();
   const [isCustomizerOpen, toggleCustomizer] = useIsCustomizerOpen();
   const product = useGetProduct();
-  const clsxWithSkeleton = useClsxWithSkeleton();
   const [showSkeleton] = useShowSkeleton();
   const [params] = useParams();
 
@@ -24,7 +28,7 @@ export function Header() {
   return (
     <header className='yr-custom-header'>
       {!isCustomizerOpen &&
-        <div className={clsxWithSkeleton('yr-header-title')}>
+        <div className={clsx('yr-header-title')}>
           <span>{name}</span>
         </div>
       }

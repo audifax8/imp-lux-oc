@@ -1,6 +1,6 @@
-import { useIsMobile } from '@/state/ui';
+import clsx from 'clsx';
 
-import { useClsxWithSkeleton } from '@/hooks/useClsxWithSkeleton';
+import { useIsMobile } from '@/state/ui';
 
 import { IConfigureAPI } from '@/declarations/interfaces';
 
@@ -9,7 +9,6 @@ import { VMButton } from '@/components2/VM/VMButton';
 import { Button } from '@/components2/button';
 
 import './index.scss';
-
 
 export type ISuspender = {
   read(): IConfigureAPI | null;
@@ -23,7 +22,6 @@ export default function Footer({ corePromise }: IFooterProps) {
   corePromise.read();
 
   const [isMobile] = useIsMobile();
-  const clsxWithSkeleton = useClsxWithSkeleton();
 
   return (
     <div className='yr-footer'>
@@ -46,7 +44,7 @@ export default function Footer({ corePromise }: IFooterProps) {
           </div>
         </div>
         <div className='yr-footer--cart'>
-          <Button className={clsxWithSkeleton('yr-add-to-cart-button')} variant='square'>
+          <Button className={clsx('yr-add-to-cart-button')} variant='square'>
             Add to Cart
           </Button>
         </div>

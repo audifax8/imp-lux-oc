@@ -1,4 +1,4 @@
-import { FetchPriority } from '@/declarations/enums';
+import { FetchPriority, SkeletonVariant } from '@/declarations/enums';
 
 export interface IConfigureState {
   /** Configure API instance */
@@ -290,3 +290,8 @@ export interface IScriptResult {
   time: string;
   status: boolean;
 }
+
+export interface ISkeletonProps {
+  variant: SkeletonVariant;
+  style?: React.CSSProperties
+};

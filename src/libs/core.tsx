@@ -122,6 +122,7 @@ export function createCorePromise(
           workflow
         },
         (error: Error, configureCore: IConfigureAPI) => {
+          import('../styles/base/fonts.scss');
           if (error) {
             if (yrEnv) {
               console.log('Error');
