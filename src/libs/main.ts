@@ -98,7 +98,6 @@ export async function startInitialStores(
     startAPIsInitialStore(rtrEnabled, rtrAPIReady, isTokenValid, rtrError);
     apis.rtrAPI.handleTokenChange(token);
   }
-  import('../styles/base/fonts.scss');
 }
 
 export async function mainResourcesPromise(
@@ -108,6 +107,7 @@ export async function mainResourcesPromise(
     if (apis.configureCore) {
       return resolve({ core: apis.configureCore, rtr: apis.rtrAPI.api });
     }
+    import('../styles/base/fonts.scss');
     try {
       const { rtrDisabled } = params;
 
