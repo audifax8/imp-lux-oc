@@ -1,10 +1,44 @@
-import { FetchPriority } from '@/declarations/enums';
+import { FetchPriority, SkeletonVariant } from '@/declarations/enums';
 
 export interface IConfigureState {
   /** Configure API instance */
   configure: IConfigureAPI;
   product: IProduct;
   token: string;
+}
+
+export interface ICAMap {
+  id: number | null;
+  name?: string;
+  alias: string;
+  icon: string;
+  //ca: IConfigurableAttribute | null;
+  selectedAvId: number | null;
+  skeleton?: boolean;
+  selectedAvName?: string;
+  open?: boolean;
+};
+export interface IMenuCA {
+  id: number;
+  alias: string;
+  caName: string;
+  icon: string;
+  selectedAvId: number | null;
+  selectedAvName: string;
+  avs: IAttributeValue[];
+  open: boolean;
+  avsLenght: number;
+  currentPage: number;
+  skeleton?: boolean;
+};
+
+export interface IMenuPagination {
+  avs: IAttributeValue[];
+  currentPage: number;
+  avsLenght: number;
+};
+export interface IMenu {
+  cas: IMenuCA[];
 }
 export interface IConfigureAPI {
   product: { id: number };
@@ -18,6 +52,8 @@ export interface IConfigureAPI {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getFcParams(): any;
   destroy(): void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setRecipe(changes: any[], cb: any): any[];
 }
 export interface IConfigureInitParams {
   /**  Customer ID. */
@@ -78,6 +114,13 @@ export interface IAttributeValue {
   name: string;
   metadata: KeyValueString[];
   facets: IAVFacet;
+  testUrl?: string;
+}
+
+export interface IFacetFacetValueMap {
+  id?: number;
+  name?: string;
+  facetValuesMapped?: IFacetValue;
 }
 
 export interface ICAFacet {
@@ -96,8 +139,8 @@ export interface IFacetValue {
 
 export interface IRTRAssetsAPI {
   prefetchListStartup?: string[];
-  prefetchListConfigurableAttributes?: Record<string, string[]>;
-  prefetchListHierarchy?: Record<string, string[]>;
+  prefetchListConfigurableAttributes?: { [key: string]: string[] };
+  prefetchListHierarchy?: { [key: string]: string[] };
 }
 
 export interface IResource {
@@ -238,8 +281,17 @@ export interface IBaseLuxAPI {
   getProductVendorId(product: IProduct): string;
   getVendorIDSize(params: IConfigureInitParams): string;
   getAssetsURL(params: IConfigureInitParams): string;
+  mapCas(): IMenuCA[];
+  reloadPagination(menu: IMenuCA): IMenuCA;
+  getAttributeByAlias(alias: string): IConfigurableAttribute;
+  getSwatchURL(av: IAttributeValue, caName: string): string;
 }
 export interface IScriptResult {
   time: string;
   status: boolean;
 }
+
+export interface ISkeletonProps {
+  variant: SkeletonVariant;
+  style?: React.CSSProperties
+};

@@ -2,8 +2,18 @@ import clsx from 'clsx';
 
 import { ButtonProps } from '@/declarations/enums';
 
+import './index.scss';
+
 export function Button(
-  { icon, children, variant = 'rounded', className, showSkeleton, onClick, ...props }: ButtonProps
+  {
+    icon,
+    children,
+    variant = 'rounded',
+    className,
+    showSkeleton,
+    onClick,
+    ...props
+  }: ButtonProps
 ) {
   return (
     <button

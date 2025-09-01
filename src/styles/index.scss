@@ -1,14 +1,19 @@
 @use 'base';
-@use 'components';
-@use 'mixins';
 
 * {
   box-sizing: border-box;
 }
 
+html,
 body {
+  height: 100%;
+  margin: 0;
   margin: unset;
   line-height: 1;
+}
+
+#root {
+  height: 100%;
 }
 
 h1,
@@ -62,4 +67,10 @@ q::after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+.yr-implementation-root {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
 }

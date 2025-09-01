@@ -1,5 +1,5 @@
 import { FetchPriority } from '@/declarations/enums';
-import { IConfigureInitParams, IResource } from '@/declarations/interfaces';
+import { IConfigureInitParams, IMenuCA, IResource } from '@/declarations/interfaces';
 import { getSkeletonResolution } from '@/libs/helpers';
 
 export const MEGA_WAYFARER_ID = 26101;
@@ -43,7 +43,6 @@ export const RXC_URL = `${RXC_BASE_URL}/rxc3/fe/test/v${DEFAULT_RXC_VERSION}/dis
 export const CDN_FLUID_BASE_URL = 'https://cdn-prod.fluidconfigure.com';
 
 export const RTR_ASSETS_URL = 'https://cp.luxottica.com/public/v1/prefetch/_vendorId_?qa=_rtrQa_';
-export const SKELETON_IMG_URL = `${CDN_FLUID_BASE_URL}/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/sk.webp`;
 
 export function getHeadlessURL(params: IConfigureInitParams): string {
   const { customer, product } = params;
@@ -59,7 +58,11 @@ export function getUPCAPI(params: IConfigureInitParams): string {
 
 export function getURLsToPreconnect(params: IConfigureInitParams): string[] {
   const { rtrDisabled } = params;
-  const urls = [CDN_FLUID_BASE_URL, 'https://prod.fluidconfigure.com'];
+  const urls = [
+    getSkeletonURL(),
+    CDN_FLUID_BASE_URL,
+    'https://prod.fluidconfigure.com'
+  ];
   if (!rtrDisabled) {
     urls.push('https://cp.luxottica.com');
     urls.push(RTR_BASE_URL);
@@ -74,7 +77,12 @@ export function getSkeletonURL(): string {
 
 export function mapURLs(params: IConfigureInitParams): IResource[] {
   const { workflow, customer, product, locale, rtrDisabled } = params;
-  const urls = [
+  const urls: IResource[] = [
+    {
+      url: getSkeletonURL(),
+      as: 'image',
+      fetchPriority: FetchPriority.HIGH
+    },
     {
       url: `${CDN_FLUID_BASE_URL}/static/configs/3.13.0/prod/${workflow}/${customer}/product/${product}/graph-settings-${locale}.json`,
       as: 'fetch',
@@ -86,42 +94,24 @@ export function mapURLs(params: IConfigureInitParams): IResource[] {
       as: 'fetch',
       fetchPriority: FetchPriority.HIGH,
       crossOrigin: 'anonymous'
-    },
-    {
-      url: getSkeletonURL(),
-      as: 'image',
-      fetchPriority: FetchPriority.HIGH
-    },
-    {
+    }
+    /*{
       url: getHeadlessURL(params),
       as: 'fetch',
       fetchPriority: FetchPriority.HIGH,
       crossOrigin: 'anonymous'
-    }
+    }*/
   ];
   if (!rtrDisabled) {
-    urls.push({ url: RTR_URL, as: 'script', fetchPriority: FetchPriority.HIGH, crossOrigin: 'anonymous' });
+    urls.push(
+      {
+        url: RTR_URL,
+        as: 'script',
+        fetchPriority: FetchPriority.HIGH,
+        crossOrigin: 'anonymous'
+      }
+    );
   }
-  /*if (customer === RBN_CUSTOMER_ID) {
-    urls.push({
-      url: 'fonts/Lato/Lato-Regular.woff2',
-      as: 'font',
-      fetchPriority: FetchPriority.LOW,
-      crossOrigin: 'anonymous'
-    });
-    urls.push({
-      url: 'fonts/Oswald/Oswald-Regular.woff2',
-      as: 'font',
-      fetchPriority: FetchPriority.LOW,
-      crossOrigin: 'anonymous'
-    });
-    urls.push({
-      url: 'fonts/Oswald/Oswald-Medium.woff2',
-      as: 'font',
-      fetchPriority: FetchPriority.LOW,
-      crossOrigin: 'anonymous'
-    });
-  }*/
   return urls;
 }
 
@@ -150,25 +140,53 @@ export const CONFIGURE_INIT_PARAM_NAMES = [
   'recipe'
 ];
 
-//TODO
-export const MOCK_RBN_MENU_ITEMS = [
+export const MOCK_RBN_MENU_ITEMS: IMenuCA[] = [
   {
-    name: 'Front',
-    selected: 'Black',
-    upcharge: null,
-    img: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/frame.webp'
+    id: 0,
+    alias: 'lenses_sku',
+    caName: 'lenses',
+    icon: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/lens.webp',
+    selectedAvId: null,
+    selectedAvName: 'lenses_sku',
+    avs: [],
+    open: false,
+    avsLenght: 0,
+    currentPage: 0
   },
   {
-    name: 'Temple',
-    selected: 'Black',
-    upcharge: null,
-    img: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/temple.webp'
+    id: 1,
+    alias: 'frame_sku',
+    caName: 'frame',
+    icon: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/frame.webp',
+    selectedAvId: null,
+    selectedAvName: 'frame_sku',
+    avs: [],
+    open: false,
+    avsLenght: 0,
+    currentPage: 0
+  }, 
+  {
+    id: 2,
+    alias: 'temple_tips_sku',
+    caName: 'temple',
+    icon: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/temple.webp',
+    selectedAvId: null,
+    selectedAvName: 'temple_tips_sku',
+    avs: [],
+    open: false,
+    avsLenght: 0,
+    currentPage: 0
   },
   {
-    name: 'Lenses',
-    selected: 'Green G-15',
-    upcharge: '+$40.00',
-    img: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/lens.webp'
+    id: 3,
+    alias: 'temple_sku',
+    caName: 'temple',
+    icon: 'https://cdn-prod.fluidconfigure.com/static/fluid-implementation-lux.s3.amazonaws.com/lux-ocp/rbn/assets/img/temple.webp',
+    selectedAvId: null,
+    selectedAvName: 'temple',
+    avs: [],
+    open: false,
+    avsLenght: 0,
+    currentPage: 0
   }
 ];
-

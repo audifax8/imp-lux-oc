@@ -1,11 +1,14 @@
  import { Suspense, lazy, useState } from 'react';
 
-import { Button } from '@/components/Button';
+import { Button } from '@/components/button';
 import { TryOnIcon } from '@/components/Icons';
+import { Skeleton } from '@/components/skeleton';
+
 import { useShowSkeleton } from '@/state/ui';
 import { apis } from '@/libs/apis';
 import { VMAPI } from '@/libs/apis/vm-api';
 import { IScriptResult } from '@/declarations/interfaces';
+import { SkeletonVariant } from '@/declarations/enums';
 
 const LazyButton = lazy(() => import('./LazyButton'));
 
@@ -29,11 +32,16 @@ export function VMButton() {
   };
   const buttonLabel = 'Try on';
 
+  const skeletonButton = {
+    variant: SkeletonVariant.rounded,
+    style: { width: '92px', height: '32px', borderRadius: '48px' }
+  };
+
   return (
     <>
       {!showLazyButtonButton && !lazyError && 
         <Button
-          variant="rounded"
+          variant='rounded'
           icon={<TryOnIcon size={18} />}
           onClick={() => setShowButton(true)}
           showSkeleton={showSkeleton}
@@ -44,17 +52,13 @@ export function VMButton() {
       {showLazyButtonButton && !lazyError &&
         <Suspense
           fallback={
-            <Button
-              variant="rounded"
-              icon={<TryOnIcon size={18} />}
-              showSkeleton={true}
-            >
-              {buttonLabel}
-            </Button>
+            <Skeleton
+              variant={skeletonButton.variant} style={skeletonButton.style}
+            />
           }
         >
           <LazyButton
-            variant="rounded"
+            variant='rounded'
             icon={<TryOnIcon size={18} />}
             onResourceResult={onResourceResult}
             onClick={() => onClick()}

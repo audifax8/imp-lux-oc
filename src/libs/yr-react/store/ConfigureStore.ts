@@ -6,10 +6,12 @@ import { IConfigureAPI } from '@/declarations/interfaces';
 
 export interface IConfigureState {
   apiReady: boolean;
+  recipe: unknown;
 }
 
 const INITIAL_STATE: IConfigureState = {
-  apiReady: false
+  apiReady: false,
+  recipe: {}
 };
 
 /** Store Hook */
@@ -22,8 +24,8 @@ export const useConfigureState = createStoreStateHook(useConfigureStore);
 export type ConfigureStore = StoreApi<IConfigureState>;
 export type ConfigureCallback = (error: Error, configure: IConfigureAPI) => void;
 
-export function setAPIReady(apiReady: boolean) {
-  useConfigureStore.setState({ apiReady }, false, 'Set API ready');
+export function setAPIReady(apiReady: boolean, recipe: unknown) {
+  useConfigureStore.setState({ apiReady, recipe }, false, 'Set API ready && Recipe');
 }
 
 export const startConfigureStore = () => {

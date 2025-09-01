@@ -1,0 +1,16 @@
+.yr-accordion {
+  &-summary {
+    padding: 16px;
+    display: grid;
+    grid-template-columns: min-content 1fr min-content;
+    grid-template-rows: min-content;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 1px solid var(--divider-color);
+  }
+
+  &-header {
+    display: flex;
+    gap: 8px;
+  }
+}

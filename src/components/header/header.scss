@@ -1,0 +1,45 @@
+.yr-custom-header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+
+  & .yr-header-title {
+    color: var(--text-color-primary);
+    font-family: var(--font-primary);
+
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%;
+    text-transform: uppercase;
+
+    @media only screen and (max-width: 600px) {
+      font-size: 20px;
+    } 
+  }
+
+  & .yr-buttons-section {
+    & .yr-button {
+      background-color: var(--background-lux-ctas);
+      color: var(--text-color-lux-ctas);
+      font-family: var(--font-primary);
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 160%;
+      text-transform: uppercase;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    & .yr-button-icon {
+      svg {
+        fill: var(--text-color-primary);
+      }
+    }
+  }
+}

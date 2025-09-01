@@ -7,6 +7,7 @@ export class AssetsWorker {
   assetsURL: string;
   assets: IRTRAssetsAPI = {};
   workers: Worker[] = [];
+  assetsAlreadePreloaded: string[] = [];
 
   constructor(params: IConfigureInitParams, assetsURL: string) {
     this.params = params;
@@ -29,6 +30,7 @@ export class AssetsWorker {
 
       const prefetchListStartup: string[] = data.prefetchListStartup;
       this.downloadAssets(prefetchListStartup, 'prefetchListStartup');
+      this.assetsAlreadePreloaded.push('prefetchListStartup');
     };
     this.worker.postMessage({ params, assetsURL });
   }
@@ -49,6 +51,25 @@ export class AssetsWorker {
     };
     worker.postMessage({ assetsToDownload, params: this.params, assetDescription });
     this.workers.push(worker);
+  }
+
+  preloadAssets(caAlias: string): void {
+    const RBN_CA_KEY_MAP: { [key: string]: string; } = {
+      'frame_sku': 'FRAME',
+      'lenses_sku': 'LENSES',
+      'temple_tips_sku': 'TEMPLE',
+      'temple_sku': 'TEMPLE'
+    };
+    const keyName = RBN_CA_KEY_MAP[caAlias];
+    const isAlreadyDownloaded = this.assetsAlreadePreloaded.find(name => name === keyName);
+    if (isAlreadyDownloaded) {
+      return;
+    }
+    const urls = this.assets.prefetchListConfigurableAttributes?.[keyName];
+    if (urls && urls.length) {
+      this.assetsAlreadePreloaded.push(keyName);
+      this.downloadAssets(urls, keyName);
+    }
   }
 
   destroy(): void {

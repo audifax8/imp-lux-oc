@@ -1,0 +1,22 @@
+.yr-custom-header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  & .yr-buttons-section {
+    display: flex;
+    gap: 10px;
+    margin: 24px 0;
+
+    @media only screen and (max-width: 600px) {
+      margin: 0px 10px;
+    }
+  }
+
+  & .yr-header-title {
+    @media only screen and (max-width: 600px) {
+      margin: 0px 10px;
+    }
+  }
+}

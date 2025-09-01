@@ -1,0 +1,34 @@
+.yr-footer {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  padding: 0;
+  gap: 10px;
+
+  @media only screen and (max-width: 600px) {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  & .yr-buttons-section {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+
+    @media only screen and (max-width: 600px) {
+      display: none;
+    }
+  }
+
+  & .yr-footer-price-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & .yr-footer--price {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+  }
+}

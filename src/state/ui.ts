@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { useUIState } from '@/store/UIStore';
 
 import { Theme } from '@/declarations/enums';
-import { SKELETON_IMG_URL } from '@/declarations/constants';
 
 type UseTheme = [ReturnType<typeof useUIState<'theme'>>[0], (newTheme?: Theme) => void];
 
@@ -12,12 +11,13 @@ export const useTheme = (): UseTheme => {
   const toggleTheme = (newTheme?: Theme) => {
     setTheme((prev) => newTheme ?? (prev === Theme.DARK ? Theme.LIGHT : Theme.DARK));
   };
-  const [params] = useUIState('params');
+  /*const [params] = useUIState('params');
   useEffect(() => {
     if (params.darkMode !== undefined) {
+      console.log('@here');
       setTheme(params.darkMode ? Theme.DARK : Theme.LIGHT);
     }
-  }, [params.darkMode, setTheme]);
+  }, [params.darkMode, setTheme]);*/
   return [theme, toggleTheme];
 };
 
@@ -50,11 +50,7 @@ export const useIsCustomizerOpen = (): UseIsCustomizerOpen => {
 type UseConfigureImg = ReturnType<typeof useUIState<'configureImg'>>;
 
 export const useConfigureImg = (): UseConfigureImg => {
-  const [token] = useUIState('token');
   const [configureImg, setConfigureImg] = useUIState('configureImg');
-  if (token === undefined) {
-    return [SKELETON_IMG_URL, setConfigureImg];
-  }
   return [configureImg, setConfigureImg];
 };
 
@@ -70,6 +66,8 @@ type UseShowSkeleton = ReturnType<typeof useUIState<'showSkeleton'>>;
 export const useShowSkeleton = (): UseShowSkeleton => {
   const [showSkeleton, setShowSkeleton] = useUIState('showSkeleton');
   return [showSkeleton, setShowSkeleton];
+  //const [, setShowSkeleton] = useUIState('showSkeleton');
+  //return [true, setShowSkeleton];
 };
 
 type UseParams = ReturnType<typeof useUIState<'params'>>;
@@ -77,4 +75,19 @@ type UseParams = ReturnType<typeof useUIState<'params'>>;
 export const useParams = (): UseParams => {
   const [params, setParams] = useUIState('params');
   return [params, setParams];
+};
+
+type UseCAS = ReturnType<typeof useUIState<'cas'>>;
+
+export const useCAS = (): UseCAS => {
+  const [cas, setCAS] = useUIState('cas');
+  return [cas, setCAS];
+};
+
+
+type UseIsInitialLoad = ReturnType<typeof useUIState<'initialLoad'>>;
+
+export const useInitialLoad = (): UseIsInitialLoad => {
+  const [initialLoad, setInitialLoad] = useUIState('initialLoad');
+  return [initialLoad, setInitialLoad];
 };

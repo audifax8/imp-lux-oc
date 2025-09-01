@@ -1,10 +1,10 @@
 import { useAPIsState } from '@/store/APIsStore';
 
-type UseRTRRendered = ReturnType<typeof useAPIsState<'rtrRendered'>>;
+/*type UseRTRRendered = ReturnType<typeof useAPIsState<'rtrRendered'>>;
 export function useRTRRendered(): UseRTRRendered {
   const [rtrRendered, setRTRRendered] = useAPIsState('rtrRendered');
   return [rtrRendered, setRTRRendered];
-}
+}*/
 
 type UseRTRAPIReady = ReturnType<typeof useAPIsState<'rtrApiReady'>>;
 export function useRTRAPIReady(): UseRTRAPIReady {
@@ -22,4 +22,10 @@ type UseRTRDisabled = ReturnType<typeof useAPIsState<'rtrDisabled'>>;
 export function useRTRDisabled(): UseRTRDisabled {
   const [rtrDisabled, setRTRDisabled] = useAPIsState('rtrDisabled');
   return [rtrDisabled, setRTRDisabled];
+}
+
+type UseTokenValid = ReturnType<typeof useAPIsState<'tokenValid'>>;
+export function useTokenValid(): UseTokenValid {
+  const [tokenValid, setTokenValid] = useAPIsState('tokenValid');
+  return [tokenValid, setTokenValid];
 }

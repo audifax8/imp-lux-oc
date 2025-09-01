@@ -62,6 +62,19 @@ class APIs {
     return this.luxAPI?.getProductImg(apiKey ?? '') ?? '';
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setRecipe(changes: any[]) {
+    return new Promise((resolve, reject) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return this.configureCore.setRecipe(changes, (e: any, c: any) => {
+        if (e) {
+          return reject(e);
+        }
+        return resolve(c);
+      });
+    });
+  }
+
   destroyAPIs(): void {
     this.configureCore?.destroy();
     this.assetsWorker?.destroy();

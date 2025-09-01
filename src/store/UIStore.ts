@@ -2,12 +2,13 @@ import { create } from 'zustand';
 import { devtools, subscribeWithSelector } from 'zustand/middleware';
 
 import { Theme } from '@/declarations/enums';
-import { IConfigureInitParams } from '@/declarations/interfaces';
+import { IConfigureInitParams, IMenuCA } from '@/declarations/interfaces';
+import { MOCK_RBN_MENU_ITEMS } from '@/declarations/constants';
 
 import { apis } from '@/libs/apis';
 import { createStoreStateHook } from '@/libs/yr-react/store/zustand-helpers';
 
-import { getInitQueryParams } from '@/helpers/params';
+import { getInitQueryParams } from '@/libs/helpers';
 
 export interface IUIState {
   theme: Theme;
@@ -17,6 +18,8 @@ export interface IUIState {
   token: string;
   configureImg: string;
   params: IConfigureInitParams;
+  cas: IMenuCA[];
+  initialLoad: boolean;
 }
 
 const params = getInitQueryParams();
@@ -28,13 +31,25 @@ const INITIAL_STATE = {
   showSkeleton: true,
   token: undefined!,
   configureImg: undefined!,
-  params
+  params,
+  cas: MOCK_RBN_MENU_ITEMS,
+  initialLoad: true
 }
 
-export function startUIStore() {
+export function loadDefaultUIStore() {
   apis.setParams(params);
-  useUIStore.setState(INITIAL_STATE, false, 'INIT UI store');
+  useUIStore.setState(INITIAL_STATE, false, 'Default UI store');
 }
+
+export function startInitialStore(
+  token: string,
+  configureImg: string,
+  cas: IMenuCA[],
+  showSkeleton: boolean,
+  initialLoad: boolean
+) {
+  useUIStore.setState({ token, configureImg, cas, showSkeleton, initialLoad }, false, 'Start UI Store');
+};
 
 export function setShowSkeleton(showSkeleton: boolean): void {
   useUIStore.setState({ showSkeleton }, false, 'Set showSkeleleton');
@@ -44,6 +59,10 @@ export function setTokenAndImage(token: string, configureImg: string) {
   useUIStore.setState({ configureImg, token }, false, 'Set Token & Img');
 }
 
+export function setCasToRender(cas: IMenuCA[]) {
+  useUIStore.setState({ cas }, false, 'Set CAS');
+}
+
 export function setToken(token: string) {
   useUIStore.setState({ token }, false, 'Set Token');
 }
@@ -51,5 +70,16 @@ export function setToken(token: string) {
 export const useUIStore = create(
   subscribeWithSelector(devtools<IUIState>(() => ({ ...INITIAL_STATE }), { name: 'UI Store' }))
 );
+
+export function reloadPagination(menuCa: IMenuCA) {
+  const currentCas = useUIStore.getState().cas;
+  const newCas = currentCas.map((menu) => {
+    if (menu.alias === menuCa.alias) {
+      return menuCa;
+    }
+    return menu;
+  });
+  useUIStore.setState({ cas: newCas }, false, 'Update pagination menu: ' + menuCa.alias);
+}
 
 export const useUIState = createStoreStateHook<IUIState>(useUIStore);

@@ -15,9 +15,14 @@ $breakpoints: (
 );
 
 .light {
+  --font-primary: #{$font-family-primary};
+  --font-secondary: #{$font-family-secondary};
   --rbn-red: #{$color-rb-red};
+  --atc-color: #{$color-light};
   --text-color-primary: #{$color-dark};
   --text-color-secondary: #{$color-dark-gray};
+  --text-color-lux-ctas: #{$color-light};
+  --background-lux-ctas: #{$color-dark};
   --customizer-background: rgb(255 255 255 / 60%);
   --customizer-border: 1px solid #{$color-light};
   --divider-color: #{$color-light};
@@ -31,9 +36,14 @@ $breakpoints: (
 }
 
 .dark {
+  --font-primary: #{$font-family-primary};
+  --font-secondary: #{$font-family-secondary};
   --rbn-red: #{$color-rb-red};
+  --atc-color: #{$color-light};
   --text-color-primary: #{$color-light};
   --text-color-secondary: #{$color-medium-gray};
+  --text-color-lux-ctas: #{$color-dark};
+  --background-lux-ctas: #{$color-light};
   --customizer-background: rgb(0 0 0 / 50%);
   --customizer-border: 1px solid #{$color-dark-gray};
   --divider-color: rgb(255 255 255 / 20%);

@@ -1,0 +1,40 @@
+.yr-loader {
+  &__logo {
+    width: 100%;
+
+    img {
+      object-fit: cover;
+      width: inherit;
+    }
+  }
+
+  &__label {
+    text-transform: uppercase;
+    color: var(--text-color-primary);
+    text-align: center;
+    font-family: var(--font-family-primary);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%;
+    margin: 20px;
+  }
+
+  &__bar {
+    margin: 20px;
+    display: flex;
+    backdrop-filter: blur(12.5px);
+    border-radius: 24px;
+    border: 1px solid var(--text-color-lux-ctas);
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12.5px);
+    height: 8px;
+
+    &__progress {
+      background: var(--text-color-lux-ctas);
+      width: 50%;
+      height: 8px;
+      flex-shrink: 0;
+    }
+  }
+}

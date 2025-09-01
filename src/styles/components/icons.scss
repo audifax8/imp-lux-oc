@@ -1,9 +1,0 @@
-@use '../base/variables.scss' as *;
-
-.yr-icon-arrow {
-  transition: transform 0.2s ease-in-out;
-
-  path {
-    fill: var(--text-color-primary);
-  }
-}

@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { preload, PreloadAs, PreloadOptions } from 'react-dom';
 
 import { mapURLs } from '@/declarations/constants';
@@ -9,18 +8,16 @@ type CrossOrigin = 'anonymous' | 'use-credentials' | '' | undefined;
 
 export const usePreloadStaticAssets = () => {
   const params = apis.getParams();
-  useEffect(() => {
-    mapURLs(params).forEach((resource) => {
-      const { url } = resource;
-      const options: PreloadOptions = {
-        as: resource.as as PreloadAs,
-        crossOrigin: resource.crossOrigin as CrossOrigin,
-        fetchPriority: resource.fetchPriority
-      };
-      if (params.yrEnv) {
-        console.info('preload resource: ' + url);
-      }
-      return preload(url, options);
-    });
-  }, [params]);
+  mapURLs(params).forEach((resource) => {
+    const { url } = resource;
+    const options: PreloadOptions = {
+      as: resource.as as PreloadAs,
+      crossOrigin: resource.crossOrigin as CrossOrigin,
+      fetchPriority: resource.fetchPriority
+    };
+    if (params.yrEnv) {
+      console.info('preload resource: ' + url);
+    }
+    return preload(url, options);
+  });
 };

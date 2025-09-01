@@ -1,25 +1,27 @@
 import { lazy, Suspense } from 'react';
+import clsx from 'clsx';
 
-import { useIsMobile } from '@/state/ui';
+import { useIsCustomizerOpen, useIsMobile } from '@/state/ui';
 
-import { MOCK_RBN_MENU_ITEMS } from '@/declarations/constants';
+import MenuSkeleton from './skeleton';
+import { coreResource, waitForCoreReady } from '@/libs/core';
 
-import { AccordionSkeleton } from '@/components/Accordion/Skeleton';
-import { Header } from '@/components/Header';
+import { Header } from '@/components/header';
 
-const Configurator = lazy(() => import('../Accordion/index'));
+const Accordion = lazy(() => import('./accordion'));
+
+import './index.scss';
 
 export function Menu() {
   const [isMobile] = useIsMobile();
+  const [isCustomizerOpen] = useIsCustomizerOpen();
+  const corePromise = coreResource(waitForCoreReady());
   return (
-    <div className="yr-menu">
+    <div className={clsx('yr-menu', { 'yr-customizer-open': isCustomizerOpen })}>
       {!isMobile && <Header />}
-      <div className="yr-customizer">
-        <Suspense
-          fallback={
-            MOCK_RBN_MENU_ITEMS.map((item) => <AccordionSkeleton key={item.name} item={item} />)}
-          >
-            {MOCK_RBN_MENU_ITEMS.map((item) => <Configurator key={item.name} item={item} />)}
+      <div className={clsx('yr-customizer', { 'yr-customizer-open': isCustomizerOpen })}>
+        <Suspense fallback={<MenuSkeleton />}>
+          <Accordion corePromise={corePromise} />
         </Suspense>
       </div>
     </div>
