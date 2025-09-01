@@ -4,7 +4,6 @@ import { ISkeletonProps } from '@/declarations/interfaces';
 
 import './index.scss';
 
-
 export function Skeleton(props: ISkeletonProps) {
   const { variant, style } = props;
   return(

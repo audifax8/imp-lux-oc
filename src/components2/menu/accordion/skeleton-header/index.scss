@@ -10,11 +10,7 @@
   }
 
   &-header {
-    grid-column: 2 / 3;
-    display: grid;
-    grid-template-rows: min-content;
-    grid-template-columns: min-content 1fr;
-    align-items: baseline;
+    display: flex;
     gap: 8px;
   }
 }
