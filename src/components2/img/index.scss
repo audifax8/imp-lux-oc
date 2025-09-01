@@ -1,7 +1,0 @@
-@use '../../styles/mixins/' as *;
-
-.yr-image {
-  &.yr-skeleton {
-    @include skeleton-image;
-  }
-}

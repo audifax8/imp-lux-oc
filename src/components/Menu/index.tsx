@@ -3,55 +3,27 @@ import clsx from 'clsx';
 
 import { useIsCustomizerOpen, useIsMobile } from '@/state/ui';
 
-import { MOCK_RBN_MENU_ITEMS } from '@/declarations/constants';
+import MenuSkeleton from './skeleton';
+import { coreResource, waitForCoreReady } from '@/libs/core';
 
-import { AccordionSkeleton } from '@/components/Accordion/Skeleton';
-import { Header } from '@/components2/header';
+import { Header } from '@/components/header';
 
-import { apis } from '@/libs/apis';
-import { coreResource, createCorePromise } from '@/libs/core';
-
-const Configurator = lazy(() => import('../Accordion2/index'));
+const Accordion = lazy(() => import('./accordion'));
 
 import './index.scss';
 
 export function Menu() {
   const [isMobile] = useIsMobile();
   const [isCustomizerOpen] = useIsCustomizerOpen();
-  const corePromise = coreResource(createCorePromise(apis.getParams()));
+  const corePromise = coreResource(waitForCoreReady());
   return (
-    <>
-      <Suspense
-        fallback={
-          <>
-            <div className={clsx('yr-menu', { 'yr-customizer-open': isCustomizerOpen })}>
-              {!isMobile && <Header />}
-              <div className={clsx('yr-customizer', { 'yr-customizer-open': isCustomizerOpen })}>
-                {MOCK_RBN_MENU_ITEMS
-                  .map(
-                    ({ id, caName, alias, selectedAvId, selectedAvName, icon }) =>
-                      <AccordionSkeleton
-                        id={id}
-                        key={id}
-                        alias={caName || alias}
-                        icon={icon}
-                        selectedAvName={selectedAvName}
-                        selectedAvId={selectedAvId}
-                      />
-                  )
-                }
-              </div>
-            </div>
-          </>
-          }
-        >
-          <div className={clsx('yr-menu', { 'yr-customizer-open': isCustomizerOpen })}>
-            {!isMobile && <Header />}
-            <div className={clsx('yr-customizer', { 'yr-customizer-open': isCustomizerOpen })}>
-              <Configurator corePromise={corePromise} />
-            </div>
-          </div>
-      </Suspense>
-    </>
+    <div className={clsx('yr-menu', { 'yr-customizer-open': isCustomizerOpen })}>
+      {!isMobile && <Header />}
+      <div className={clsx('yr-customizer', { 'yr-customizer-open': isCustomizerOpen })}>
+        <Suspense fallback={<MenuSkeleton />}>
+          <Accordion corePromise={corePromise} />
+        </Suspense>
+      </div>
+    </div>
   );
 }

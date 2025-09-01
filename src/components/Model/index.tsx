@@ -1,26 +1,23 @@
 import { lazy, Suspense } from 'react';
+import clsx from 'clsx';
 
-import { coreResource, createCorePromise } from '@/libs/core';
-import { rtrResource, rtrLoadedPromise } from '@/libs/rtr';
-
-import { ModelSkeleton } from './Skeleton';
 import { apis } from '@/libs/apis';
-import { useParams } from '@/state/ui';
+import { Loader } from './loader';
 
-const Product = lazy(() => import('./Model3'));
-const RTR = lazy(() => import('./rtr'));
+import { mainSuspender, mainResourcesPromise } from '@/libs/main';
+import { useIsCustomizerOpen, useIsMobile } from '@/state/ui';
+
+const LazyModel = lazy(() => import('./model'));
 
 export default function Model() {
-  const [params] = useParams();
-  //TODO
-  const corePromise = coreResource(createCorePromise(apis.getParams()));
-  const rtrPromise = rtrResource(rtrLoadedPromise(apis.getParams()));
+  const [isCustomizerOpen] = useIsCustomizerOpen();
+  const [isMobile] = useIsMobile();
+  const mainAPIsPromise = mainSuspender(mainResourcesPromise(apis.getParams()));
   return(
-    <Suspense fallback={<ModelSkeleton />}>
-      {params.rtrDisabled ?
-        <Product corePromise={corePromise} /> :
-        <RTR corePromise={rtrPromise} />
-      }
-    </Suspense>
+    <div className={clsx('yr-model', { 'yr-customizer-open': (isCustomizerOpen && isMobile) })}>
+      <Suspense fallback={<Loader />}>
+        <LazyModel mainAPIsPromise={mainAPIsPromise}/>
+      </Suspense>
+    </div>
   );
 };
