@@ -31,3 +31,10 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 export enum RTRError {
   UPC_NOT_AVAILABLE = 'UPC_NOT_AVAILABLE'
 }
+
+export enum SkeletonVariant {
+  text = 'text',
+  circular = 'circular',
+  rectangular = 'rectangular',
+  rounded = 'rounded'
+}
