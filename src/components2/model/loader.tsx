@@ -25,8 +25,8 @@ export function Loader() {
         </div>
       }
       {initialLoaded &&
-        <div className='yr-loader__progress'>
-          <progress value='10' max='100' className='yr-loader__progress__bar'></progress>
+        <div className='yr-loader__bar'>
+          <span className='yr-loader__bar__progress'></span>
         </div>
       }
     </section>

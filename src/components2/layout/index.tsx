@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import {
   useIsCustomizerOpen,
   useIsMobile,
+  useParams,
   useTheme
 } from '@/state/ui';
 
@@ -10,10 +11,12 @@ import Model from '@/components2/model';
 import { Menu } from '@/components2/menu';
 import { Header } from '@/components2/header';
 import Footer from '@/components2/footer';
+import { RBNHeader } from '@/components2/RBNHeader';
 
 import './index.scss';
 
 export function AppLayout() {
+  const [params] = useParams();
   const [isMobile] = useIsMobile();
   const [theme] = useTheme();
   const [isCustomizerOpen] = useIsCustomizerOpen();
@@ -24,6 +27,7 @@ export function AppLayout() {
         theme
       )}>
         <div className='yr-content'>
+          {params?.showHeader && <RBNHeader />}
           {isMobile && <Header />}
           <div
             className={clsx(

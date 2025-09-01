@@ -1,63 +1,22 @@
-@use '../../styles/mixins/skeleton.scss' as *;
-@use '../../styles/mixins/typography.scss' as *;
-//@use '../../styles/base/variables.scss' as *;
-
 .yr-custom-header {
   position: relative;
   display: flex;
-  margin: 10px 0px;
+  flex-direction: column;
   justify-content: space-between;
 
-  & .yr-header-title {
-    text-transform: uppercase;
-    font-family: "Oswald", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    line-height: 160%;
-    color: var(--text-color-primary);
-    font-size: 20px;
-
-    @include text-editorial-lg;
-
-    &.yr-skeleton {
-      @include skeleton-text(20px);
-      height: 32px;
-    }
-
-    @media only screen and (max-width: 600px) {
-      width: fit-content;
-      margin: 0px 16px;
-    } 
-  }
-
   & .yr-buttons-section {
-    margin: 0px 16px;
+    display: flex;
+    gap: 10px;
+    margin: 5px 0;
 
     @media only screen and (max-width: 600px) {
-      display: flex;
-      gap: 10px;
-    }
-
-    & .yr-button {
-      @include text-editorial-xs;
-      //background-color: var(--customizer-background);
-      //color: var(--text-color-primary);
-
-      &.yr-skeleton {
-        //color: transparent;
-      }
+      margin: 0px 10px;
     }
   }
 
-  @media only screen and (max-width: 600px) {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-
-    & .yr-button-icon {
-      svg {
-        fill: var(--text-color-primary);
-      }
+  & .yr-header-title {
+    @media only screen and (max-width: 600px) {
+      margin: 0px 10px;
     }
   }
 }

@@ -1,6 +1,8 @@
 import { ReactNode, useState, useEffect } from 'react';
 import clsx from 'clsx';
 
+import './index.scss';
+
 interface SwitchProps {
   label?: string | ReactNode;
   onChange?: (checked: boolean) => void;

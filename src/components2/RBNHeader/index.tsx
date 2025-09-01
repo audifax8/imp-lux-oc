@@ -1,8 +1,8 @@
 import { useTheme, useParams, useIsMobile } from '@/state/ui';
 
-import { Logo } from '@/components/Logo';
-import { Switch } from '@/components/Switch';
-import { MenuIcon } from '@/components/Icons';
+import { Logo } from '@/components2/logo';
+import { Switch } from '@/components2/switch';
+import { MenuIcon } from '@/components2/Icons';
 
 import { Theme } from '@/declarations/enums';
 
@@ -13,7 +13,7 @@ export function RBNHeader() {
   const [params] = useParams();
   const [theme, toggleTheme] = useTheme();
   return (
-    <header className='yr-header'>
+    <header className='yr-rbn-header'>
       <Logo />
       {params?.showThemeSwitch && (
         <Switch
@@ -22,7 +22,7 @@ export function RBNHeader() {
           label='Dark mode'
         />
       )}
-      {isMobile && <span className='yr-menu'>{<MenuIcon size={18}/>}</span>}
+      {isMobile && <span className='yr-menu-icon'>{<MenuIcon size={18}/>}</span>}
     </header>
   );
 }

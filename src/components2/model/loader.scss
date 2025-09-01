@@ -20,9 +20,21 @@
     margin: 20px;
   }
 
-  &__progress {
+  &__bar {
     margin: 20px;
     display: flex;
-    justify-content: center;
+    backdrop-filter: blur(12.5px);
+    border-radius: 24px;
+    border: 1px solid var(--text-color-lux-ctas);
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12.5px);
+    height: 8px;
+
+    &__progress {
+      background: var(--text-color-lux-ctas);
+      width: 50%;
+      height: 8px;
+      flex-shrink: 0;
+    }
   }
 }

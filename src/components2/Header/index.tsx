@@ -1,57 +1,20 @@
-import clsx from 'clsx';
+import { lazy, Suspense } from 'react';
 
-import {
-  useIsCustomizerOpen,
-  useIsMobile,
-  useParams,
-  useShowSkeleton
-} from '@/state/ui';
+import { coreResource, waitForCoreReady } from '@/libs/core';
 
-import { useGetProduct } from '@/libs/yr-react/hooks/configure';
-
-import { Button } from '@/components2/button';
-import { ArrowIcon } from '@/components2/Icons';
-import { VMButton } from '@/components2/VM/VMButton';
-import { RXCButton } from '@/components2/RXC/RXCButton';
+import { HeaderSkeleton } from './skeleton';
 
 import './index.scss';
 
+const Head = lazy(() => import('./header'));
+
 export function Header() {
-  const [isMobile] = useIsMobile();
-  const [isCustomizerOpen, toggleCustomizer] = useIsCustomizerOpen();
-  const product = useGetProduct();
-  const [showSkeleton] = useShowSkeleton();
-  const [params] = useParams();
-
-  const name = product?.name ?? 'TEST NAME';
-
+  const corePromise = coreResource(waitForCoreReady());
   return (
     <header className='yr-custom-header'>
-      {!isCustomizerOpen &&
-        <div className={clsx('yr-header-title')}>
-          <span>{name}</span>
-        </div>
-      }
-      {isMobile && !isCustomizerOpen &&
-        <div className='yr-buttons-section'>
-          <VMButton />
-          <RXCButton />
-          {!params.rtrDisabled &&
-            <Button
-              variant="rounded"
-              onClick={() => toggleCustomizer(true)}
-              showSkeleton={showSkeleton}
-            >Open menu </Button>
-          }
-        </div>
-      }
-      {isMobile && isCustomizerOpen &&
-        <Button
-          className='yr-header-go-back-button'
-          icon={<ArrowIcon direction='right' size={24} />}
-          onClick={() => toggleCustomizer(false)}
-        />
-      }
+      <Suspense fallback={<HeaderSkeleton />}>
+        <Head corePromise={corePromise} />
+      </Suspense>
     </header>
   );
 }
