@@ -13,7 +13,7 @@ export type IAccordionProps = {
   corePromise: ISuspender; 
 };
 
-import './index.scss';
+//import './index.scss';
 
 export default React.memo(function Accordion({ corePromise }: IAccordionProps) {
   corePromise.read();

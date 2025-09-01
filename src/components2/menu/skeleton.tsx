@@ -7,15 +7,8 @@ export default function MenuSkeleton() {
     <>
       {MOCK_RBN_MENU_ITEMS
         .map(
-          ({ id, caName, alias, selectedAvId, selectedAvName, icon }) =>
-            <HeaderSkeleton
-              id={id}
-              key={id}
-              alias={caName || alias}
-              icon={icon}
-              selectedAvName={selectedAvName}
-              selectedAvId={selectedAvId}
-            />
+          (_menu, index) =>
+            <HeaderSkeleton key={index} />
           ) 
       }
     </>

@@ -1,19 +1,27 @@
-import { Image } from '@/components2/img';
-import { Button } from '@/components2/button';
-import { ICAMap } from '@/declarations/interfaces';
+
+import { SkeletonVariant } from '@/declarations/enums';
+import { Skeleton } from '@/components2/skeleton';
 
 import './index.scss';
 
-export function HeaderSkeleton({ alias, selectedAvName }: ICAMap) {
+export function HeaderSkeleton() {
   return (
     <details open={false} className='yr-accordion'>
       <summary className='yr-accordion-summary'>
-        <Image showSkeleton={true} alt={alias} className='yr-accordion-summary-image' />
+        <Skeleton
+          variant={SkeletonVariant.rectangular}
+          style={{ width: '48px', height: '48px' }}
+        />
         <div className='yr-accordion-header'>
-          <h3 className={'yr-skeleton yr-accordion-header-title'}>{alias}</h3>
-          <p className={'yr-skeleton yr-accordion-header-selected'}>{selectedAvName}</p>
+          <Skeleton variant={SkeletonVariant.text} style={{ width: '78px', height: '26px' }} />
+          <Skeleton variant={SkeletonVariant.text} style={{ width: '101px', height: '26px' }} />
         </div>
-        <Button className='yr-skeleton' tabIndex={-1} />
+        <Skeleton
+          variant={SkeletonVariant.rounded}
+          style={
+            { width: '26px', height: '26px', borderRadius: '26px' }
+          }
+        />
       </summary>
     </details>
   );
