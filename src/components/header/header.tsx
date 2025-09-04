@@ -15,10 +15,7 @@ import { RXCButton } from '@/components/RXC/RXCButton';
 import './header.scss';
 
 
-export default function Test() {
-//export default function Test({ corePromise }: IHeaderProps) {
-  //corePromise.read();
-
+export default function Header() {
   const [isMobile] = useIsMobile();
   const [isCustomizerOpen, toggleCustomizer] = useIsCustomizerOpen();
   const product = useGetProduct();

@@ -9,9 +9,6 @@ import { Button } from '@/components/button';
 import './index.scss';
 
 export default function Footer() {
-//export default function Footer({ corePromise }: IFooterProps) {
-  //corePromise.read();
-
   const [isMobile] = useIsMobile();
 
   return (

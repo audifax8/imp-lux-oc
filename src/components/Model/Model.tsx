@@ -13,19 +13,11 @@ import {
 } from '@/state/rtr';
 
 import { getImgData } from '@/libs/helpers';
-//import { ISuspender } from '@/libs/main';
-
-/*export type IModelProps = {
-  mainAPIsPromise: ISuspender; 
-};*/
 
 import './model.scss';
 import { getSkeletonURL } from '@/declarations/constants';
 
-//export default React.memo(function Model() {
-
 export default function Model() {
-  //mainAPIsPromise.read();
   const [rtrError] = useRTRError();
   const [rtrAPIReady] = useRTRAPIReady();
   const [isMobile] = useIsMobile();

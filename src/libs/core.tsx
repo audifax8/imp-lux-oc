@@ -1,4 +1,3 @@
-//import { apis } from '@/libs/apis';
 import { apis } from '@/libs/lazyimport';
 
 import { IConfigureAPI, IConfigureInitParams } from '@/declarations/interfaces';

@@ -4,7 +4,6 @@ import { coreResource, createCorePromise } from '@/libs/core';
 import { rtrResource, rtrLoadedPromise } from '@/libs/rtr';
 
 import { ModelSkeleton } from './Skeleton';
-//import { apis } from '@/libs/apis';
 import { apis } from '@/libs/lazyimport';
 import { useParams } from '@/state/ui';
 

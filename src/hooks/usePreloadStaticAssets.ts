@@ -2,7 +2,6 @@ import { preload, PreloadAs, PreloadOptions } from 'react-dom';
 
 import { mapURLs } from '@/declarations/constants';
 
-//import { apis } from '@/libs/apis';
 import { apis } from '@/libs/lazyimport';
 type CrossOrigin = 'anonymous' | 'use-credentials' | '' | undefined;
 

@@ -11,7 +11,6 @@ import { ArrowIcon } from '@/components/Icons';
 import { Swatch } from '../swatch';
 import { ViewMore } from '../view-more';
 
-//import { apis } from '@/libs/apis';
 import { apis } from '@/libs/lazyimport';
 
 import './index.scss';
@@ -37,7 +36,7 @@ export default function Header(props: IAccordeon) {
         [{ ca: { alias }, av: { id: av.id } }]
       );
       const token = apis.luxAPI.getToken();
-      //apis.rtrAPI.handleTokenChange(token);
+      apis.rtrAPI?.handleTokenChange(token);
       const img = apis.getImg();
       setTokenAndImage(token, img);
       setSelectedAvId(av.id);

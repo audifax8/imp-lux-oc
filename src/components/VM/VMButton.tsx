@@ -5,7 +5,6 @@ import { TryOnIcon } from '@/components/Icons';
 import { Skeleton } from '@/components/skeleton';
 
 import { useShowSkeleton } from '@/state/ui';
-//import { apis } from '@/libs/apis';
 import { apis } from '@/libs/lazyimport';
 import { VMAPI } from '@/libs/apis/vm-api';
 import { IScriptResult } from '@/declarations/interfaces';

@@ -5,7 +5,6 @@ import { TryLensesIcon } from '@/components/Icons';
 import { Skeleton } from '@/components/skeleton';
 
 import { useShowSkeleton } from '@/state/ui';
-//import { apis } from '@/libs/apis';
 import { apis } from '@/libs/lazyimport';
 import { IRXCBaseAPI, IScriptResult } from '@/declarations/interfaces';
 import { SkeletonVariant } from '@/declarations/enums';
