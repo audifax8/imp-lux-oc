@@ -1,4 +1,4 @@
-import React from 'react';
+//import React from 'react';
 import clsx from 'clsx';
 
 import {
@@ -13,16 +13,19 @@ import {
 } from '@/state/rtr';
 
 import { getImgData } from '@/libs/helpers';
-import { ISuspender } from '@/libs/main';
+//import { ISuspender } from '@/libs/main';
 
-export type IModelProps = {
+/*export type IModelProps = {
   mainAPIsPromise: ISuspender; 
-};
+};*/
 
 import './model.scss';
+import { getSkeletonURL } from '@/declarations/constants';
 
-export default React.memo(function Model({ mainAPIsPromise }: IModelProps) {
-  mainAPIsPromise.read();
+//export default React.memo(function Model() {
+
+export default function Model() {
+  //mainAPIsPromise.read();
   const [rtrError] = useRTRError();
   const [rtrAPIReady] = useRTRAPIReady();
   const [isMobile] = useIsMobile();
@@ -31,6 +34,7 @@ export default React.memo(function Model({ mainAPIsPromise }: IModelProps) {
 
   const imageData = getImgData();
   const [img] = useConfigureImg();
+  const skeletonURL = getSkeletonURL();
 
   return (
     <>
@@ -40,7 +44,7 @@ export default React.memo(function Model({ mainAPIsPromise }: IModelProps) {
           className={clsx('yr-model__rtr')}
         ></div>
       }
-      {(rtrError) &&
+      {
         <picture
           className={clsx('yr-model__placeholder yr-image')}
           onClick={() => {
@@ -52,7 +56,7 @@ export default React.memo(function Model({ mainAPIsPromise }: IModelProps) {
           >
             <img
               fetchPriority='high'
-              src={img}
+              src={img ?? skeletonURL}
               alt='Model'
               height={imageData.dimentions.height}
               width={imageData.dimentions.width}
@@ -61,4 +65,4 @@ export default React.memo(function Model({ mainAPIsPromise }: IModelProps) {
       }
     </>
   );
-});
+};

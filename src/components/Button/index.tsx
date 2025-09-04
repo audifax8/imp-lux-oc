@@ -23,8 +23,8 @@ export function Button(
       })}
       {...props}
       onClick={onClick}>
-      {icon && <span className="yr-button-icon">{icon}</span>}
-      {children}
+      {icon && <span className='yr-button-icon'>{icon}</span>}
+      <span className='yr-button-label'>{children}</span>
     </button>
   );
 }

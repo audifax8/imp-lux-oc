@@ -1,6 +1,7 @@
 import { preconnect, PreconnectOptions } from 'react-dom';
 
-import { apis } from '@/libs/apis';
+//import { apis } from 
+import { apis } from '@/libs/lazyimport';
 
 import { getURLsToPreconnect } from '@/declarations/constants';
 

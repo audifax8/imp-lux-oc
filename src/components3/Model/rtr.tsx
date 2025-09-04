@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 
-import { apis } from '@/libs/apis';
+//import { apis } from '@/libs/apis';
+import { apis } from '@/libs/lazyimport';
 
 import {
   useIsCustomizerOpen,

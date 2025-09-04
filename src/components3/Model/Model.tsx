@@ -7,7 +7,8 @@ import { useIsCustomizerOpen, useToken } from '@/state/ui';
 import { startAPIs } from '@/store/APIsStore';
 import { setShowSkeleton, setTokenAndImage } from '@/store/UIStore';
 
-import { apis } from '@/libs/apis';
+//import { apis } from '@/libs/apis';
+import { apis } from '@/libs/lazyimport';
 //import { setAPIReady } from '@/libs/yr-react/store/ConfigureStore';
 
 import { IConfigureAPI } from '@/declarations/interfaces';

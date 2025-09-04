@@ -8,10 +8,10 @@ import {
 
 import { core } from './core';
 import { rtrLoadedPromise } from './rtr';
-import { apis } from './apis';
-import { RtrAPI } from './apis/rtr-api';
-import { startInitialStore } from '@/store/UIStore';
-import { startAPIs, startAPIsInitialStore } from '@/store/APIsStore';
+import { apis } from './lazyimport';
+//import { RtrAPI } from './apis/rtr-api';
+//import { startInitialStore } from '@/store/UIStore';
+//import { startAPIs, startAPIsInitialStore } from '@/store/APIsStore';
 
 export type IMainAPIs = {
   core: IConfigureAPI | null,
@@ -22,7 +22,7 @@ export type ISuspender = {
   read(): IMainAPIs;
 };
 
-const getCookie = (cookieKey: string) => {
+/*const getCookie = (cookieKey: string) => {
   const cookies = document.cookie.split(';');
   for (const cookie of cookies) {
     const cooKeyValue = cookie.split('=');
@@ -34,9 +34,9 @@ const getCookie = (cookieKey: string) => {
       }
     }
   }
-};
+};*/
 
-const isRTREnabled = (
+/*const isRTREnabled = (
   configureCore: IConfigureAPI,
   params: IConfigureInitParams
 ) => {
@@ -62,17 +62,19 @@ const isRTREnabled = (
     return false;
   }
   return true;
-};
+};*/
 
 export async function startInitialStores(
   configureCore: IConfigureAPI,
   params: IConfigureInitParams,
-  rtr?: IRTRBaseAPI
+  //rtr?: IRTRBaseAPI
 ) {
+  console.log('000');
+  console.log(configureCore);
   const { yrEnv } = params;
-  let isTokenValid = false;
-  apis.initLuxApi(configureCore);
-  startAPIs(configureCore);
+  //let isTokenValid = false;
+  //apis.initLuxApi(configureCore);
+  //startAPIs(configureCore);
   const configureImg = apis.luxAPI.getProductImg('LUX-Ray-Ban-8taOhSR5AFyjt9tfxU');
 
   const options: PreloadOptions = {
@@ -84,11 +86,11 @@ export async function startInitialStores(
   }
   preload(configureImg, options);
 
-  const token = apis.luxAPI.getToken();
-  const casToRender = apis.luxAPI.mapCas();
-  startInitialStore(token, configureImg, casToRender, false, false);
+  //const token = apis.luxAPI.getToken();
+  //const casToRender = apis.luxAPI.mapCas();
+  //startInitialStore(token, configureImg, casToRender, false, false);
 
-  const rtrEnabled = isRTREnabled(configureCore, params);
+  /*const rtrEnabled = isRTREnabled(configureCore, params);
   if (rtr) {
     const rtrAPI = new RtrAPI(window.rtrViewerMV as IRTRBaseAPI);
     apis.initRTRAPI(rtrAPI);
@@ -97,7 +99,7 @@ export async function startInitialStores(
     const rtrError = !isTokenValid ? 'Invalid token' : '';
     startAPIsInitialStore(rtrEnabled, rtrAPIReady, isTokenValid, rtrError);
     apis.rtrAPI.handleTokenChange(token);
-  }
+  }*/
 }
 
 export async function mainResourcesPromise(
@@ -138,7 +140,7 @@ export async function mainResourcesPromise(
           if (rtr) {
             rtrAPI = rtr;
           }
-          startInitialStores(coreAPI, params, rtrAPI);
+          startInitialStores(coreAPI, params);
           return resolve({ core: coreAPI, rtr: rtrAPI });
         });
       }

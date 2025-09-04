@@ -29,6 +29,10 @@
     justify-content: center;
   }
 
+  &-label {
+    width: max-content;
+  }
+
   &-rounded {
     border-radius: 48px;
 

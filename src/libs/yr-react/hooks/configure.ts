@@ -1,6 +1,7 @@
 import { IConfigureAPI, IProduct } from '@/declarations/interfaces';
 
-import { apis } from '@/libs/apis';
+//import { apis } from '@/libs/apis';
+import { apis } from '@/libs/lazyimport';
 import { useConfigureState } from '@/libs/yr-react/store/ConfigureStore';
 
 /**

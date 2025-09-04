@@ -7,7 +7,7 @@ import { VMAPI } from '@/libs/apis/vm-api';
 import { LuxBaseAPI, OakCustomAPI, RbnCustomAPI } from '@/libs/apis/lux-api';
 import { RxcAPI } from './rxc-api';
 
-class APIs {
+export class APIs {
   params: IConfigureInitParams = undefined!;
   rtrAPI: RtrAPI = undefined!;
   vmApi: VMAPI = undefined!;
@@ -15,6 +15,8 @@ class APIs {
   assetsWorker: AssetsWorker = undefined!;
   luxAPI: LuxBaseAPI = undefined!;
   configureCore: IConfigureAPI = undefined!;
+
+  constructor() {}
 
   setParams(params: IConfigureInitParams): void {
     this.params = params;
@@ -83,4 +85,4 @@ class APIs {
   }
 }
 
-export const apis = new APIs();
+//export const apis = new APIs();

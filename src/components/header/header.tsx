@@ -12,20 +12,12 @@ import { ArrowIcon } from '@/components/Icons';
 import { VMButton } from '@/components/VM/VMButton';
 import { RXCButton } from '@/components/RXC/RXCButton';
 
-import { IConfigureAPI } from '@/declarations/interfaces';
-
 import './header.scss';
 
-export type ISuspender = {
-  read(): IConfigureAPI | null;
-};
 
-export type IHeaderProps = {
-  corePromise: ISuspender; 
-};
-
-export default function Test({ corePromise }: IHeaderProps) {
-  corePromise.read();
+export default function Test() {
+//export default function Test({ corePromise }: IHeaderProps) {
+  //corePromise.read();
 
   const [isMobile] = useIsMobile();
   const [isCustomizerOpen, toggleCustomizer] = useIsCustomizerOpen();

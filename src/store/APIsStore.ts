@@ -1,7 +1,8 @@
 import { create, StoreApi } from 'zustand';
 import { devtools, subscribeWithSelector } from 'zustand/middleware';
 
-import { apis } from '@/libs/apis';
+//import { apis } from '@/libs/apis';
+import { apis } from '@/libs/lazyimport';
 import { RtrAPI } from '@/libs/apis/rtr-api';
 import { createStoreStateHook } from '@/libs/yr-react/store/zustand-helpers';
 

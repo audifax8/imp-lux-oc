@@ -5,7 +5,7 @@ import { Theme } from '@/declarations/enums';
 import { IConfigureInitParams, IMenuCA } from '@/declarations/interfaces';
 import { MOCK_RBN_MENU_ITEMS } from '@/declarations/constants';
 
-import { apis } from '@/libs/apis';
+//import { apis } from '@/libs/lazyimport';
 import { createStoreStateHook } from '@/libs/yr-react/store/zustand-helpers';
 
 import { getInitQueryParams } from '@/libs/helpers';
@@ -37,7 +37,17 @@ const INITIAL_STATE = {
 }
 
 export function loadDefaultUIStore() {
-  apis.setParams(params);
+  /*const configureImg = apis.luxAPI.getProductImg('LUX-Ray-Ban-8taOhSR5AFyjt9tfxU');
+  const token = apis.luxAPI.getToken();
+  const cas = apis.luxAPI.mapCas();*/
+  /*const state = {
+    ...INITIAL_STATE,
+    showSkeleton: false,
+    configureImg,
+    token,
+    cas
+  };
+  useUIStore.setState(state, false, 'Default UI store');*/
   useUIStore.setState(INITIAL_STATE, false, 'Default UI store');
 }
 

@@ -1,4 +1,5 @@
-import { apis } from '@/libs/apis';
+//import { apis } from '@/libs/apis';
+import { apis } from '@/libs/lazyimport';
 
 import { IConfigureAPI, IConfigureInitParams } from '@/declarations/interfaces';
 import { CDN_FLUID_BASE_URL } from '@/declarations/constants';

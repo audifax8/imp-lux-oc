@@ -2,24 +2,15 @@ import clsx from 'clsx';
 
 import { useIsMobile } from '@/state/ui';
 
-import { IConfigureAPI } from '@/declarations/interfaces';
-
 import { RXCButton } from '@/components/RXC/RXCButton';
 import { VMButton } from '@/components/VM/VMButton';
 import { Button } from '@/components/button';
 
 import './index.scss';
 
-export type ISuspender = {
-  read(): IConfigureAPI | null;
-};
-
-export type IFooterProps = {
-  corePromise: ISuspender; 
-};
-
-export default function Footer({ corePromise }: IFooterProps) {
-  corePromise.read();
+export default function Footer() {
+//export default function Footer({ corePromise }: IFooterProps) {
+  //corePromise.read();
 
   const [isMobile] = useIsMobile();
 

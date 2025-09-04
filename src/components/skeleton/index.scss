@@ -7,3 +7,12 @@
   height: 1.2em;
   border-radius: 4px / 6.7px;
 }
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}

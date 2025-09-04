@@ -38,3 +38,10 @@ export enum SkeletonVariant {
   rectangular = 'rectangular',
   rounded = 'rounded'
 }
+
+export enum ComponentType {
+  model = 'MODEL',
+  menu = 'MENU',
+  header = 'HEADER',
+  footer = 'FOOTER'
+}
