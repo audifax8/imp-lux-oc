@@ -84,5 +84,3 @@ export class APIs {
     this.rtrAPI?.destroy();
   }
 }
-
-//export const apis = new APIs();
