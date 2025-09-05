@@ -4,18 +4,131 @@ import {
   IRTRBaseAPI,
   KeyValueString,
   KeyValueNumber,
-  IInitRTRPayload
+  IInitRTRPayload,
+  IConfigureInitParams,
+  ScriptType
 } from '@/declarations/interfaces';
-import { waitForScriptToLoad } from '@/libs/helpers';
-import { setRTRDisabled, setRTRError } from '@/store/APIsStore';
+import { getInitQueryParams, waitForScriptToLoad } from '@/libs/helpers';
+import { setRTRDisabled, setRTRError, startAPIsInitialStore } from '@/store/APIsStore';
+import { apis } from '../lazyimport';
+
+const { yrEnv, rtrDisabled } = getInitQueryParams() as IConfigureInitParams;
+
 export class RtrAPI implements IRTRAPI {
   /* Lux rtr API */
-  api: IRTRBaseAPI;
+  api!: IRTRBaseAPI;
   lastTokenRendered: string;
-  constructor(api: IRTRBaseAPI) {
-    this.api = api;
+  rtrEnabled!: boolean;
+ 
+  constructor() {
     this.lastTokenRendered = '';
+    this.rtrEnabled = this.isRTREnabled();
+    if (!this.rtrEnabled) {
+      setRTRDisabled(true);
+      return;
+    }
+    if (window.rtrViewerMV) {
+      this.api = window.rtrViewerMV as IRTRBaseAPI;
+      Promise.resolve().then(() => {
+        setTimeout(async () => this.render(), 0);
+        console.log('render 0');
+      });
+    } else {
+      waitForScriptToLoad(100, 20000, 'rtrViewerMV')
+        .then((e: ScriptType) => {
+          if (!e.status) {
+            if (yrEnv) {
+              console.log('RTR error');
+            }
+            return;
+          }
+          this.api = window.rtrViewerMV as IRTRBaseAPI;
+          Promise.resolve().then(() => {
+            setTimeout(async () => this.render(), 0);
+            console.log('render 1');
+          });
+        })
+        .catch((err) => {
+          if (yrEnv) {
+            console.log('RTR error');
+            console.error(err);
+          }
+        });
+    }
+    setRTRDisabled(this.rtrEnabled);
   }
+
+  async render(): Promise<any> {
+    return new Promise(() => {
+      if (!this.rtrEnabled) {
+        return;
+      }
+      const token = apis.luxAPI.getToken();
+      this.isIdAvailable(token).then((isValidToken: boolean) => {
+        console.log({isValidToken});
+        if (!isValidToken) {
+          startAPIsInitialStore(
+            true,
+            true,
+            isValidToken,
+            'Invalid token'
+          );
+          return;
+        }
+        this.init(token);
+        this.lastTokenRendered = token;
+        startAPIsInitialStore(
+          false,
+          true,
+          isValidToken,
+          ''
+        );
+      });
+    });
+  };
+
+  getCookie(cookieKey: string) {
+    const cookies = document.cookie.split(';');
+    for (const cookie of cookies) {
+      const cooKeyValue = cookie.split('=');
+      if (cooKeyValue[0].replace(' ', '') === cookieKey) {
+        try {
+          return JSON.parse(cooKeyValue[1]);
+        } catch {
+          return cooKeyValue[1];
+        }
+      }
+    }
+    return null;
+  }
+
+  isRTREnabled(): boolean {
+    const rtrCookie = this.getCookie('rtr-exp');
+    if (rtrCookie === true || rtrCookie === false) {
+      if (yrEnv) {
+        console.info(`RTR: ${rtrCookie ? 'enabled' : 'disabled'} by cookie`);
+      }
+      return rtrCookie;
+    }
+
+    if (rtrDisabled !== undefined) {
+      if (yrEnv) {
+        console.info(`RTR: ${rtrDisabled ? 'disabled' : 'enabled'} by URL param`);
+      }
+      return rtrDisabled;
+    }
+
+    const product = apis.configureCore.getProduct();
+    const productFacets = product.facets;
+    const rtrFacet = productFacets.RTR_VIEWER;
+    if (!rtrFacet || rtrFacet[0] !== 'ENABLED') {
+      if (yrEnv) {
+        console.info(`RTR: disabled by product facet`);
+      }
+      return false;
+    }
+    return true;
+  };
 
   async handleTokenChange(token: string): Promise<void> {
     if (!token || !this.api) { return; }

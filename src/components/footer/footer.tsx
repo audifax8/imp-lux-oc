@@ -2,8 +2,6 @@ import clsx from 'clsx';
 
 import { useIsMobile } from '@/state/ui';
 
-import { RXCButton } from '@/components/RXC/RXCButton';
-import { VMButton } from '@/components/VM/VMButton';
 import { Button } from '@/components/button';
 
 import './index.scss';
@@ -14,10 +12,7 @@ export default function Footer() {
   return (
     <div className='yr-footer'>
       {!isMobile &&
-        <div className='yr-buttons-section'>
-          <VMButton />
-          <RXCButton />
-        </div>
+        <div className='yr-buttons-section'></div>
       }
       <div className='yr-footer-price-info'>
         <div className={`yr-footer--price`}>

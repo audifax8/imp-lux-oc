@@ -295,3 +295,8 @@ export interface ISkeletonProps {
   variant: SkeletonVariant;
   style?: React.CSSProperties
 };
+
+export type ScriptType = {
+  time: string;
+  status: boolean
+};

@@ -9,7 +9,7 @@ import './skeleton.scss';
 
 export default function FooterSkeleton() {
   const [isMobile] = useIsMobile();
-  const footerCTAs: ISkeletonProps[] = [
+  /*const footerCTAs: ISkeletonProps[] = [
     {
       variant: SkeletonVariant.rounded,
       style: { width: '92px', height: '32px', borderRadius: '48px' }
@@ -19,6 +19,10 @@ export default function FooterSkeleton() {
       style: { width: '112px', height: '32px', borderRadius: '48px' }
     }
   ];
+  {footerCTAs.map(
+    (cta, index) =>
+      <Skeleton key={index} variant={cta.variant} style={cta.style} />
+  )}*/
   const footerPrice: ISkeletonProps[] = [
     {
       variant: SkeletonVariant.text,
@@ -50,10 +54,6 @@ export default function FooterSkeleton() {
     <div className='yr-footer'>
       {!isMobile &&
         <div className='yr-buttons-section'>
-          {footerCTAs.map(
-            (cta, index) =>
-              <Skeleton key={index} variant={cta.variant} style={cta.style} />
-          )}
         </div>
       }
       <div className='yr-footer-price-info'>

@@ -15,7 +15,7 @@ export class AssetsWorker {
     const { rtrDisabled, yrEnv } = params;
     if (rtrDisabled) {
       if (yrEnv) {
-        console.log('RTR Disabled');
+        console.log('RTR: Assets worker disabled');
       }
       return;
     }

@@ -42,8 +42,8 @@ export class APIs {
     }
   }
 
-  initRTRAPI(rtrApi: RtrAPI): void {
-    this.rtrAPI = rtrApi;
+  initRTRAPI(): void {
+    this.rtrAPI = new RtrAPI();
   }
 
   initVMAPI(vmApi: VMAPI): void {

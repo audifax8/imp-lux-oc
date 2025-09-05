@@ -1,10 +1,5 @@
-import { IConfigureInitParams, IRTRBaseAPI } from '@/declarations/interfaces';
+import { IConfigureInitParams, IRTRBaseAPI, ScriptType } from '@/declarations/interfaces';
 import { waitForScriptToLoad } from '@/libs/helpers';
-
-type ScriptType = {
-  time: string;
-  status: boolean
-};
 
 export function rtrLoadedPromise(params: IConfigureInitParams): Promise<IRTRBaseAPI | null> {
   const { yrEnv, rtrDisabled } = params;

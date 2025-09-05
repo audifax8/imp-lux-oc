@@ -150,7 +150,7 @@ export function getInitQueryParams(): IConfigureInitParams {
     locale: parseInt(customer) === OAK_CUSTOMER_ID ? 'en' : DEFAULT_LOCALE,
     environment: 'prod',
     yrEnv: parseBoolParam(yrEnv),
-    rtrDisabled: parseBoolParam(rtrDisabled),
+    rtrDisabled: rtrDisabled !== undefined ? parseBoolParam(rtrDisabled): undefined,
     customer: isNaN(parseInt(customer)) ? RBN_CUSTOMER_ID : parseInt(customer),
     product: isNaN(parseInt(product)) ? WAYFARER_ID : parseInt(product),
     recipeId: recipeId ?? undefined,

@@ -2,10 +2,9 @@ import { create, StoreApi } from 'zustand';
 import { devtools, subscribeWithSelector } from 'zustand/middleware';
 
 import { apis } from '@/libs/lazyimport';
-import { RtrAPI } from '@/libs/apis/rtr-api';
 import { createStoreStateHook } from '@/libs/yr-react/store/zustand-helpers';
 
-import { IConfigureAPI, IRTRBaseAPI, IVMBaseAPI } from '@/declarations/interfaces';
+import { IConfigureAPI, IVMBaseAPI } from '@/declarations/interfaces';
 import { VMAPI } from '@/libs/apis/vm-api';
 
 export interface IAPIsState {
@@ -36,8 +35,6 @@ export function startAPIs(configure: IConfigureAPI) {
 }
 
 export function startRTR() {
-  const rtrAPI = new RtrAPI(window.rtrViewerMV as IRTRBaseAPI);
-  apis.initRTRAPI(rtrAPI);
   useAPIsStore.setState({ rtrApiReady: true }, false, 'Start RTR');
 }
 

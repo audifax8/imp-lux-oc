@@ -50,7 +50,7 @@ export function loadOnce(params: IConfigureInitParams): Promise<IConfigureAPI | 
   if (!promise) {
     promise = new Promise((resolve) => {
       core(params)
-        .then((configureCore) => {
+        .then(async (configureCore) => {
           if (configureCore) {
             if (params.yrEnv) {
               window._configure = configureCore;
@@ -70,12 +70,13 @@ export function loadOnce(params: IConfigureInitParams): Promise<IConfigureAPI | 
             const cas = apis.luxAPI.mapCas()
             startInitialStore(
               token,
-              configureImg,
+              '',
               cas,
               false,
               false
             );
             apis.initAssetsWorkers();
+            apis.initRTRAPI();
             resolve(configureCore);
           }
         })

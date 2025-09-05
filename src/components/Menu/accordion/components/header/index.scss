@@ -49,6 +49,12 @@
     backdrop-filter: blur(20px);
     padding: 16px;
     @include text-main-md;
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
   }
 
   &[open] {
