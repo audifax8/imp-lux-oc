@@ -32,7 +32,7 @@ export default function Model() {
 
   useEffect(() => {
     if (rtrDisabled && !isImageLoaded) {
-      const url = apis.luxAPI.getProductImg('LUX-Ray-Ban-8taOhSR5AFyjt9tfxU');
+      const url = apis.luxAPI.getProductImg();
       fetch(url)
         .then(() => setIsImageLoaded(url));
     } else if (rtrDisabled && img) {

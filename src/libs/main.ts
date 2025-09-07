@@ -75,7 +75,7 @@ export async function startInitialStores(
   //let isTokenValid = false;
   //apis.initLuxApi(configureCore);
   //startAPIs(configureCore);
-  const configureImg = apis.luxAPI.getProductImg('LUX-Ray-Ban-8taOhSR5AFyjt9tfxU');
+  const configureImg = apis.luxAPI.getProductImg();
 
   const options: PreloadOptions = {
     as: 'image',

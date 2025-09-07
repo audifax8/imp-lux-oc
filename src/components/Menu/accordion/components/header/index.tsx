@@ -39,7 +39,6 @@ export default function Header(props: IAccordeon) {
       const token = apis.luxAPI.getToken();
       apis.rtrAPI?.handleTokenChange(token);
       const img = apis.luxAPI.getProductImg(
-        'LUX-Ray-Ban-8taOhSR5AFyjt9tfxU',
         ca.viewName
       );
       setTokenAndImage(token, img);

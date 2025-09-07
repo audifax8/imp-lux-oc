@@ -58,7 +58,7 @@ const createCorePromise = new Promise((resolve) => {
           return resolve(false);
         }
         apis.initLuxApi(configureCore);
-        const configureImg = apis.luxAPI.getProductImg('LUX-Ray-Ban-8taOhSR5AFyjt9tfxU');
+        const configureImg = apis.luxAPI.getProductImg();
         fetch(configureImg)
           .then(() => {
             const token = apis.luxAPI.getToken();

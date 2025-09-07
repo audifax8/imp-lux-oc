@@ -5,8 +5,12 @@ import { getImgData, resolutions } from '@/libs/helpers';
 
 export abstract class LuxBaseAPI implements IBaseLuxAPI {
   coreService: IConfigureAPI = undefined!;
+  apiKey: string;
 
-  constructor() {}
+  constructor() {
+    //TODO
+    this.apiKey = 'LUX-Ray-Ban-8taOhSR5AFyjt9tfxU';
+  }
 
   abstract reloadPagination(menu: IMenuCA): IMenuCA;
   abstract getSwatchURL(av: IAttributeValue, caName: string): string;
@@ -79,8 +83,9 @@ export abstract class LuxBaseAPI implements IBaseLuxAPI {
     return assetsURL;
   }
 
-  getProductImg(apiKey: string, view?: string): string {
+  getProductImg(view?: string): string {
     const imageData = getImgData();
+    const apiKey = this.apiKey;
     const { scale, quality } = imageData;
     const conciseRecipe = this.coreService.getRecipe('legacyConcise');
     const uriRecipe = encodeURI(conciseRecipe);
@@ -90,8 +95,9 @@ export abstract class LuxBaseAPI implements IBaseLuxAPI {
     return baseURL;
   }
 
-  getProductImgByViewName(apiKey: string, viewName: string, resolution: IImageData): string {
+  getProductImgByViewName(viewName: string, resolution: IImageData): string {
     const { scale, quality } = resolution;
+    const apiKey = this.apiKey;
     const conciseRecipe = this.coreService.getRecipe('legacyConcise');
     const uriRecipe = encodeURI(conciseRecipe);
     const { id, defaultViewName, environment, workflow, customerId } = this.coreService.getProduct();
@@ -100,9 +106,9 @@ export abstract class LuxBaseAPI implements IBaseLuxAPI {
     return baseURL;
   }
 
-  mapConfigureImgs(apiKey: string, view: string): IImageData[] {
+  mapConfigureImgs(view: string): IImageData[] {
     return resolutions.map(resolution => {
-      const url = this.getProductImgByViewName(apiKey, view, resolution);
+      const url = this.getProductImgByViewName(view, resolution);
       return {
         ...resolution,
         url

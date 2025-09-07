@@ -59,7 +59,6 @@ export function loadOnce(params: IConfigureInitParams): Promise<IConfigureAPI | 
             import('../styles/base/fonts.scss');
             apis.initLuxApi(configureCore);
             const configureImg = apis.luxAPI.getProductImg(
-              'LUX-Ray-Ban-8taOhSR5AFyjt9tfxU',
               viewName
             );
             const options: PreloadOptions = {
@@ -73,7 +72,6 @@ export function loadOnce(params: IConfigureInitParams): Promise<IConfigureAPI | 
             const token = apis.luxAPI.getToken();
             const cas = apis.luxAPI.mapCas()
             const imgs = apis.luxAPI.mapConfigureImgs(
-              'LUX-Ray-Ban-8taOhSR5AFyjt9tfxU',
               viewName
             );
             startInitialStore(
