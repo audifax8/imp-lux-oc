@@ -89,19 +89,19 @@ export const resolutions: IImageData[] =
   [
     {
       resolution: ResolutionType.MOBILE,
-      scale: 0.15,
+      scale: 0.3,
       quality: 50,
-      media: '(max-width:350px)',
+      media: '(max-width:375px)',
       type: 'image/png',
       url: '',
       dimentions: {
-        width: 350,
-        height: 170
+        width: 375,
+        height: 188
       }
     },
     {
       resolution: ResolutionType.DESKTOP,
-      scale: 0.6,
+      /*scale: 0.6,
       quality: 91,
       media: '(max-width:760px)',
       type: 'image/png',
@@ -109,18 +109,27 @@ export const resolutions: IImageData[] =
       dimentions: {
         width: 760,
         height: 380
+      }*/
+      scale: 0.6,
+      quality: 90,
+      media: '(max-width:675px)',
+      type: 'image/png',
+      url: '',
+      dimentions: {
+        width: 675,
+        height: 337
       }
     },
     {
       resolution: ResolutionType.TABLET,
       scale: 0.3,
       quality: 70,
-      media: '(max-width:550px)',
+      media: '(max-width:675px)',
       type: 'image/png',
       url: '',
       dimentions: {
-        width: 500,
-        height: 325
+        width: 675,
+        height: 337
       }
     }
   ];
