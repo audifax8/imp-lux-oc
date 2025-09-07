@@ -18,12 +18,12 @@ export class RtrAPI implements IRTRAPI {
   /* Lux rtr API */
   api!: IRTRBaseAPI;
   lastTokenRendered: string;
-  rtrEnabled!: boolean;
+  rtrDisabled!: boolean;
  
   constructor() {
     this.lastTokenRendered = '';
-    this.rtrEnabled = this.isRTREnabled();
-    if (!this.rtrEnabled) {
+    this.rtrDisabled = this.isRTRDisabled();
+    if (this.rtrDisabled) {
       setRTRDisabled(true);
       return;
     }
@@ -55,12 +55,12 @@ export class RtrAPI implements IRTRAPI {
           }
         });
     }
-    setRTRDisabled(this.rtrEnabled);
+    setRTRDisabled(this.rtrDisabled);
   }
 
   async render(): Promise<any> {
     return new Promise(() => {
-      if (!this.rtrEnabled) {
+      if (this.rtrDisabled) {
         return;
       }
       const token = apis.luxAPI.getToken();
@@ -102,7 +102,7 @@ export class RtrAPI implements IRTRAPI {
     return null;
   }
 
-  isRTREnabled(): boolean {
+  isRTRDisabled(): boolean {
     const rtrCookie = this.getCookie('rtr-exp');
     if (rtrCookie === true || rtrCookie === false) {
       if (yrEnv) {
