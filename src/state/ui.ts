@@ -54,6 +54,13 @@ export const useConfigureImg = (): UseConfigureImg => {
   return [configureImg, setConfigureImg];
 };
 
+type UseConfigureImgs = ReturnType<typeof useUIState<'imgs'>>;
+
+export const useConfigureImgs = (): UseConfigureImgs => {
+  const [configureImgs, setConfigureImgs] = useUIState('imgs');
+  return [configureImgs, setConfigureImgs];
+};
+
 type UseToken = ReturnType<typeof useUIState<'token'>>;
 
 export const useToken = (): UseToken => {

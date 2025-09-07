@@ -45,3 +45,9 @@ export enum ComponentType {
   header = 'HEADER',
   footer = 'FOOTER'
 }
+
+export enum ResolutionType {
+  MOBILE = 'mobile',
+  TABLET = 'tablet',
+  DESKTOP = 'desktop'
+}

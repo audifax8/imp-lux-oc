@@ -6,7 +6,8 @@ import {
   DEFAULT_LOCALE,
   WAYFARER_VENDOR_ID
 } from '@/declarations/constants';
-import { IConfigureInitParams, IScriptResult } from '@/declarations/interfaces';
+import { ResolutionType } from '@/declarations/enums';
+import { IConfigureInitParams, IImageData, IScriptResult } from '@/declarations/interfaces';
 
 export function downloadScript(url: string) {
   const script = document.createElement('script');
@@ -43,22 +44,88 @@ export function waitForScriptToLoad(
   });
 };
 
-export enum ResolutionType {
-  MOBILE = 'mobile',
-  TABLET = 'tablet',
-  DESKTOP = 'desktop'
-}
-interface IImageData {
-  resolution: ResolutionType;
-  scale: number;
-  quality: number;
+/*
+export const resolutions: IImageData[] =
+  [
+    {
+      resolution: ResolutionType.MOBILE,
+      scale: 0.31,
+      quality: 50,
+      media: '(max-width:480px)',
+      type: 'image/png',
+      url: '',
+      dimentions: {
+        width: 480,
+        height: 238
+      }
+    },
+    {
+      resolution: ResolutionType.TABLET,
+      scale: 0.5,
+      quality: 75,
+      media: '(max-width:768px)',
+      type: 'image/png',
+      url: '',
+      dimentions: {
+        width: 768,
+        height: 387
+      }
+    },
+    {
+      resolution: ResolutionType.DESKTOP,
+      scale: 0.91,
+      quality: 100,
+      media: '(max-width:1400px)',
+      type: 'image/png',
+      url: '',
+      dimentions: {
+        width: 1400,
+        height: 651
+      }
+    }
+  ];
+*/
+export const resolutions: IImageData[] =
+  [
+    {
+      resolution: ResolutionType.MOBILE,
+      scale: 0.15,
+      quality: 50,
+      media: '(max-width:350px)',
+      type: 'image/png',
+      url: '',
+      dimentions: {
+        width: 350,
+        height: 170
+      }
+    },
+    {
+      resolution: ResolutionType.DESKTOP,
+      scale: 0.6,
+      quality: 91,
+      media: '(max-width:760px)',
+      type: 'image/png',
+      url: '',
+      dimentions: {
+        width: 760,
+        height: 380
+      }
+    },
+    {
+      resolution: ResolutionType.TABLET,
+      scale: 0.3,
+      quality: 70,
+      media: '(max-width:550px)',
+      type: 'image/png',
+      url: '',
+      dimentions: {
+        width: 500,
+        height: 325
+      }
+    }
+  ];
 
-  dimentions: {
-    width: number;
-    height: number;
-  }
-}
-
+  /*
 const resolutions: Record<ResolutionType, IImageData> = {
   mobile: {
     resolution: ResolutionType.MOBILE,
@@ -87,11 +154,12 @@ const resolutions: Record<ResolutionType, IImageData> = {
       height: 300
     }
   }
-};
+};*/
 
 export function getImgData(): IImageData {
   const res = getSkeletonResolution();
-  return resolutions[res] as IImageData;
+  //return resolutions[res] as IImageData;
+  return resolutions.find(({ resolution }) => resolution === res) as IImageData;
 }
 
 export function getSkeletonResolution(): ResolutionType {

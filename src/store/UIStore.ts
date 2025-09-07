@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { devtools, subscribeWithSelector } from 'zustand/middleware';
 
 import { Theme } from '@/declarations/enums';
-import { IConfigureInitParams, IMenuCA } from '@/declarations/interfaces';
+import { IConfigureInitParams, IImageData, IMenuCA } from '@/declarations/interfaces';
 import { MOCK_RBN_MENU_ITEMS } from '@/declarations/constants';
 
 import { createStoreStateHook } from '@/libs/yr-react/store/zustand-helpers';
@@ -19,6 +19,8 @@ export interface IUIState {
   params: IConfigureInitParams;
   cas: IMenuCA[];
   initialLoad: boolean;
+  imgs: IImageData[],
+  viewName: string
 }
 
 const params = getInitQueryParams();
@@ -32,7 +34,9 @@ const INITIAL_STATE = {
   configureImg: undefined!,
   params,
   cas: MOCK_RBN_MENU_ITEMS,
-  initialLoad: true
+  initialLoad: true,
+  imgs: [],
+  viewName: 'FFL'
 }
 
 export function loadDefaultUIStore() {
@@ -44,9 +48,19 @@ export function startInitialStore(
   configureImg: string,
   cas: IMenuCA[],
   showSkeleton: boolean,
-  initialLoad: boolean
+  initialLoad: boolean,
+  imgs: IImageData[],
+  viewName: string
 ) {
-  useUIStore.setState({ token, configureImg, cas, showSkeleton, initialLoad }, false, 'Start UI Store');
+  useUIStore.setState({
+    token,
+    configureImg,
+    cas,
+    showSkeleton,
+    initialLoad,
+    imgs,
+    viewName
+  }, false, 'Start UI Store');
 };
 
 export function setShowSkeleton(showSkeleton: boolean): void {

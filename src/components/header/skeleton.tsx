@@ -26,7 +26,7 @@ export function HeaderSkeleton() {
   const productName: ISkeletonProps = {
     variant: SkeletonVariant.text,
     style:  isMobile ?
-      { width: '114px', height: '32px' } :
+      { width: '114px', height: '30px' } :
       { width: '131px', height: '32px' }
   };
 

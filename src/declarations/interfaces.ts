@@ -1,4 +1,4 @@
-import { FetchPriority, SkeletonVariant } from '@/declarations/enums';
+import { FetchPriority, ResolutionType, SkeletonVariant } from '@/declarations/enums';
 
 export interface IConfigureState {
   /** Configure API instance */
@@ -90,6 +90,7 @@ export interface IConfigurableAttribute {
   values: IAttributeValue[];
   metadata: KeyValueString[];
   allFacets: ICAFacet[];
+  viewName: string;
 }
 export interface IProduct {
   name: string;
@@ -300,3 +301,16 @@ export type ScriptType = {
   time: string;
   status: boolean
 };
+
+export interface IImageData {
+  resolution: ResolutionType;
+  scale: number;
+  quality: number;
+  media?: string,
+  type?: string,
+  url?: string,
+  dimentions: {
+    width: number;
+    height?: number;
+  }
+}

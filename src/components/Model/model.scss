@@ -9,10 +9,16 @@
   position: relative;
 
   &__placeholder {
+    //width: -webkit-fill-available;
+
     @media only screen and (max-width: 600px) {
       &.yr-customizer-open {
         grid-template-rows: min-content min-content 1fr;
       }
+    }
+
+    img {
+      //width: -webkit-fill-available;
     }
   }
 

@@ -2,6 +2,7 @@ import clsx from 'clsx';
 
 import {
   useConfigureImg,
+  useConfigureImgs,
   useIsCustomizerOpen,
   useIsMobile
 } from '@/state/ui';
@@ -26,6 +27,7 @@ export default function Model() {
 
   const imageData = getImgData();
   const [img] = useConfigureImg();
+  const [imgs] = useConfigureImgs();
   const skeletonURL = getSkeletonURL();
 
   useEffect(() => {
@@ -56,6 +58,10 @@ export default function Model() {
             setIsCustomizerOpen(!isCustomizerOpen);
           }}
           >
+            {imgs.map(
+              ({ media, type, url }, index) =>
+                <source key={index} media={media} type={type} srcSet={url} />)
+            }
             <img
               fetchPriority='high'
               src={isImageLoaded ?? skeletonURL}

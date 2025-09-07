@@ -32,12 +32,16 @@ export default function Header(props: IAccordeon) {
 
   const onSwatchClick = async (av: IAttributeValue, event: React.MouseEvent) => {
     try {
+      const ca = apis.luxAPI.getAttributeByAlias(alias);
       await apis.setRecipe(
         [{ ca: { alias }, av: { id: av.id } }]
       );
       const token = apis.luxAPI.getToken();
       apis.rtrAPI?.handleTokenChange(token);
-      const img = apis.getImg();
+      const img = apis.luxAPI.getProductImg(
+        'LUX-Ray-Ban-8taOhSR5AFyjt9tfxU',
+        ca.viewName
+      );
       setTokenAndImage(token, img);
       setSelectedAvId(av.id);
       setSelectedName(av.name);

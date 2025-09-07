@@ -1,7 +1,7 @@
 /* eslint-disable */
-import { IConfigureAPI, IConfigureInitParams, IProduct, IBaseLuxAPI, ICAMap, IConfigurableAttribute, IAttributeValue, IMenuPagination, IMenuCA, ICAFacet, IFacetFacetValueMap } from '@/declarations/interfaces';
+import { IConfigureAPI, IConfigureInitParams, IProduct, IBaseLuxAPI, ICAMap, IConfigurableAttribute, IAttributeValue, IMenuPagination, IMenuCA, ICAFacet, IFacetFacetValueMap, IImageData } from '@/declarations/interfaces';
 import { RBN_TOKEN_ALIASES, OAK_TOKEN_ALIASES, RTR_ASSETS_URL, MOCK_RBN_MENU_ITEMS } from '@/declarations/constants';
-import { getImgData } from '@/libs/helpers';
+import { getImgData, resolutions } from '@/libs/helpers';
 
 export abstract class LuxBaseAPI implements IBaseLuxAPI {
   coreService: IConfigureAPI = undefined!;
@@ -79,15 +79,35 @@ export abstract class LuxBaseAPI implements IBaseLuxAPI {
     return assetsURL;
   }
 
-  getProductImg(apiKey: string): string {
+  getProductImg(apiKey: string, view?: string): string {
     const imageData = getImgData();
     const { scale, quality } = imageData;
     const conciseRecipe = this.coreService.getRecipe('legacyConcise');
     const uriRecipe = encodeURI(conciseRecipe);
     const { id, defaultViewName, environment, workflow, customerId } = this.coreService.getProduct();
     const format = 'png';
-    const baseURL = `https://prod.fluidconfigure.com/imagecomposer/generate/?view=${defaultViewName}&apiKey=${apiKey}&workflow=${workflow}&environment=${environment}&customerId=${customerId}&productId=${id}&purpose=serverDisplay&format=${format}&trim=false&padding=0&scale=${scale}&binary=true&quality=${quality}&backgroundColor=%23f6f6f6ff&recipe=${uriRecipe}`;
+    const baseURL = `https://prod.fluidconfigure.com/imagecomposer/generate/?view=${view ?? defaultViewName}&apiKey=${apiKey}&workflow=${workflow}&environment=${environment}&customerId=${customerId}&productId=${id}&purpose=serverDisplay&format=${format}&trim=false&padding=0&scale=${scale}&binary=true&quality=${quality}&backgroundColor=%23f6f6f6ff&recipe=${uriRecipe}`;
     return baseURL;
+  }
+
+  getProductImgByViewName(apiKey: string, viewName: string, resolution: IImageData): string {
+    const { scale, quality } = resolution;
+    const conciseRecipe = this.coreService.getRecipe('legacyConcise');
+    const uriRecipe = encodeURI(conciseRecipe);
+    const { id, defaultViewName, environment, workflow, customerId } = this.coreService.getProduct();
+    const format = 'png';
+    const baseURL = `https://prod.fluidconfigure.com/imagecomposer/generate/?view=${viewName ?? defaultViewName}&apiKey=${apiKey}&workflow=${workflow}&environment=${environment}&customerId=${customerId}&productId=${id}&purpose=serverDisplay&format=${format}&trim=false&padding=0&scale=${scale}&binary=true&quality=${quality}&backgroundColor=%23f6f6f6ff&recipe=${uriRecipe}`;
+    return baseURL;
+  }
+
+  mapConfigureImgs(apiKey: string, view: string): IImageData[] {
+    return resolutions.map(resolution => {
+      const url = this.getProductImgByViewName(apiKey, view, resolution);
+      return {
+        ...resolution,
+        url
+      };
+    });
   }
 }
 
