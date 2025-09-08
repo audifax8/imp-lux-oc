@@ -68,6 +68,13 @@ export const useToken = (): UseToken => {
   return [token, setToken];
 };
 
+type UseViewName = ReturnType<typeof useUIState<'viewName'>>;
+
+export const useViewName = (): UseViewName => {
+  const [viewName, setViewName] = useUIState('viewName');
+  return [viewName, setViewName];
+};
+
 type UseShowSkeleton = ReturnType<typeof useUIState<'showSkeleton'>>;
 
 export const useShowSkeleton = (): UseShowSkeleton => {

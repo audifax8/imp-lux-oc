@@ -19,6 +19,7 @@ export class RtrAPI implements IRTRAPI {
   api!: IRTRBaseAPI;
   lastTokenRendered: string;
   rtrDisabled!: boolean;
+  lastComponentSelected!: number;
  
   constructor() {
     this.lastTokenRendered = '';
@@ -125,9 +126,9 @@ export class RtrAPI implements IRTRAPI {
       if (yrEnv) {
         console.info(`RTR: disabled by product facet`);
       }
-      return false;
+      return true;
     }
-    return true;
+    return false;
   };
 
   async handleTokenChange(token: string): Promise<void> {
@@ -269,7 +270,11 @@ export class RtrAPI implements IRTRAPI {
   }
 
   selectComponent(componentId: number): void {
-    this.api.selectComponent({ componentId });
+    if (componentId === this.lastComponentSelected) {
+      return;
+    }
+    this.api?.selectComponent({ componentId });
+    this.lastComponentSelected = componentId;
   }
 
   mapCaNameToRTRCameraName(caAlias: string): string {

@@ -5,11 +5,9 @@ import { getImgData, resolutions } from '@/libs/helpers';
 
 export abstract class LuxBaseAPI implements IBaseLuxAPI {
   coreService: IConfigureAPI = undefined!;
-  apiKey: string;
+  apiKey: string = '';
 
   constructor() {
-    //TODO
-    this.apiKey = 'LUX-Ray-Ban-8taOhSR5AFyjt9tfxU';
   }
 
   abstract reloadPagination(menu: IMenuCA): IMenuCA;
@@ -115,6 +113,17 @@ export abstract class LuxBaseAPI implements IBaseLuxAPI {
       };
     });
   }
+
+  recipeChange(changes: any[]) {
+    return new Promise((resolve, reject) => {
+      return this.coreService.setRecipe(changes, (e: any, c: any) => {
+        if (e) {
+          return reject(e);
+        }
+        return resolve(c);
+      });
+    });
+  }
 }
 
 export class OakCustomAPI extends LuxBaseAPI {
@@ -206,6 +215,10 @@ export class OakCustomAPI extends LuxBaseAPI {
   }
 }
 export class RbnCustomAPI extends LuxBaseAPI {
+  constructor() {
+    super();
+    this.apiKey = 'LUX-Ray-Ban-8taOhSR5AFyjt9tfxU';
+  }
 
   reloadPagination(menu: IMenuCA): IMenuCA {
     const ITEMS_BY_PAGE = 5;

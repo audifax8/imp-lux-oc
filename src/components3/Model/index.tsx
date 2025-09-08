@@ -17,7 +17,7 @@ export default function Model() {
   const rtrPromise = rtrResource(rtrLoadedPromise(apis.getParams()));
   return(
     <Suspense fallback={<ModelSkeleton />}>
-      {params.rtrDisabled ?
+      {params?.rtrDisabled ?
         <Product corePromise={corePromise} /> :
         <RTR corePromise={rtrPromise} />
       }

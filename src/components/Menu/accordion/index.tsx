@@ -7,7 +7,7 @@ export default function Accordion() {
 
   return (
     <>
-      {cas.map((ca) => <Header menu={ca} key={ca.id} />)}
+      {cas?.map((ca) => <Header menu={ca} key={ca.id} />)}
     </>
   );
 };

@@ -6,11 +6,10 @@ import { downloadScript } from '@/libs/helpers';
 
 export const useDownloadRTRScript = () => {
   const [params] = useParams();
-  const { yrEnv, rtrDisabled } = params;
-  if (yrEnv && !rtrDisabled) {
+  if (params?.yrEnv && !params?.rtrDisabled) {
     console.log(`Downloading RTR script ${RTR_URL}`);
   }
-  if (!rtrDisabled) {
+  if (!params?.rtrDisabled) {
     downloadScript(RTR_URL);
   }
 };

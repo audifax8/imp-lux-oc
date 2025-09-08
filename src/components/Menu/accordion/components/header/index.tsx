@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import { IAttributeValue, IMenuCA } from '@/declarations/interfaces';
 
-import { reloadPagination, setTokenAndImage } from '@/store/UIStore';
+import { reloadPagination, updateUI } from '@/store/UIStore';
 
 import { Image } from '@/components/img';
 import { Button } from '@/components/button';
@@ -36,24 +36,40 @@ export default function Header(props: IAccordeon) {
       await apis.setRecipe(
         [{ ca: { alias }, av: { id: av.id } }]
       );
-      const token = apis.luxAPI.getToken();
-      apis.rtrAPI?.handleTokenChange(token);
-      const img = apis.luxAPI.getProductImg(
-        ca.viewName
-      );
-      setTokenAndImage(token, img);
       setSelectedAvId(av.id);
       setSelectedName(av.name);
-      apis.assetsWorker.preloadAssets(alias);
+
+      const token = apis.luxAPI.getToken();
+      const viewName = ca.viewName;
+      const configureImg = apis.luxAPI.getProductImg(viewName);
+      const imgs = apis.luxAPI.mapConfigureImgs(viewName);
+      const cameraName = apis.rtrAPI.mapCameraNameRTRToComponent(alias);
+
+      updateUI({
+        token,
+        configureImg,
+        imgs,
+        viewName
+      });
+
+      apis.rtrAPI?.selectComponent(cameraName as number);
+      apis.rtrAPI?.handleTokenChange(token);
+      apis?.assetsWorker?.preloadAssets(alias);
       event.preventDefault();
       event.stopPropagation();
     } catch (e) {
+      //TODO show tooltip
       console.log(e);
     }
   };
 
   const onOpenClick = (e: React.MouseEvent) => {
-    apis.assetsWorker.preloadAssets(alias);
+    const ca = apis.luxAPI.getAttributeByAlias(alias);
+    const cameraName = apis.rtrAPI.mapCameraNameRTRToComponent(alias);
+    const viewName = ca.viewName;
+    updateUI({ viewName });
+    apis.rtrAPI?.selectComponent(cameraName as number);
+    apis?.assetsWorker?.preloadAssets(alias);
     e.preventDefault();
     setIsOpen(!isOpen);
   };
@@ -67,8 +83,8 @@ export default function Header(props: IAccordeon) {
       <summary className='yr-accordion-summary'>
         <Image src={icon} alt={alias} className='yr-accordion-summary-image' />
         <div className='yr-accordion-header'>
-          <h3 className={'yr-accordion-header-title'}>{caName}</h3>
-          <p className={'yr-accordion-header-selected'}>{selectedAvName}</p>
+          <h3 className='yr-accordion-header-title'>{caName}</h3>
+          <p className='yr-accordion-header-selected'>{selectedAvName}</p>
         </div>
         <Button
           icon={<ArrowIcon size={16} direction={isOpen ? 'up' : 'down'} className='yr-accordion-arrow'/>}

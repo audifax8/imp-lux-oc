@@ -33,11 +33,11 @@ export default React.memo(function RTR({ corePromise }: IModelProps) {
   const [isMobile] = useIsMobile();
 
   useEffect(() => {
-    if (params.rtrDisabled) {
+    if (params?.rtrDisabled) {
       return;
     }
     if (rtrError) {
-      if (params.yrEnv) {
+      if (params?.yrEnv) {
         console.log('RTR turned off due to internal error');
       }
       apis.rtrAPI.dispose();
@@ -50,7 +50,7 @@ export default React.memo(function RTR({ corePromise }: IModelProps) {
       apis.rtrAPI?.init(token);
       setRTRStarted(true);
     }
-  }, [params.rtrDisabled, rtrAPIReady, token, rtrError, rtrStarted]);
+  }, [params?.rtrDisabled, rtrAPIReady, token, rtrError, rtrStarted]);
 
   return ( 
     <div className={clsx('yr-model', { 'yr-customizer-open': (isCustomizerOpen && isMobile) })}>

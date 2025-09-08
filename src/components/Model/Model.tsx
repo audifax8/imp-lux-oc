@@ -1,10 +1,9 @@
-import clsx from 'clsx';
-
 import {
   useConfigureImg,
   useConfigureImgs,
   useIsCustomizerOpen,
-  useIsMobile
+  useIsMobile,
+  useViewName
 } from '@/state/ui';
 
 import {
@@ -17,6 +16,8 @@ import './model.scss';
 import { getSkeletonURL } from '@/declarations/constants';
 import { useEffect, useState } from 'react';
 import { apis } from '@/libs/lazyimport';
+import { SkeletonVariant } from '@/declarations/enums';
+import { Skeleton } from '../skeleton';
 
 export default function Model() {
   const [isImageLoaded, setIsImageLoaded] = useState<string | null>(null);
@@ -27,6 +28,8 @@ export default function Model() {
 
   const imageData = getImgData();
   const [img] = useConfigureImg();
+  const [viewName] = useViewName();
+  //?posible error
   const [imgs] = useConfigureImgs();
   const skeletonURL = getSkeletonURL();
 
@@ -36,39 +39,67 @@ export default function Model() {
       fetch(url)
         .then(() => setIsImageLoaded(url));
     } else if (rtrDisabled && img) {
-      setIsImageLoaded(img);
+      if (img !== isImageLoaded) {
+        setIsImageLoaded(img);
+      }
     }
-  }, [img, skeletonURL, rtrDisabled, isImageLoaded]);
+  }, [img, skeletonURL, rtrDisabled, isImageLoaded, viewName]);
 
   return (
     <>
+      {!isImageLoaded && rtrDisabled &&
+        <Skeleton
+          variant={SkeletonVariant.rectangular}
+          style={{
+            width: imageData.dimentions.width,
+            height: imageData.dimentions.height
+          }}
+        />
+      }
       {!rtrDisabled &&
         <div
           id='viewer'
-          className={clsx('yr-model__rtr')}
-        ></div>
+          className='yr-model__rtr'
+        >
+          <Skeleton
+              variant={SkeletonVariant.rectangular}
+              style={{
+                width: imageData.dimentions.width,
+                height: imageData.dimentions.height
+              }}
+            />
+        </div>
       }
       {rtrDisabled &&
         <picture
-          className={clsx('yr-model__placeholder yr-image')}
+          className='yr-model__placeholder yr-image'
           onClick={() => {
             if (!isMobile) {
               return;
             }
             setIsCustomizerOpen(!isCustomizerOpen);
-          }}
-          >
-            {imgs.map(
-              ({ media, type, url }, index) =>
-                <source key={index} media={media} type={type} srcSet={url} />)
-            }
-            <img
-              fetchPriority='high'
-              src={isImageLoaded ?? skeletonURL}
-              alt='Model'
-              height={imageData.dimentions.height}
-              width={imageData.dimentions.width}
-            />
+          }}>
+
+          {isImageLoaded && 
+            <>
+              {imgs?.map(
+                ({ media, type, url }, index) =>
+                  <source
+                    key={index}
+                    media={media}
+                    type={type}
+                    srcSet={url}
+                  />)
+              }
+              <img
+                fetchPriority='high'
+                src={isImageLoaded ?? skeletonURL}
+                alt='Model'
+                height={imageData.dimentions.height}
+                width={imageData.dimentions.width}
+              />
+            </>
+          }
         </picture>
       }
     </>

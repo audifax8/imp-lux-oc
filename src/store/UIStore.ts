@@ -10,17 +10,17 @@ import { createStoreStateHook } from '@/libs/yr-react/store/zustand-helpers';
 import { getInitQueryParams } from '@/libs/helpers';
 
 export interface IUIState {
-  theme: Theme;
-  isCustomizerOpen: boolean;
-  isMobile: boolean;
-  showSkeleton: boolean;
-  token: string;
-  configureImg: string;
-  params: IConfigureInitParams;
-  cas: IMenuCA[];
-  initialLoad: boolean;
-  imgs: IImageData[],
-  viewName: string
+  theme?: Theme;
+  isCustomizerOpen?: boolean;
+  isMobile?: boolean;
+  showSkeleton?: boolean;
+  token?: string;
+  configureImg?: string;
+  params?: IConfigureInitParams;
+  cas?: IMenuCA[];
+  initialLoad?: boolean;
+  imgs?: IImageData[],
+  viewName?: string
 }
 
 const params = getInitQueryParams();
@@ -63,6 +63,30 @@ export function startInitialStore(
   }, false, 'Start UI Store');
 };
 
+export function updateUIStore(
+  token: string,
+  configureImg: string,
+  imgs: IImageData[],
+  viewName: string
+) {
+  useUIStore.setState({
+    token,
+    configureImg,
+    imgs,
+    viewName
+  }, false, 'Start UI Store');
+};
+
+export function updateUI(
+  uiChanges: IUIState
+) {
+  const currentState = useUIStore.getState();
+  const newState = {
+    ...currentState,
+    ...uiChanges
+  };
+  useUIStore.setState(newState, false, 'Update UI Store');
+};
 export function setShowSkeleton(showSkeleton: boolean): void {
   useUIStore.setState({ showSkeleton }, false, 'Set showSkeleleton');
 }
@@ -85,7 +109,7 @@ export const useUIStore = create(
 
 export function reloadPagination(menuCa: IMenuCA) {
   const currentCas = useUIStore.getState().cas;
-  const newCas = currentCas.map((menu) => {
+  const newCas = currentCas?.map((menu) => {
     if (menu.alias === menuCa.alias) {
       return menuCa;
     }
