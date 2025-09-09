@@ -105,7 +105,7 @@ export function createLazyComponent(type: ComponentType, params: IConfigureInitP
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const componentsMap: { [key: string]: any } = {
       'MODEL' : import('../components/model/model'),
-      'MENU': import('../components/menu/accordion'),
+      'MENU': import('../components/menu/lazy-menu'),
       'HEADER': import('../components/header/header'),
       'FOOTER': import('../components/footer/footer')
     };

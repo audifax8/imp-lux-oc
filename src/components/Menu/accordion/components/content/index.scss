@@ -1,0 +1,60 @@
+@use '../../../../../styles/mixins/' as *;
+
+.yr-accordion {
+  &-content {
+    background: var(--accordion-content-background);
+    box-shadow: 0 4px 20px 0 rgb(0 0 0 / 4%) inset;
+    backdrop-filter: blur(20px);
+    padding: 16px;
+    @include text-main-md;
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  &[open] {
+    .yr-accordion-summary {
+      border-bottom: unset;
+    }
+
+    .yr-accordion-content {
+      border-bottom: 1px solid var(--divider-color);
+
+      & .fc-attribute-values {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+
+        display: flex;
+        flex-flow: wrap;
+        padding: 8px 8px 0px 8px;
+        align-items: flex-start;
+        justify-content: center;
+      }
+    }
+  }
+
+  &:first-of-type {
+    border-radius: 24px 24px 0 0;
+
+    .yr-accordion-summary {
+      border-radius: 24px 24px 0 0;
+    }
+  }
+
+  &:last-of-type {
+    border-radius: 0;
+
+    .yr-accordion-summary {
+      border-radius: 0;
+      border-bottom: unset;
+    }
+
+    .yr-accordion-content {
+      border-bottom: unset;
+    }
+  }
+}

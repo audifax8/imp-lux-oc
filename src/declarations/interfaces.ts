@@ -115,7 +115,7 @@ export interface IAttributeValue {
   name: string;
   metadata: KeyValueString[];
   facets: IAVFacet;
-  testUrl?: string;
+  colorCodeURL?: string;
 }
 
 export interface IFacetFacetValueMap {

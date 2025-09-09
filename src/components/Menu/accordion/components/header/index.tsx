@@ -1,85 +1,34 @@
 
-import { useState } from 'react';
-
-import { IAttributeValue, IMenuCA } from '@/declarations/interfaces';
-
-import { reloadPagination, updateUI } from '@/store/UIStore';
+import { IMenuCA } from '@/declarations/interfaces';
 
 import { Image } from '@/components/img';
 import { Button } from '@/components/button';
 import { ArrowIcon } from '@/components/Icons';
-import { Swatch } from '../swatch';
-import { ViewMore } from '../view-more';
-
-import { apis } from '@/libs/lazyimport';
 
 import './index.scss';
 
-type IAccordeon = {
-  menu: IMenuCA
+type IHeader = {
+  menu: IMenuCA,
+  isOpen?: boolean,
+  selectedAvId?: number | null,
+  selectedAvName?: string,
+  onOpenCallback?(event: React.MouseEvent): void;
 };
 
-export default function Header(props: IAccordeon) {
-  const { alias, icon, avs, currentPage, avsLenght, caName } = props.menu;
-  const [selectedAvId, setSelectedAvId] = useState(props.menu.selectedAvId);
-  const [selectedAvName, setSelectedName] = useState(props.menu.selectedAvName);
-  const [isOpen, setIsOpen] = useState(false);
-
-  const onViewMoreClick = () => {
-    const newData = apis.luxAPI.reloadPagination(props.menu);
-    return reloadPagination(newData);
-  }
-
-  const onSwatchClick = async (av: IAttributeValue, event: React.MouseEvent) => {
-    try {
-      const ca = apis.luxAPI.getAttributeByAlias(alias);
-      await apis.setRecipe(
-        [{ ca: { alias }, av: { id: av.id } }]
-      );
-      setSelectedAvId(av.id);
-      setSelectedName(av.name);
-
-      const token = apis.luxAPI.getToken();
-      const viewName = ca.viewName;
-      const configureImg = apis.luxAPI.getProductImg(viewName);
-      const imgs = apis.luxAPI.mapConfigureImgs(viewName);
-      const cameraName = apis.rtrAPI.mapCameraNameRTRToComponent(alias);
-
-      updateUI({
-        token,
-        configureImg,
-        imgs,
-        viewName
-      });
-
-      apis.rtrAPI?.selectComponent(cameraName as number);
-      apis.rtrAPI?.handleTokenChange(token);
-      apis?.assetsWorker?.preloadAssets(alias);
-      event.preventDefault();
-      event.stopPropagation();
-    } catch (e) {
-      //TODO show tooltip
-      console.log(e);
-    }
-  };
+export default function Header(props: IHeader) {
+  const { alias, icon, caName, selectedAvName } = props.menu;
+  const { isOpen, onOpenCallback } = props;
 
   const onOpenClick = (e: React.MouseEvent) => {
-    const ca = apis.luxAPI.getAttributeByAlias(alias);
-    const cameraName = apis.rtrAPI.mapCameraNameRTRToComponent(alias);
-    const viewName = ca.viewName;
-    updateUI({ viewName });
-    apis.rtrAPI?.selectComponent(cameraName as number);
-    apis?.assetsWorker?.preloadAssets(alias);
+    if (onOpenCallback) {
+      onOpenCallback(e);
+    }
     e.preventDefault();
-    setIsOpen(!isOpen);
+    e.stopPropagation();
   };
 
   return (
-    <details
-      open={isOpen}
-      className='yr-accordion'
-      onClick={onOpenClick}
-    >
+    <>
       <summary className='yr-accordion-summary'>
         <Image src={icon} alt={alias} className='yr-accordion-summary-image' />
         <div className='yr-accordion-header'>
@@ -91,38 +40,6 @@ export default function Header(props: IAccordeon) {
           onClick={onOpenClick}
         />
       </summary>
-      <div className='yr-accordion-content'>
-        {isOpen && (
-          <ul
-            className='fc-attribute-values'
-            aria-label='attribute values menu'
-          >
-            {avs && avs?.length && (
-              avs.map(
-                (av, index: number) => 
-                  <li key={av.id || index}>
-                    <Swatch
-                      av={av}
-                      caAlias={alias}
-                      selectedAvId={selectedAvId}
-                      index={index}
-                      onClickCallback={onSwatchClick}
-                    />
-                  </li>
-              )
-            )}
-            {currentPage < avsLenght &&
-              <li key={avs?.length}>
-                <ViewMore
-                  remainingItems={avsLenght - currentPage}
-                  label='view more'
-                  onClickCallback={onViewMoreClick}
-                />
-              </li>
-            }
-          </ul>
-        )}
-      </div>
-    </details>
+    </>
   );
 }

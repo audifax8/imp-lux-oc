@@ -4,7 +4,7 @@ import { Skeleton } from '@/components/skeleton';
 
 import './index.scss';
 
-export function HeaderSkeleton() {
+export function SkeletonHeader() {
   return (
     <details open={false} className='yr-accordion'>
       <summary className='yr-accordion-summary'>

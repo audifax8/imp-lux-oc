@@ -38,7 +38,7 @@ export const Swatch = memo(function (props: ISwatchPropTypes) {
     >
       <div className='fc-swatch-wrapper'>
         <div className={imgClasses}>
-          <Image src={av.testUrl} alt={av.name} />
+          <Image src={av.colorCodeURL || av.url} alt={av.name} />
         </div>
         <div className='fc-swatch-wrapper--name'>
           <span>{av?.name}</span>

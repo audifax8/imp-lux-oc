@@ -269,24 +269,15 @@ export class RbnCustomAPI extends LuxBaseAPI {
   getAVsToRenderByCA(caAlias: string): IAttributeValue[] {
     try {
       const configurableAttibute = this.getAttributeByAlias(caAlias);
-      const t =  configurableAttibute.values
+      const activeAvValues =  configurableAttibute.values
         .filter(av => av.selectable && av.active && av.name !== 'Blank')
-        /*.map(av => {
-          av.url = this.getSwatchURL(av, caAlias)
-          return av;
-        });*/
-        //console.log(t);
-        const y = t.map(av => {
-          const testUrl = this.getSwatchURL(av, caAlias);
-          //console.log(av, caAlias, testUrl);
-          //av.testUrl = testUrl;
+        return activeAvValues.map(av => {
+          const colorCodeURL = this.getSwatchURL(av, caAlias);
           return {
             ...av,
-            testUrl: testUrl
+            colorCodeURL
           };
         });
-        //console.log(y);
-        return y;
     } catch (e) {
       return [];
     }

@@ -1,5 +1,5 @@
 
-import { HeaderSkeleton } from '@/components/menu/accordion/skeleton-header';
+import { SkeletonHeader } from '@/components/menu/accordion/skeleton-header';
 import { MOCK_RBN_MENU_ITEMS } from '@/declarations/constants';
 
 export default function MenuSkeleton() {
@@ -8,7 +8,7 @@ export default function MenuSkeleton() {
       {MOCK_RBN_MENU_ITEMS
         .map(
           (_menu, index) =>
-            <HeaderSkeleton key={index} />
+            <SkeletonHeader key={index} />
           ) 
       }
     </>
