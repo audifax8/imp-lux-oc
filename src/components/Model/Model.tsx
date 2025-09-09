@@ -13,7 +13,7 @@ import {
 import { getImgData } from '@/libs/helpers';
 
 import './model.scss';
-//import { getSkeletonURL } from '@/declarations/constants';
+import { getSkeletonURL } from '@/declarations/constants';
 import { useEffect, useState } from 'react';
 import { apis } from '@/libs/lazyimport';
 import { SkeletonVariant } from '@/declarations/enums';
@@ -31,7 +31,7 @@ export default function Model() {
   const [viewName] = useViewName();
   //?posible error
   const [imgs] = useConfigureImgs();
-  //const skeletonURL = getSkeletonURL();
+  const skeletonURL = getSkeletonURL();
 
   useEffect(() => {
     if (rtrDisabled && !isImageLoaded) {
@@ -47,13 +47,13 @@ export default function Model() {
 
   return (
     <>
-      {rtrDisabled && !isImageLoaded &&
-        <Skeleton
-          variant={SkeletonVariant.rectangular}
-          style={{
-            width: imageData.dimentions.width,
-            height: imageData.dimentions.height
-          }}
+      {rtrDisabled && !isImageLoaded && 
+        <img
+          fetchPriority='high'
+          src={skeletonURL}
+          alt='product loader'
+          height={imageData.dimentions.height}
+          width={imageData.dimentions.width}
         />
       }
       {rtrDisabled && isImageLoaded &&
