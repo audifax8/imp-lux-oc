@@ -59,7 +59,7 @@ export function getUPCAPI(params: IConfigureInitParams): string {
 export function getURLsToPreconnect(params: IConfigureInitParams): string[] {
   const { rtrDisabled } = params;
   const urls = [
-    getSkeletonURL(),
+    //getSkeletonURL(),
     CDN_FLUID_BASE_URL,
     'https://prod.fluidconfigure.com'
   ];
@@ -78,11 +78,11 @@ export function getSkeletonURL(): string {
 export function mapURLs(params: IConfigureInitParams): IResource[] {
   const { workflow, customer, product, locale, rtrDisabled } = params;
   const urls: IResource[] = [
-    {
+    /*{
       url: getSkeletonURL(),
       as: 'image',
       fetchPriority: FetchPriority.HIGH
-    },
+    },*/
     {
       url: `${CDN_FLUID_BASE_URL}/static/configs/3.13.0/prod/${workflow}/${customer}/product/${product}/graph-settings-${locale}.json`,
       as: 'fetch',
